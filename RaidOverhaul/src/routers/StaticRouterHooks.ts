@@ -189,11 +189,11 @@ export class StaticRouters {
                         action: async (url, info, sessionId, output) => {
                             const profileId = info.uid;
                             const modLoc = path.join(__dirname, "..", "..");
-                            const seasonsProgressionLoc = `${modLoc}/src/utils/data/seasonsProgressionFile.json5`;
+                            const seasonsProgressionLoc = path.join(modLoc, "config", "profiles", profileId, "seasonsProgression.json5");
 
                             if (!fs.existsSync(seasonsProgressionLoc)) {
                                 this.logger.logWarning("No season progress file exists for this profile. Creating...");
-                                this.weatherController.createSeasonsProgressFile();
+                                this.weatherController.createSeasonsProgressFile(seasonsProgressionLoc);
                                 this.logger.log(`Season progression file created.`, LogTextColor.MAGENTA);
                             }
 

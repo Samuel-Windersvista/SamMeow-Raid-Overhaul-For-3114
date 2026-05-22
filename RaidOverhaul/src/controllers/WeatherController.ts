@@ -360,20 +360,20 @@ export class ROWeatherController {
         }
     }
 
-    public createSeasonsProgressFile(): void {
+    public createSeasonsProgressFile(filePath?: string): void {
         const seasonsProgressActual = 1;
         const progressFileseasons = (ROWeatherController.progressFile = {
             seasonsProgression: seasonsProgressActual,
         });
 
-        const progressLocFolder = `${ROWeatherController.modLoc}/src/utils/data`;
-        const progressLoc = `${progressLocFolder}/seasonsProgressionFile.json5`;
+        const targetPath = filePath ?? `${ROWeatherController.modLoc}/src/utils/data/seasonsProgressionFile.json5`;
+        const progressLocFolder = path.dirname(targetPath);
         if (!fs.existsSync(progressLocFolder)) {
             fs.mkdirSync(progressLocFolder, { recursive: true });
         }
 
         try {
-            fs.writeFileSync(progressLoc, JSON5.stringify(progressFileseasons, null, 4));
+            fs.writeFileSync(targetPath, JSON5.stringify(progressFileseasons, null, 4));
         } catch (error) {
             this.logger.logError(`Error writing season progression file: ${error}`);
         }

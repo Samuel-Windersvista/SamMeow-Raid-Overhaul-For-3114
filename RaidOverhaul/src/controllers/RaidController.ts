@@ -96,6 +96,25 @@ export class RaidController {
         const markedRoomStreets = tables.locations.tarkovstreets.looseLoot.spawnpoints;
         const markedRoomLighthouse = tables.locations.lighthouse.looseLoot.spawnpoints;
 
+        // Marked room spawn point coordinate bounds for each map
+        const MARKED_ROOM_BOUNDS = {
+            customs: [
+                { xMin: 180, xMax: 185, yMin: 6, yMax: 7, zMin: 180, zMax: 185 }
+            ],
+            reserve: [
+                { xMin: -125, xMax: -120, yMin: -15, yMax: -14, zMin: 25, zMax: 30 },
+                { xMin: -155, xMax: -150, yMin: -9, yMax: -8, zMin: 70, zMax: 75 },
+                { xMin: 190, xMax: 195, yMin: -6, yMax: -5, zMin: -230, zMax: -225 }
+            ],
+            streets: [
+                { xMin: -133, xMax: -129, yMin: 8.5, yMax: 11, zMin: 265, zMax: 275 },
+                { xMin: 186, xMax: 191, yMin: -0.5, yMax: 1.5, zMin: 224, zMax: 229 }
+            ],
+            lighthouse: [
+                { xMin: 319, xMax: 330, yMin: 5, yMax: 6.5, zMin: 482, zMax: 489 }
+            ]
+        };
+
         if (this.configManager.modConfig().LootChanges.EnableLootOptions) {
             maps.looseLootMultiplier.bigmap = this.configManager.modConfig().LootChanges.LooseLootMultiplier;
             maps.looseLootMultiplier.factory4_day = this.configManager.modConfig().LootChanges.LooseLootMultiplier;
@@ -123,82 +142,35 @@ export class RaidController {
         }
 
         for (const cSP of markedRoomCustoms) {
-            if (
-                cSP.template.Position.x > 180 &&
-                cSP.template.Position.x < 185 &&
-                cSP.template.Position.z > 180 &&
-                cSP.template.Position.z < 185 &&
-                cSP.template.Position.y > 6 &&
-                cSP.template.Position.y < 7
-            ) {
+            if (isInBounds(cSP.template.Position, MARKED_ROOM_BOUNDS.customs)) {
                 cSP.probability *= this.configManager.modConfig().LootChanges.MarkedRoomLootMultiplier;
             }
         }
 
         for (const rSP of markedRoomReserve) {
-            if (
-                rSP.template.Position.x > -125 &&
-                rSP.template.Position.x < -120 &&
-                rSP.template.Position.z > 25 &&
-                rSP.template.Position.z < 30 &&
-                rSP.template.Position.y > -15 &&
-                rSP.template.Position.y < -14
-            ) {
-                rSP.probability *= this.configManager.modConfig().LootChanges.MarkedRoomLootMultiplier;
-            } else if (
-                rSP.template.Position.x > -155 &&
-                rSP.template.Position.x < -150 &&
-                rSP.template.Position.z > 70 &&
-                rSP.template.Position.z < 75 &&
-                rSP.template.Position.y > -9 &&
-                rSP.template.Position.y < -8
-            ) {
-                rSP.probability *= this.configManager.modConfig().LootChanges.MarkedRoomLootMultiplier;
-            } else if (
-                rSP.template.Position.x > 190 &&
-                rSP.template.Position.x < 195 &&
-                rSP.template.Position.z > -230 &&
-                rSP.template.Position.z < -225 &&
-                rSP.template.Position.y > -6 &&
-                rSP.template.Position.y < -5
-            ) {
+            if (isInBounds(rSP.template.Position, MARKED_ROOM_BOUNDS.reserve)) {
                 rSP.probability *= this.configManager.modConfig().LootChanges.MarkedRoomLootMultiplier;
             }
         }
 
         for (const sSP of markedRoomStreets) {
-            if (
-                sSP.template.Position.x > -133 &&
-                sSP.template.Position.x < -129 &&
-                sSP.template.Position.z > 265 &&
-                sSP.template.Position.z < 275 &&
-                sSP.template.Position.y > 8.5 &&
-                sSP.template.Position.y < 11
-            ) {
-                sSP.probability *= this.configManager.modConfig().LootChanges.MarkedRoomLootMultiplier;
-            } else if (
-                sSP.template.Position.x > 186 &&
-                sSP.template.Position.x < 191 &&
-                sSP.template.Position.z > 224 &&
-                sSP.template.Position.z < 229 &&
-                sSP.template.Position.y > -0.5 &&
-                sSP.template.Position.y < 1.5
-            ) {
+            if (isInBounds(sSP.template.Position, MARKED_ROOM_BOUNDS.streets)) {
                 sSP.probability *= this.configManager.modConfig().LootChanges.MarkedRoomLootMultiplier;
             }
         }
 
         for (const lSP of markedRoomLighthouse) {
-            if (
-                lSP.template.Position.x > 319 &&
-                lSP.template.Position.x < 330 &&
-                lSP.template.Position.z > 482 &&
-                lSP.template.Position.z < 489 &&
-                lSP.template.Position.y > 5 &&
-                lSP.template.Position.y < 6.5
-            ) {
+            if (isInBounds(lSP.template.Position, MARKED_ROOM_BOUNDS.lighthouse)) {
                 lSP.probability *= this.configManager.modConfig().LootChanges.MarkedRoomLootMultiplier;
             }
+        }
+
+        function isInBounds(pos: { x: number; y: number; z: number }, bounds: { xMin: number; xMax: number; yMin: number; yMax: number; zMin: number; zMax: number }[]): boolean {
+            return bounds.some(b =>
+                pos.x > b.xMin && pos.x < b.xMax &&
+                pos.y > b.yMin && pos.y < b.yMax &&
+                pos.z > b.zMin && pos.z < b.zMax
+            );
         }
     }
 

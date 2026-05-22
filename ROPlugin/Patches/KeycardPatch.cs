@@ -19,17 +19,17 @@ namespace RaidOverhaul.Patches
             Player player,
             KeycardDoor __instance)
         {
+            // Let the original method handle non-VIP keycard attempts
+            if (key.Template.KeyId != Utils.VipKeycard)
+            {
+                return true;
+            }
+
+            // VIP Keycard logic — intercept only for universal keycards
             Error canInteract = player.MovementContext.CanInteract;
             if (canInteract != null)
             {
                 __result = canInteract;
-                return false;
-            }
-
-            bool isAuthorized = key.Template.KeyId == __instance.KeyId || key.Template.KeyId == Utils.VipKeycard;
-            if (!isAuthorized)
-            {
-                __result = new GClass3424(key, null, false);
                 return false;
             }
 

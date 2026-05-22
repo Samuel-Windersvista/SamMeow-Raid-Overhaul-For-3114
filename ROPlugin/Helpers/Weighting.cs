@@ -8,6 +8,7 @@ namespace RaidOverhaul.Helpers
 {
     public static class Weighting
     {
+        private static readonly Random _rng = new Random();
         public static List<(Action, int)> weightedEvents;
         public static List<(Action, int)> weightedDoorMethods;
 
@@ -26,7 +27,7 @@ namespace RaidOverhaul.Helpers
             int totalWeight = weighting.Sum(pair => pair.Item2);
 
             // Generate a random number between 1 and totalWeight
-            int randomNum = new Random().Next(1, totalWeight + 1);
+            int randomNum = _rng.Next(1, totalWeight + 1);
 
             // Find the method to call based on the random number
             foreach (var (method, weight) in weighting)

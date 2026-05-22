@@ -20,6 +20,7 @@ using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System;
 using RaidOverhaul.Helpers;
 using RaidOverhaul.Configs;
 using RaidOverhaul.Patches;
@@ -33,6 +34,7 @@ namespace RaidOverhaul.Controllers
     public class EventController : MonoBehaviour
     {
         private bool _exfilUIChanged = false;
+        private Dictionary<string, float> _originalStandings = new Dictionary<string, float>();
 
         private static bool _pmcExfilEventRunning = false;
         public static bool _eventIsRunning = false;
@@ -61,6 +63,8 @@ namespace RaidOverhaul.Controllers
         private Switch[] _pswitchs = null;
         private KeycardDoor[] _keydoor = null;
         private LampController[] _lamp = null;
+        private bool _objectsFound = false;
+        private int _initFrameDelay = 30;
 
         public DamageInfoStruct Blunt { get; private set; }
 
@@ -117,19 +121,19 @@ namespace RaidOverhaul.Controllers
                 return;
             }
 
-            if (_pswitchs == null)
+            // Lazy init with frame delay to ensure scene is fully loaded
+            if (_initFrameDelay > 0)
+            {
+                _initFrameDelay--;
+                return;
+            }
+
+            if (!_objectsFound)
             {
                 _pswitchs = FindObjectsOfType<Switch>();
-            }
-
-            if (_keydoor == null)
-            {
                 _keydoor = FindObjectsOfType<KeycardDoor>();
-            }
-
-            if (_lamp == null)
-            {
                 _lamp = FindObjectsOfType<LampController>();
+                _objectsFound = true;
             }
 
 
@@ -158,7 +162,7 @@ namespace RaidOverhaul.Controllers
 
         private IEnumerator StartEvents()
         {
-            yield return new WaitForSeconds(Random.Range(ConfigController.EventConfig.RandomEventRangeMinimumServer, ConfigController.EventConfig.RandomEventRangeMaximumServer) * 60f);
+            yield return new WaitForSeconds(UnityEngine.Random.Range(ConfigController.EventConfig.RandomEventRangeMinimumServer, ConfigController.EventConfig.RandomEventRangeMaximumServer) * 60f);
 
             if (Ready() && FikaBridge.IAmHost())
             {
@@ -212,111 +216,164 @@ namespace RaidOverhaul.Controllers
 
         public void DoHealPlayer()
         {
-            if (_healthEventCount >= 2) { return; }
+            try
+            {
+                if (_healthEventCount >= 2) { return; }
 
-            if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Heal); }
+                if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Heal); }
 
-            NotificationManagerClass.DisplayMessageNotification("Heal Event: On your feet you ain't dead yet.", ENotificationDurationType.Long, ENotificationIconType.Default);
-            ROPlayer.ActiveHealthController.RestoreFullHealth();
+                NotificationManagerClass.DisplayMessageNotification("Heal Event: On your feet you ain't dead yet.", ENotificationDurationType.Long, ENotificationIconType.Default);
+                ROPlayer.ActiveHealthController.RestoreFullHealth();
                 _healthEventCount++;
 
-            if (ConfigController.DebugConfig.DebugMode) {
-                Utils.LogToServerConsole("Heal Event has run");
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole("Heal Event has run");
+                }
+            }
+            catch (Exception ex)
+            {
+                Plugin.Log.LogError($"[DoHealPlayer] event failed: {ex}");
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole($"[DoHealPlayer] event exception: {ex.Message}");
+                }
             }
         }
 
         public void DoDamageEvent()
         {
-            if (_damageEventCount >= 1) { return; }
+            try
+            {
+                if (_damageEventCount >= 1) { return; }
 
-            if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Damage); }
+                if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Damage); }
 
-            NotificationManagerClass.DisplayMessageNotification("Heart Attack Event: Better get to a medic quick, you don't have long left.", ENotificationDurationType.Long, ENotificationIconType.Alert);
-            ROPlayer.ActiveHealthController.DoContusion(4f, 50f);
-            ROPlayer.ActiveHealthController.DoStun(5f, 0f);
-            ROPlayer.ActiveHealthController.DoFracture(EBodyPart.LeftArm);
-            ROPlayer.ActiveHealthController.ApplyDamage(EBodyPart.Chest, 65f, Blunt);
+                NotificationManagerClass.DisplayMessageNotification("Heart Attack Event: Better get to a medic quick, you don't have long left.", ENotificationDurationType.Long, ENotificationIconType.Alert);
+                ROPlayer.ActiveHealthController.DoContusion(4f, 50f);
+                ROPlayer.ActiveHealthController.DoStun(5f, 0f);
+                ROPlayer.ActiveHealthController.DoFracture(EBodyPart.LeftArm);
+                ROPlayer.ActiveHealthController.ApplyDamage(EBodyPart.Chest, 65f, Blunt);
                 _damageEventCount++;
 
-            if (ConfigController.DebugConfig.DebugMode) {
-                Utils.LogToServerConsole("Heart Attack Event has run");
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole("Heart Attack Event has run");
+                }
+            }
+            catch (Exception ex)
+            {
+                Plugin.Log.LogError($"[DoDamageEvent] event failed: {ex}");
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole($"[DoDamageEvent] event exception: {ex.Message}");
+                }
             }
         }
 
         public void DoArmorRepair()
         {
-            if (_repairEventCount >= 2) { return; }
-
-            if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Repair); }
-
-            NotificationManagerClass.DisplayMessageNotification("Armor Repair Event: All equipped armor repaired... nice!", ENotificationDurationType.Long, ENotificationIconType.Default);
-            ROPlayer.Profile.Inventory.GetPlayerItems().ExecuteForEach((item) =>
+            try
             {
-                if (item.GetItemComponent<ArmorComponent>() != null) item.GetItemComponent<RepairableComponent>().Durability = item.GetItemComponent<RepairableComponent>().MaxDurability;
-                    _repairEventCount++;
-            });
+                if (_repairEventCount >= 2) { return; }
 
-            if (ConfigController.DebugConfig.DebugMode) {
-                Utils.LogToServerConsole("Armor Repair Event has run");
+                if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Repair); }
+
+                NotificationManagerClass.DisplayMessageNotification("Armor Repair Event: All equipped armor repaired... nice!", ENotificationDurationType.Long, ENotificationIconType.Default);
+                ROPlayer.Profile.Inventory.GetPlayerItems().ExecuteForEach((item) =>
+                {
+                    if (item.GetItemComponent<ArmorComponent>() != null) item.GetItemComponent<RepairableComponent>().Durability = item.GetItemComponent<RepairableComponent>().MaxDurability;
+                    _repairEventCount++;
+                });
+
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole("Armor Repair Event has run");
+                }
+            }
+            catch (Exception ex)
+            {
+                Plugin.Log.LogError($"[DoArmorRepair] event failed: {ex}");
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole($"[DoArmorRepair] event exception: {ex.Message}");
+                }
             }
         }
 
         public void DoAirdropEvent()
         {
-
-            if (ROPlayer.Location != "factory4_day" && ROPlayer.Location != "factory4_night" && ROPlayer.Location != "laboratory" && ROPlayer.Location != "sandbox" && !_airdropEventHasRun)
+            try
             {
-                if (Utils.FindTemplates(Utils.RedFlare).FirstOrDefault() is not AmmoTemplate ammoTemplate) { return; };
-                
-                ROPlayer.HandleFlareSuccessEvent(ROPlayer.Transform.position, ammoTemplate);
+                if (ROPlayer.Location != "factory4_day" && ROPlayer.Location != "factory4_night" && ROPlayer.Location != "laboratory" && ROPlayer.Location != "sandbox" && !_airdropEventHasRun)
+                {
+                    if (Utils.FindTemplates(Utils.RedFlare).FirstOrDefault() is not AmmoTemplate ammoTemplate) { return; };
+                    
+                    ROPlayer.HandleFlareSuccessEvent(ROPlayer.Transform.position, ammoTemplate);
 
-                NotificationManagerClass.DisplayMessageNotification("Aidrop Event: Incoming Airdrop!", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                    NotificationManagerClass.DisplayMessageNotification("Aidrop Event: Incoming Airdrop!", ENotificationDurationType.Long, ENotificationIconType.Quest);
 
-                _airdropEventHasRun = true;
+                    _airdropEventHasRun = true;
 
-                if (ConfigController.DebugConfig.DebugMode) {
-                    Utils.LogToServerConsole("Aidrop Event has run");
+                    if (ConfigController.DebugConfig.DebugMode) {
+                        Utils.LogToServerConsole("Aidrop Event has run");
+                    }
+                }
+
+                else
+                {
+
+                    Weighting.DoRandomEvent(Weighting.weightedEvents);
                 }
             }
-
-            else
+            catch (Exception ex)
             {
-
-                Weighting.DoRandomEvent(Weighting.weightedEvents);
+                Plugin.Log.LogError($"[DoAirdropEvent] event failed: {ex}");
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole($"[DoAirdropEvent] event exception: {ex.Message}");
+                }
             }
         }
 
         public async void DoFunny()
         {
-            if (!_jokeEventHasRun)
+            try
             {
-                if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Jokes); }
+                var token = this.destroyCancellationToken;
+                if (!_jokeEventHasRun)
+                {
+                    if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Jokes); }
 
-                NotificationManagerClass.DisplayMessageNotification("Heart Attack Event: Nice knowing ya, you've got 10 seconds", ENotificationDurationType.Long, ENotificationIconType.Alert);
+                    NotificationManagerClass.DisplayMessageNotification("Heart Attack Event: Nice knowing ya, you've got 10 seconds", ENotificationDurationType.Long, ENotificationIconType.Alert);
 
-                await Task.Delay(10000);
+                    await Task.Delay(10000, token);
 
-                NotificationManagerClass.DisplayMessageNotification("jk", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                    NotificationManagerClass.DisplayMessageNotification("jk", ENotificationDurationType.Long, ENotificationIconType.Quest);
 
-                await Task.Delay(2000);
+                    await Task.Delay(2000, token);
 
-                DoHealPlayer();
+                    DoHealPlayer();
 
-                if (ConfigController.DebugConfig.DebugMode) {
-                    Utils.LogToServerConsole("Joke Event has run");
+                    if (ConfigController.DebugConfig.DebugMode) {
+                        Utils.LogToServerConsole("Joke Event has run");
+                    }
+
+                    _jokeEventHasRun = true;
                 }
 
-                _jokeEventHasRun = true;
+                if (_jokeEventHasRun)
+                {
+                    Weighting.DoRandomEvent(Weighting.weightedEvents);
+                }
             }
-
-            if (_jokeEventHasRun)
+            catch (Exception ex)
             {
-                Weighting.DoRandomEvent(Weighting.weightedEvents);
+                Plugin.Log.LogError($"[DoFunny] event failed: {ex}");
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole($"[DoFunny] event exception: {ex.Message}");
+                }
             }
         }
 
         public async void DoBlackoutEvent()
         {
+            try
+            {
+                var token = this.destroyCancellationToken;
                 if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Blackout); }
 
                 foreach (Switch pSwitch in _pswitchs)
@@ -333,20 +390,20 @@ namespace RaidOverhaul.Controllers
 
                 foreach (KeycardDoor door in _keydoor)
                 {
-                    if (_keydoor != null || _keydoor.Length >= 0)
+                    if (_keydoor != null && _keydoor.Length > 0)
                     {
                         typeof(KeycardDoor).GetMethod("Unlock", BindingFlags.Instance | BindingFlags.Public).Invoke(door, null);
                         typeof(KeycardDoor).GetMethod("Open", BindingFlags.Instance | BindingFlags.Public).Invoke(door, null);
                     }
                 }
 
-            NotificationManagerClass.DisplayMessageNotification("Blackout Event: All power switches and lights disabled for 10 minutes", ENotificationDurationType.Long, ENotificationIconType.Alert);
+                NotificationManagerClass.DisplayMessageNotification("Blackout Event: All power switches and lights disabled for 10 minutes", ENotificationDurationType.Long, ENotificationIconType.Alert);
 
                 if (ConfigController.DebugConfig.DebugMode) {
                     Utils.LogToServerConsole("Blackout Event: All power switches and lights disabled for 10 minutes");
                 }
 
-                await Task.Delay(600000);
+                await Task.Delay(600000, token);
 
                 foreach (Switch pSwitch in _pswitchs)
                 {
@@ -359,27 +416,42 @@ namespace RaidOverhaul.Controllers
                     lamp.enabled = true;
                 }
 
-            NotificationManagerClass.DisplayMessageNotification("Blackout Event over", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                NotificationManagerClass.DisplayMessageNotification("Blackout Event over", ENotificationDurationType.Long, ENotificationIconType.Quest);
 
-            if (ConfigController.DebugConfig.DebugMode) {
-                Utils.LogToServerConsole("Blackout Event has run");
-            }          
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole("Blackout Event has run");
+                }
+            }
+            catch (Exception ex)
+            {
+                Plugin.Log.LogError($"[DoBlackoutEvent] event failed: {ex}");
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole($"[DoBlackoutEvent] event exception: {ex.Message}");
+                }
+            }
         }
 
         public void DoSkillEvent()
         {
-            if (_skillEventCount >= 3) { return; }
+            try
+            {
+                if (_skillEventCount >= 3) { return; }
 
                 if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Skill); }
 
                 System.Random random = new System.Random();
-
                 int chance = random.Next(0, 100 + 1);
-                var selectedSkill = ROSkillManager.DisplayList.RandomElement();
-                int level = selectedSkill.Level;
 
-                // If the skill is a locked skill, start over.
-                if (selectedSkill.Locked == true) { DoSkillEvent(); };
+                // Try to find an unlocked skill, with a bounded retry limit
+                var selectedSkill = ROSkillManager.DisplayList.RandomElement();
+                int maxRetries = 20;
+                while (selectedSkill.Locked == true && maxRetries-- > 0)
+                {
+                    selectedSkill = ROSkillManager.DisplayList.RandomElement();
+                }
+                if (selectedSkill.Locked == true) return; // Give up if all locked
+
+                int level = selectedSkill.Level;
 
                 // 55% chance to roll a skill gain
                 // 45% chance to roll a skill loss
@@ -400,498 +472,600 @@ namespace RaidOverhaul.Controllers
                     NotificationManagerClass.DisplayMessageNotification("Skill Event: You've lost a skill level, unlucky!", ENotificationDurationType.Long, ENotificationIconType.Quest);
                 }
 
-            if (ConfigController.DebugConfig.DebugMode) {
-                Utils.LogToServerConsole("Skill Event has run");
-            }         
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole("Skill Event has run");
+                }
+            }
+            catch (Exception ex)
+            {
+                Plugin.Log.LogError($"[DoSkillEvent] event failed: {ex}");
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole($"[DoSkillEvent] event exception: {ex.Message}");
+                }
+            }
         }
 
         public void DoMetabolismEvent()
         {
-            if (!_metabolismDisabled)
+            try
             {
-                if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Metabolism); }
-
-                System.Random random = new System.Random();
-                int chance = random.Next(0, 100 + 1);
-
-                // 33% chance to disable metabolism for the raid
-                // 33% chance to increase metabolism rate by 20% for the raid
-                // 33% chance to reduce metabolism rate by 20% for the raid
-                if (chance >= 0 && chance <= 33)
+                if (!_metabolismDisabled)
                 {
-                    ROPlayer.ActiveHealthController.DisableMetabolism();
-                    _metabolismDisabled = true;
-                    NotificationManagerClass.DisplayMessageNotification("Metabolism Event: You've got an iron stomach, No hunger or hydration drain!", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                    if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Metabolism); }
+
+                    System.Random random = new System.Random();
+                    int chance = random.Next(0, 100 + 1);
+
+                    // 33% chance to disable metabolism for the raid
+                    // 33% chance to increase metabolism rate by 20% for the raid
+                    // 33% chance to reduce metabolism rate by 20% for the raid
+                    if (chance >= 0 && chance <= 33)
+                    {
+                        float originalEnergyRate = ROPlayer.ActiveHealthController.EnergyRate;
+                        float originalHydrationRate = ROPlayer.ActiveHealthController.HydrationRate;
+                        ROPlayer.ActiveHealthController.DisableMetabolism();
+                        _metabolismDisabled = true;
+                        NotificationManagerClass.DisplayMessageNotification("Metabolism Event: You've got an iron stomach, No hunger or hydration drain!", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                        StartCoroutine(RestoreMetabolism(originalEnergyRate, originalHydrationRate));
+                    }
+                    else if (chance >= 34f && chance <= 66)
+                    {
+                        AccessTools.Property(typeof(ActiveHealthController), "EnergyRate").SetValue(
+                            ROPlayer.ActiveHealthController,
+                            ROPlayer.ActiveHealthController.EnergyRate * 0.80f);
+
+                        AccessTools.Property(typeof(ActiveHealthController), "HydrationRate").SetValue(
+                            ROPlayer.ActiveHealthController,
+                            ROPlayer.ActiveHealthController.HydrationRate * 0.80f);
+
+                        NotificationManagerClass.DisplayMessageNotification("Metabolism Event: Your metabolism has slowed. Decreased hunger and hydration drain!", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                    }
+                    else if (chance >= 67 && chance <= 100f)
+                    {
+                        AccessTools.Property(typeof(ActiveHealthController), "EnergyRate").SetValue(
+                            ROPlayer.ActiveHealthController,
+                            ROPlayer.ActiveHealthController.EnergyRate * 1.20f);
+
+                        AccessTools.Property(typeof(ActiveHealthController), "HydrationRate").SetValue(
+                            ROPlayer.ActiveHealthController,
+                            ROPlayer.ActiveHealthController.HydrationRate * 1.20f);
+
+                        NotificationManagerClass.DisplayMessageNotification("Metabolism Event: Your metabolism has fastened. Increased hunger and hydration drain!", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                    }
                 }
-                else if (chance >= 34f && chance <= 66)
-                {
-                    AccessTools.Property(typeof(ActiveHealthController), "EnergyRate").SetValue(
-                        ROPlayer.ActiveHealthController,
-                        ROPlayer.ActiveHealthController.EnergyRate * 0.80f);
 
-                    AccessTools.Property(typeof(ActiveHealthController), "HydrationRate").SetValue(
-                        ROPlayer.ActiveHealthController,
-                        ROPlayer.ActiveHealthController.HydrationRate * 0.80f);
-
-                    NotificationManagerClass.DisplayMessageNotification("Metabolism Event: Your metabolism has slowed. Decreased hunger and hydration drain!", ENotificationDurationType.Long, ENotificationIconType.Quest);
-                }
-                else if (chance >= 67 && chance <= 100f)
-                {
-                    AccessTools.Property(typeof(ActiveHealthController), "EnergyRate").SetValue(
-                        ROPlayer.ActiveHealthController,
-                        ROPlayer.ActiveHealthController.EnergyRate * 1.20f);
-
-                    AccessTools.Property(typeof(ActiveHealthController), "HydrationRate").SetValue(
-                        ROPlayer.ActiveHealthController,
-                        ROPlayer.ActiveHealthController.HydrationRate * 1.20f);
-
-                    NotificationManagerClass.DisplayMessageNotification("Metabolism Event: Your metabolism has fastened. Increased hunger and hydration drain!", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole("Metabolism Event has run");
                 }
             }
-
-            if (ConfigController.DebugConfig.DebugMode) {
-                Utils.LogToServerConsole("Metabolism Event has run");
+            catch (Exception ex)
+            {
+                Plugin.Log.LogError($"[DoMetabolismEvent] event failed: {ex}");
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole($"[DoMetabolismEvent] event exception: {ex.Message}");
+                }
             }
         }
 
         public async void DoMalfEvent()
         {
-            var Items = Session.Profile.Inventory.GetItemsInSlots(new EquipmentSlot[] {EquipmentSlot.FirstPrimaryWeapon, EquipmentSlot.SecondPrimaryWeapon});
-
-            if (!_malfEventHasRun)
+            try
             {
-                if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Malf); }
+                var token = this.destroyCancellationToken;
+                var Items = Session.Profile.Inventory.GetItemsInSlots(new EquipmentSlot[] {EquipmentSlot.FirstPrimaryWeapon, EquipmentSlot.SecondPrimaryWeapon});
 
-                _malfEventHasRun = true;
-
-                var tempItems = _allWeapons;
-
-                foreach (var item in tempItems)
+                if (!_malfEventHasRun)
                 {
-                    if (item is Weapon weapon)
+                    if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Malf); }
+
+                    _malfEventHasRun = true;
+
+                    var tempItems = _allWeapons;
+
+                    foreach (var item in tempItems)
                     {
-                        var origStats = new OriginalWeaponStatsMalf();
+                        if (item is Weapon weapon)
+                        {
+                            var origStats = new OriginalWeaponStatsMalf();
 
-                        origStats.malfChance = weapon.Template.BaseMalfunctionChance;
-                        origStats.duraBurn = weapon.Template.DurabilityBurnRatio;
-                        origStats.ergo = weapon.Template.Ergonomics;
+                            origStats.malfChance = weapon.Template.BaseMalfunctionChance;
+                            origStats.duraBurn = weapon.Template.DurabilityBurnRatio;
+                            origStats.ergo = weapon.Template.Ergonomics;
 
-                        _originalWSMalf.Add(item.TemplateId, origStats);
+                            _originalWSMalf.Add(item.TemplateId, origStats);
+                        }
                     }
-                }
 
-                //
-                //
-                //
+                    //
+                    //
+                    //
 
-                foreach (var item in Items)
+                    try
+                    {
+                        foreach (var item in Items)
+                        {
+                            if (item is Weapon weapon)
+                            {
+                                weapon.Template.BaseMalfunctionChance = _originalWSMalf[item.TemplateId].malfChance * 3f;
+                                weapon.Template.DurabilityBurnRatio = _originalWSMalf[item.TemplateId].duraBurn * 2f;
+                                weapon.Template.Ergonomics = _originalWSMalf[item.TemplateId].ergo * 0.5f;
+                            }
+                        }
+
+                        NotificationManagerClass.DisplayMessageNotification("Malfunction Event: Be careful not to jam up!", ENotificationDurationType.Long, ENotificationIconType.Alert);
+
+                        if (ConfigController.DebugConfig.DebugMode) {
+                            Utils.LogToServerConsole("Malfunction Event has started");
+                        }
+
+                        await Task.Delay(300000, token);
+                    }
+                    finally
+                    {
+                        foreach (var item in Items)
+                        {
+                            if (item is Weapon weapon)
+                            {
+                                weapon.Template.BaseMalfunctionChance = _originalWSMalf[item.TemplateId].malfChance;
+                                weapon.Template.DurabilityBurnRatio = _originalWSMalf[item.TemplateId].duraBurn;
+                                weapon.Template.Ergonomics = _originalWSMalf[item.TemplateId].ergo;
+                            }
+                        }
+
+                        NotificationManagerClass.DisplayMessageNotification("Malfunction Event: Your weapon has had time to cool off, shouldn't have any more troubles!", ENotificationDurationType.Long, ENotificationIconType.Default);
+
+                        if (ConfigController.DebugConfig.DebugMode) {
+                            Utils.LogToServerConsole("Malfunction Event has run");
+                        }
+                    }
+                }  
+
+                else
                 {
-                    if (item is Weapon weapon)
-                    {
-                        weapon.Template.BaseMalfunctionChance = _originalWSMalf[item.TemplateId].malfChance * 3f;
-                        weapon.Template.DurabilityBurnRatio = _originalWSMalf[item.TemplateId].duraBurn * 2f;
-                        weapon.Template.Ergonomics = _originalWSMalf[item.TemplateId].ergo * 0.5f;
-                    }
+                    Weighting.DoRandomEvent(Weighting.weightedEvents);
                 }
-
-                NotificationManagerClass.DisplayMessageNotification("Malfunction Event: Be careful not to jam up!", ENotificationDurationType.Long, ENotificationIconType.Alert);
-
-                if (ConfigController.DebugConfig.DebugMode) {
-                    Utils.LogToServerConsole("Malfunction Event has started");
-                }
-
-                await Task.Delay(300000);
-
-                foreach (var item in Items)
-                {
-                    if (item is Weapon weapon)
-                    {
-                        weapon.Template.BaseMalfunctionChance = _originalWSMalf[item.TemplateId].malfChance;
-                        weapon.Template.DurabilityBurnRatio = _originalWSMalf[item.TemplateId].duraBurn;
-                        weapon.Template.Ergonomics = _originalWSMalf[item.TemplateId].ergo;
-                    }
-                }
-
-                NotificationManagerClass.DisplayMessageNotification("Malfunction Event: Your weapon has had time to cool off, shouldn't have any more troubles!", ENotificationDurationType.Long, ENotificationIconType.Default);
-
-                if (ConfigController.DebugConfig.DebugMode) {
-                    Utils.LogToServerConsole("Malfunction Event has run");
-                }
-            }  
-
-            else
+            }
+            catch (Exception ex)
             {
-                Weighting.DoRandomEvent(Weighting.weightedEvents);
+                Plugin.Log.LogError($"[DoMalfEvent] event failed: {ex}");
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole($"[DoMalfEvent] event exception: {ex.Message}");
+                }
             }
         }
 
         public void DoLLEvent()
         {
-            if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.LoyaltyLevel); }
-
-            System.Random random = new System.Random();
-
-            if (ConfigController.ServerConfig.EnableReqShop)
+            try
             {
-                var Trader = Utils.Traders.RandomElement();
-                int chance = random.Next(0, 100 + 1);
+                if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.LoyaltyLevel); }
 
-                if (chance is >= 0 && chance is <= 49)
+                System.Random random = new System.Random();
+
+                if (ConfigController.ServerConfig.EnableReqShop)
                 {
-                    Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing + 0.1);
-                    NotificationManagerClass.DisplayMessageNotification("Trader Event: A random Trader has gained a little more respect for you.", ENotificationDurationType.Default, ENotificationIconType.Achievement);
+                    var Trader = Utils.Traders.RandomElement();
+                    int chance = random.Next(0, 100 + 1);
 
-                    if (ConfigController.DebugConfig.DebugMode) {
-                        Utils.LogToServerConsole("Trader Rep Gain Event has run");
-                    }
-                }
-
-                else if (chance is >= 50 && chance is <= 100)
-                {
-                    if (Session.Profile.TradersInfo[Trader].Standing >= 0.05)
+                    if (chance is >= 0 && chance is <= 49)
                     {
-                        Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing - 0.05);
-                        NotificationManagerClass.DisplayMessageNotification("Trader Event: A random Trader has lost a little faith in you.", ENotificationDurationType.Default, ENotificationIconType.Achievement);
+                        Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing + 0.1);
+                        NotificationManagerClass.DisplayMessageNotification("Trader Event: A random Trader has gained a little more respect for you.", ENotificationDurationType.Default, ENotificationIconType.Achievement);
 
                         if (ConfigController.DebugConfig.DebugMode) {
-                            Utils.LogToServerConsole("Trader Rep Loss Event has run");
+                            Utils.LogToServerConsole("Trader Rep Gain Event has run");
                         }
                     }
 
-                    else
+                    else if (chance is >= 50 && chance is <= 100)
                     {
-                        Weighting.DoRandomEvent(Weighting.weightedEvents);
+                        if (Session.Profile.TradersInfo[Trader].Standing >= 0.05)
+                        {
+                            Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing - 0.05);
+                            NotificationManagerClass.DisplayMessageNotification("Trader Event: A random Trader has lost a little faith in you.", ENotificationDurationType.Default, ENotificationIconType.Achievement);
+
+                            if (ConfigController.DebugConfig.DebugMode) {
+                                Utils.LogToServerConsole("Trader Rep Loss Event has run");
+                            }
+                        }
+
+                        else
+                        {
+                            Weighting.DoRandomEvent(Weighting.weightedEvents);
+                        }
+                    }
+                }
+                else
+                {
+                    var Trader = Utils.TradersNoReq.RandomElement();
+                    int chance = random.Next(0, 100 + 1);
+
+                    if (chance is >= 0 && chance is <= 49)
+                    {
+                        Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing + 0.1);
+                        NotificationManagerClass.DisplayMessageNotification("Trader Event: A random Trader has gained a little more respect for you.", ENotificationDurationType.Default, ENotificationIconType.Achievement);
+
+                        if (ConfigController.DebugConfig.DebugMode) {
+                            Utils.LogToServerConsole("Trader Rep Gain Event has run");
+                        }
+                    }
+
+                    else if (chance is >= 50 && chance is <= 100)
+                    {
+                        if (Session.Profile.TradersInfo[Trader].Standing >= 0.05)
+                        {
+                            Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing - 0.05);
+                            NotificationManagerClass.DisplayMessageNotification("Trader Event: A random Trader has lost a little faith in you.", ENotificationDurationType.Default, ENotificationIconType.Achievement);
+
+                            if (ConfigController.DebugConfig.DebugMode) {
+                                Utils.LogToServerConsole("Trader Rep Loss Event has run");
+                            }
+                        }
+
+                        else
+                        {
+                            Weighting.DoRandomEvent(Weighting.weightedEvents);
+                        }
                     }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                var Trader = Utils.TradersNoReq.RandomElement();
-                int chance = random.Next(0, 100 + 1);
-
-                if (chance is >= 0 && chance is <= 49)
-                {
-                    Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing + 0.1);
-                    NotificationManagerClass.DisplayMessageNotification("Trader Event: A random Trader has gained a little more respect for you.", ENotificationDurationType.Default, ENotificationIconType.Achievement);
-
-                    if (ConfigController.DebugConfig.DebugMode) {
-                        Utils.LogToServerConsole("Trader Rep Gain Event has run");
-                    }
-                }
-
-                else if (chance is >= 50 && chance is <= 100)
-                {
-                    if (Session.Profile.TradersInfo[Trader].Standing >= 0.05)
-                    {
-                        Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing - 0.05);
-                        NotificationManagerClass.DisplayMessageNotification("Trader Event: A random Trader has lost a little faith in you.", ENotificationDurationType.Default, ENotificationIconType.Achievement);
-
-                        if (ConfigController.DebugConfig.DebugMode) {
-                            Utils.LogToServerConsole("Trader Rep Loss Event has run");
-                        }
-                    }
-
-                    else
-                    {
-                        Weighting.DoRandomEvent(Weighting.weightedEvents);
-                    }
+                Plugin.Log.LogError($"[DoLLEvent] event failed: {ex}");
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole($"[DoLLEvent] event exception: {ex.Message}");
                 }
             }
         }
 
         public async void DoBerserkEvent()
         {
-            var Items = Session.Profile.Inventory.GetItemsInSlots(new EquipmentSlot[] {EquipmentSlot.FirstPrimaryWeapon, EquipmentSlot.SecondPrimaryWeapon});
-
-            if (!_berserkEventHasRun)
+            try
             {
-                if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Berserk); }
+                var token = this.destroyCancellationToken;
+                var Items = Session.Profile.Inventory.GetItemsInSlots(new EquipmentSlot[] {EquipmentSlot.FirstPrimaryWeapon, EquipmentSlot.SecondPrimaryWeapon});
 
-                _berserkEventHasRun = true;
-
-                var tempItems = _allWeapons;
-
-                foreach (var item in tempItems)
+                if (!_berserkEventHasRun)
                 {
-                    if (item is Weapon weapon)
+                    if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Berserk); }
+
+                    _berserkEventHasRun = true;
+
+                    var tempItems = _allWeapons;
+
+                    foreach (var item in tempItems)
                     {
-                        var origStats = new OriginalWeaponStatsBers();
+                        if (item is Weapon weapon)
+                        {
+                            var origStats = new OriginalWeaponStatsBers();
 
-                        origStats.ergo = weapon.Template.Ergonomics;
-                        origStats.duraBurn = weapon.Template.DurabilityBurnRatio;
-                        origStats.malfChance = weapon.Template.BaseMalfunctionChance;
-                        origStats.recoilBack = weapon.Template.RecoilForceBack;
-                        origStats.recoilUp = weapon.Template.RecoilForceUp;
+                            origStats.ergo = weapon.Template.Ergonomics;
+                            origStats.duraBurn = weapon.Template.DurabilityBurnRatio;
+                            origStats.malfChance = weapon.Template.BaseMalfunctionChance;
+                            origStats.recoilBack = weapon.Template.RecoilForceBack;
+                            origStats.recoilUp = weapon.Template.RecoilForceUp;
 
-                        _originalWSBers.Add(item.TemplateId, origStats);
+                            _originalWSBers.Add(item.TemplateId, origStats);
+                        }
+                    }
+
+                    //
+                    //
+                    //
+
+
+                    try
+                    {
+                        ROPlayer.ActiveHealthController.DoScavRegeneration(10f);
+
+                        foreach (var item in Items)
+                        {
+                            if (item is Weapon weapon)
+                            {
+                                weapon.Template.BaseMalfunctionChance = _originalWSBers[item.TemplateId].malfChance * 0.25f;
+                                weapon.Template.DurabilityBurnRatio = _originalWSBers[item.TemplateId].duraBurn * 0.5f;
+                                weapon.Template.Ergonomics = _originalWSBers[item.TemplateId].ergo * 2f;
+                                weapon.Template.RecoilForceBack = _originalWSBers[item.TemplateId].recoilBack * 0.5f;
+                                weapon.Template.RecoilForceUp = _originalWSBers[item.TemplateId].recoilUp * 0.5f;
+                            }
+                        }
+
+                        NotificationManagerClass.DisplayMessageNotification("Berserk Event: You're seeing red, I feel bad for any scavs and PMCs in your way!", ENotificationDurationType.Long, ENotificationIconType.Alert);
+
+                        if (ConfigController.DebugConfig.DebugMode) {
+                            Utils.LogToServerConsole("Berserk Event has started");
+                        }
+
+                        await Task.Delay(180000, token);
+                    }
+                    finally
+                    {
+                        ROPlayer.ActiveHealthController.DoScavRegeneration(0);
+                        ROPlayer.ActiveHealthController.PauseAllEffects();
+
+                        foreach (var item in Items)
+                        {
+                            if (item is Weapon weapon)
+                            {
+                                weapon.Template.BaseMalfunctionChance = _originalWSBers[item.TemplateId].malfChance;
+                                weapon.Template.DurabilityBurnRatio = _originalWSBers[item.TemplateId].duraBurn;
+                                weapon.Template.Ergonomics = _originalWSBers[item.TemplateId].ergo;
+                                weapon.Template.RecoilForceBack = _originalWSBers[item.TemplateId].recoilBack;
+                                weapon.Template.RecoilForceUp = _originalWSBers[item.TemplateId].recoilUp;
+                            }
+                        }
+
+                        NotificationManagerClass.DisplayMessageNotification("Berserk Event: Your vision has cleared up, I guess you got all your rage out!", ENotificationDurationType.Long, ENotificationIconType.Alert);
+
+                        if (ConfigController.DebugConfig.DebugMode) {
+                            Utils.LogToServerConsole("Berserk Event has run");
+                        }
                     }
                 }
 
-                //
-                //
-                //
-
-
-                ROPlayer.ActiveHealthController.DoScavRegeneration(10f);
-
-
-                foreach (var item in Items)
+                else
                 {
-                    if (item is Weapon weapon)
-                    {
-                        weapon.Template.BaseMalfunctionChance = _originalWSBers[item.TemplateId].malfChance * 0.25f;
-                        weapon.Template.DurabilityBurnRatio = _originalWSBers[item.TemplateId].duraBurn * 0.5f;
-                        weapon.Template.Ergonomics = _originalWSBers[item.TemplateId].ergo * 2f;
-                        weapon.Template.RecoilForceBack = _originalWSBers[item.TemplateId].recoilBack * 0.5f;
-                        weapon.Template.RecoilForceUp = _originalWSBers[item.TemplateId].recoilUp * 0.5f;
-                    }
-                }
-
-                NotificationManagerClass.DisplayMessageNotification("Berserk Event: You're seeing red, I feel bad for any scavs and PMCs in your way!", ENotificationDurationType.Long, ENotificationIconType.Alert);
-
-                if (ConfigController.DebugConfig.DebugMode) {
-                    Utils.LogToServerConsole("Berserk Event has started");
-                }
-
-                await Task.Delay(180000);
-
-                ROPlayer.ActiveHealthController.DoScavRegeneration(0);
-                ROPlayer.ActiveHealthController.PauseAllEffects();
-
-                foreach (var item in Items)
-                {
-                    if (item is Weapon weapon)
-                    {
-                        weapon.Template.BaseMalfunctionChance = _originalWSBers[item.TemplateId].malfChance;
-                        weapon.Template.DurabilityBurnRatio = _originalWSBers[item.TemplateId].duraBurn;
-                        weapon.Template.Ergonomics = _originalWSBers[item.TemplateId].ergo;
-                        weapon.Template.RecoilForceBack = _originalWSBers[item.TemplateId].recoilBack;
-                        weapon.Template.RecoilForceUp = _originalWSBers[item.TemplateId].recoilUp;
-                    }
-                }
-
-                NotificationManagerClass.DisplayMessageNotification("Berserk Event: Your vision has cleared up, I guess you got all your rage out!", ENotificationDurationType.Long, ENotificationIconType.Alert);
-
-                if (ConfigController.DebugConfig.DebugMode) {
-                    Utils.LogToServerConsole("Berserk Event has run");
+                    Weighting.DoRandomEvent(Weighting.weightedEvents);
                 }
             }
-
-            else
+            catch (Exception ex)
             {
-                Weighting.DoRandomEvent(Weighting.weightedEvents);
+                Plugin.Log.LogError($"[DoBerserkEvent] event failed: {ex}");
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole($"[DoBerserkEvent] event exception: {ex.Message}");
+                }
             }
         }
 
         public async void DoWeightEvent()
         {
-            var Items = Session.Profile.Inventory.GetItemsInSlots(new EquipmentSlot[] { EquipmentSlot.FirstPrimaryWeapon, 
-                                                                                        EquipmentSlot.SecondPrimaryWeapon,
-                                                                                        EquipmentSlot.Holster,
-                                                                                        EquipmentSlot.Scabbard,
-                                                                                        EquipmentSlot.ArmorVest, 
-                                                                                        EquipmentSlot.TacticalVest, 
-                                                                                        EquipmentSlot.Backpack,
-                                                                                        EquipmentSlot.Earpiece,
-                                                                                        EquipmentSlot.Headwear });
-
-            System.Random random = new System.Random();
-            int chance = random.Next(0, 100 + 1);
-
-            if (!_weightEventHasRun)
+            try
             {
-                if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Weight); }
+                var token = this.destroyCancellationToken;
+                var Items = Session.Profile.Inventory.GetItemsInSlots(new EquipmentSlot[] { EquipmentSlot.FirstPrimaryWeapon, 
+                                                                                            EquipmentSlot.SecondPrimaryWeapon,
+                                                                                            EquipmentSlot.Holster,
+                                                                                            EquipmentSlot.Scabbard,
+                                                                                            EquipmentSlot.ArmorVest, 
+                                                                                            EquipmentSlot.TacticalVest, 
+                                                                                            EquipmentSlot.Backpack,
+                                                                                            EquipmentSlot.Earpiece,
+                                                                                            EquipmentSlot.Headwear });
 
-                _weightEventHasRun = true;
+                System.Random random = new System.Random();
+                int chance = random.Next(0, 100 + 1);
 
-                if (chance is >= 0 && chance is <= 49)
+                if (!_weightEventHasRun)
                 {
-                    foreach (var item in Items)
+                    if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Weight); }
+
+                    _weightEventHasRun = true;
+
+                    if (chance is >= 0 && chance is <= 49)
                     {
-                        if (item is Item slottedItem)
+                        try
                         {
-                            slottedItem.Template.Weight = slottedItem.Template.Weight * 2f;
+                            foreach (var item in Items)
+                            {
+                                if (item is Item slottedItem)
+                                {
+                                    slottedItem.Template.Weight = slottedItem.Template.Weight * 2f;
+                                }
+                            }
+                            Session.Profile.Inventory.UpdateTotalWeight();
+
+                            NotificationManagerClass.DisplayMessageNotification("Weight Event: Better hunker down until you get your stamina back!", ENotificationDurationType.Long, ENotificationIconType.Alert);
+
+                            if (ConfigController.DebugConfig.DebugMode) {
+                                Utils.LogToServerConsole("Weight Event has started");
+                            }
+
+                            await Task.Delay(180000, token);
+                        }
+                        finally
+                        {
+                            foreach (var item in Items)
+                            {
+                                if (item is Item slottedItem)
+                                {
+                                    slottedItem.Template.Weight = slottedItem.Template.Weight * 0.5f;
+                                }
+                            }
+                            Session.Profile.Inventory.UpdateTotalWeight();
+
+                            NotificationManagerClass.DisplayMessageNotification("Weight Event: You're rested and ready to get back out there!", ENotificationDurationType.Long, ENotificationIconType.Alert);
+
+                            if (ConfigController.DebugConfig.DebugMode) {
+                                Utils.LogToServerConsole("Weight Event has run");
+                            }
                         }
                     }
-                    Session.Profile.Inventory.UpdateTotalWeight();
 
-                    NotificationManagerClass.DisplayMessageNotification("Weight Event: Better hunker down until you get your stamina back!", ENotificationDurationType.Long, ENotificationIconType.Alert);
+                    //
+                    //
+                    //
 
-                    if (ConfigController.DebugConfig.DebugMode) {
-                        Utils.LogToServerConsole("Weight Event has started");
-                    }
-
-                    await Task.Delay(180000);
-
-                    foreach (var item in Items)
+                    if (chance is >= 50 && chance is <= 100)
                     {
-                        if (item is Item slottedItem)
+                        try
                         {
-                            slottedItem.Template.Weight = slottedItem.Template.Weight * 0.5f;
+                            foreach (var item in Items)
+                            {
+                                if (item is Item slottedItem)
+                                {
+                                    slottedItem.Template.Weight = slottedItem.Template.Weight * 0.5f;
+                                }
+                            }
+                            Session.Profile.Inventory.UpdateTotalWeight();
+
+                            NotificationManagerClass.DisplayMessageNotification("Weight Event: You feel light on your feet, stock up on everything you can!", ENotificationDurationType.Long, ENotificationIconType.Alert);
+
+                            if (ConfigController.DebugConfig.DebugMode) {
+                                Utils.LogToServerConsole("Weight Event has started");
+                            }
+
+                            await Task.Delay(180000, token);
+                        }
+                        finally
+                        {
+                            foreach (var item in Items)
+                            {
+                                if (item is Item slottedItem)
+                                {
+                                    slottedItem.Template.Weight = slottedItem.Template.Weight * 2f;
+                                }
+                            }
+                            Session.Profile.Inventory.UpdateTotalWeight();
+
+                            NotificationManagerClass.DisplayMessageNotification("Weight Event: You've lost your extra energy, hope you didn't fill your backpack too much!", ENotificationDurationType.Long, ENotificationIconType.Alert);
+
+                            if (ConfigController.DebugConfig.DebugMode) {
+                                Utils.LogToServerConsole("Weight Event has run");
+                            }
                         }
                     }
-                    Session.Profile.Inventory.UpdateTotalWeight();
-
-                    if (ConfigController.DebugConfig.DebugMode) {
-                        Utils.LogToServerConsole("Weight Event has run");
-                    }
-
-                    NotificationManagerClass.DisplayMessageNotification("Weight Event: You're rested and ready to get back out there!", ENotificationDurationType.Long, ENotificationIconType.Alert);
                 }
 
-                //
-                //
-                //
-
-                if (chance is >= 50 && chance is <= 100)
+                else
                 {
-                    foreach (var item in Items)
-                    {
-                        if (item is Item slottedItem)
-                        {
-                            slottedItem.Template.Weight = slottedItem.Template.Weight * 0.5f;
-                        }
-                    }
-                    Session.Profile.Inventory.UpdateTotalWeight();
-
-                    NotificationManagerClass.DisplayMessageNotification("Weight Event: You feel light on your feet, stock up on everything you can!", ENotificationDurationType.Long, ENotificationIconType.Alert);
-
-                    if (ConfigController.DebugConfig.DebugMode) {
-                        Utils.LogToServerConsole("Weight Event has started");
-                    }
-
-                    await Task.Delay(180000);
-
-                    foreach (var item in Items)
-                    {
-                        if (item is Item slottedItem)
-                        {
-                            slottedItem.Template.Weight = slottedItem.Template.Weight * 2f;
-                        }
-                    }
-                    Session.Profile.Inventory.UpdateTotalWeight();
-
-                    NotificationManagerClass.DisplayMessageNotification("Weight Event: You've lost your extra energy, hope you didn't fill your backpack too much!", ENotificationDurationType.Long, ENotificationIconType.Alert);
-
-                    if (ConfigController.DebugConfig.DebugMode) {
-                        Utils.LogToServerConsole("Weight Event has run");
-                    }
+                    Weighting.DoRandomEvent(Weighting.weightedEvents);
                 }
             }
-
-            else
+            catch (Exception ex)
             {
-                Weighting.DoRandomEvent(Weighting.weightedEvents);
+                Plugin.Log.LogError($"[DoWeightEvent] event failed: {ex}");
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole($"[DoWeightEvent] event exception: {ex.Message}");
+                }
             }
         }
 
         public async void DoMaxLLEvent()
         {
-            if (JsonHandler.CheckFilePath("TraderRep", "Flags"))
+            try
             {
-                JsonHandler.ReadFlagFile("TraderRep", "Flags");
-
-                if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.MaxLoyaltyLevel); }
-
-                if (!ConfigController.flags.traderRepFlag)
+                var token = this.destroyCancellationToken;
+                if (JsonHandler.CheckFilePath("TraderRep", "Flags"))
                 {
-                    if (_maxLLEventCount >= 1) 
+                    JsonHandler.ReadFlagFile("TraderRep", "Flags");
+
+                    if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.MaxLoyaltyLevel); }
+
+                    if (!ConfigController.flags.traderRepFlag)
                     {
-                        Weighting.DoRandomEvent(Weighting.weightedEvents);
-                        return; 
+                        if (_maxLLEventCount >= 1) 
+                        {
+                            Weighting.DoRandomEvent(Weighting.weightedEvents);
+                            return; 
+                        }
+
+                        if (ConfigController.ServerConfig.EnableReqShop)
+                        {
+                            var Traders = Utils.Traders;
+
+                            _maxLLEventCount++;
+
+                            foreach (var Trader in Traders)
+                            {
+                                {
+                                    if (!_originalStandings.ContainsKey(Trader))
+                                        _originalStandings[Trader] = (float)Session.Profile.TradersInfo[Trader].Standing;
+                                    Session.Profile.TradersInfo[Trader].SetStanding(6.0f);
+                                }
+                            }
+
+                            ConfigController.flags.traderRepFlag = true;
+                            JsonHandler.SaveToJson(ConfigController.flags, "TraderRep", "Flags");
+
+                            NotificationManagerClass.DisplayMessageNotification("Shopping Spree Event: All Traders have maxed out standing. Better get to them in the next ten minutes!", ENotificationDurationType.Default, ENotificationIconType.Mail);
+
+                            if (ConfigController.DebugConfig.DebugMode) {
+                                Utils.LogToServerConsole("Shopping Spree Event has started");
+                            }
+
+                            await Task.Delay(600000, token);
+
+                            foreach (var Trader in Traders)
+                            {
+                                {
+                                    if (_originalStandings.TryGetValue(Trader, out float origStanding))
+                                        Session.Profile.TradersInfo[Trader].SetStanding(origStanding);
+                                }
+                            }
+                            _originalStandings.Clear();
+
+                            ConfigController.flags.traderRepFlag = false;
+                            JsonHandler.SaveToJson(ConfigController.flags, "TraderRep", "Flags");
+
+                            NotificationManagerClass.DisplayMessageNotification("Shopping Spree Event: All Traders standing has been set back to normal. This is a fickle business after all.", ENotificationDurationType.Default, ENotificationIconType.Mail);
+
+                            if (ConfigController.DebugConfig.DebugMode) {
+                                Utils.LogToServerConsole("Shopping Spree Event has run");
+                            }
+                        }
+                        else
+                        {
+                            var Traders = Utils.TradersNoReq;
+
+                            _maxLLEventCount++;
+
+                            foreach (var Trader in Traders)
+                            {
+                                {
+                                    if (!_originalStandings.ContainsKey(Trader))
+                                        _originalStandings[Trader] = (float)Session.Profile.TradersInfo[Trader].Standing;
+                                    Session.Profile.TradersInfo[Trader].SetStanding(6.0f);
+                                }
+                            }
+
+                            ConfigController.flags.traderRepFlag = true;
+                            JsonHandler.SaveToJson(ConfigController.flags, "TraderRep", "Flags");
+
+                            NotificationManagerClass.DisplayMessageNotification("Shopping Spree Event: All Traders have maxed out standing. Better get to them in the next ten minutes!", ENotificationDurationType.Default, ENotificationIconType.Mail);
+
+                            if (ConfigController.DebugConfig.DebugMode) {
+                                Utils.LogToServerConsole("Shopping Spree Event has started");
+                            }
+
+                            await Task.Delay(600000, token);
+
+                            foreach (var Trader in Traders)
+                            {
+                                {
+                                    if (_originalStandings.TryGetValue(Trader, out float origStanding))
+                                        Session.Profile.TradersInfo[Trader].SetStanding(origStanding);
+                                }
+                            }
+                            _originalStandings.Clear();
+
+                            ConfigController.flags.traderRepFlag = false;
+                            JsonHandler.SaveToJson(ConfigController.flags, "TraderRep", "Flags");
+
+                            NotificationManagerClass.DisplayMessageNotification("Shopping Spree Event: All Traders standing has been set back to normal. This is a fickle business after all.", ENotificationDurationType.Default, ENotificationIconType.Mail);
+
+                            if (ConfigController.DebugConfig.DebugMode) {
+                                Utils.LogToServerConsole("Shopping Spree Event has run");
+                            }
+                        }
                     }
 
-                    if (ConfigController.ServerConfig.EnableReqShop)
+                    else if (ConfigController.flags.traderRepFlag)
                     {
-                        var Traders = Utils.Traders;
-
-                        _maxLLEventCount++;
-
-                        foreach (var Trader in Traders)
-                        {
-                            {
-                                Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing + 1);
-                            }
-                        }
-
-                        ConfigController.flags.traderRepFlag = true;
-                        JsonHandler.SaveToJson(ConfigController.flags, "TraderRep", "Flags");
-
-                        NotificationManagerClass.DisplayMessageNotification("Shopping Spree Event: All Traders have maxed out standing. Better get to them in the next ten minutes!", ENotificationDurationType.Default, ENotificationIconType.Mail);
-
-                        if (ConfigController.DebugConfig.DebugMode) {
-                            Utils.LogToServerConsole("Shopping Spree Event has started");
-                        }
-
-                        await Task.Delay(600000);
-
-                        foreach (var Trader in Traders)
-                        {
-                            {
-                                Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing - 1);
-                            }
-                        }
-
-                        ConfigController.flags.traderRepFlag = false;
-                        JsonHandler.SaveToJson(ConfigController.flags, "TraderRep", "Flags");
-
-                        NotificationManagerClass.DisplayMessageNotification("Shopping Spree Event: All Traders standing has been set back to normal. This is a fickle business after all.", ENotificationDurationType.Default, ENotificationIconType.Mail);
-
-                        if (ConfigController.DebugConfig.DebugMode) {
-                            Utils.LogToServerConsole("Shopping Spree Event has run");
-                        }
-                    }
-                    else
-                    {
-                        var Traders = Utils.TradersNoReq;
-
-                        _maxLLEventCount++;
-
-                        foreach (var Trader in Traders)
-                        {
-                            {
-                                Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing + 1);
-                            }
-                        }
-
-                        ConfigController.flags.traderRepFlag = true;
-                        JsonHandler.SaveToJson(ConfigController.flags, "TraderRep", "Flags");
-
-                        NotificationManagerClass.DisplayMessageNotification("Shopping Spree Event: All Traders have maxed out standing. Better get to them in the next ten minutes!", ENotificationDurationType.Default, ENotificationIconType.Mail);
-
-                        if (ConfigController.DebugConfig.DebugMode) {
-                            Utils.LogToServerConsole("Shopping Spree Event has started");
-                        }
-
-                        await Task.Delay(600000);
-
-                        foreach (var Trader in Traders)
-                        {
-                            {
-                                Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing - 1);
-                            }
-                        }
-
-                        ConfigController.flags.traderRepFlag = false;
-                        JsonHandler.SaveToJson(ConfigController.flags, "TraderRep", "Flags");
-
-                        NotificationManagerClass.DisplayMessageNotification("Shopping Spree Event: All Traders standing has been set back to normal. This is a fickle business after all.", ENotificationDurationType.Default, ENotificationIconType.Mail);
-
-                        if (ConfigController.DebugConfig.DebugMode) {
-                            Utils.LogToServerConsole("Shopping Spree Event has run");
-                        }
+                        CorrectRep();
                     }
                 }
 
-                else if (ConfigController.flags.traderRepFlag)
+                else
                 {
-                    CorrectRep();
+                    Weighting.DoRandomEvent(Weighting.weightedEvents);
                 }
             }
-
-            else
+            catch (Exception ex)
             {
-                Weighting.DoRandomEvent(Weighting.weightedEvents);
+                Plugin.Log.LogError($"[DoMaxLLEvent] event failed: {ex}");
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole($"[DoMaxLLEvent] event exception: {ex.Message}");
+                }
             }
         }
 
@@ -912,9 +1086,11 @@ namespace RaidOverhaul.Controllers
                         foreach (var Trader in Traders)
                         {
                             {
-                                Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing - 1);
+                                if (_originalStandings.TryGetValue(Trader, out float origStanding))
+                                    Session.Profile.TradersInfo[Trader].SetStanding(origStanding);
                             }
                         }
+                        _originalStandings.Clear();
 
                         ConfigController.flags.traderRepFlag = false;
                         JsonHandler.SaveToJson(ConfigController.flags, "TraderRep", "Flags");
@@ -927,9 +1103,11 @@ namespace RaidOverhaul.Controllers
                         foreach (var Trader in Traders)
                         {
                             {
-                                Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing - 1);
+                                if (_originalStandings.TryGetValue(Trader, out float origStanding))
+                                    Session.Profile.TradersInfo[Trader].SetStanding(origStanding);
                             }
                         }
+                        _originalStandings.Clear();
 
                         ConfigController.flags.traderRepFlag = false;
                         JsonHandler.SaveToJson(ConfigController.flags, "TraderRep", "Flags");
@@ -946,85 +1124,106 @@ namespace RaidOverhaul.Controllers
 
         public async void DoLockDownEvent()
         {
-            var raidTimeLeft = SPT.SinglePlayer.Utils.InRaid.RaidTimeUtil.GetRemainingRaidSeconds();
-            var exfils = FindObjectsOfType<ExfiltrationPoint>();
-
-            if (_exfilEventCount >= 1) { return; }
-
-            if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Lockdown); }
-
-            if (raidTimeLeft < 900 || ROPlayer.Location == "laboratory")
+            try
             {
-                Weighting.DoRandomEvent(Weighting.weightedEvents);
+                var token = this.destroyCancellationToken;
+                var raidTimeLeft = SPT.SinglePlayer.Utils.InRaid.RaidTimeUtil.GetRemainingRaidSeconds();
+                var exfils = FindObjectsOfType<ExfiltrationPoint>();
+
+                if (_exfilEventCount >= 1) { return; }
+
+                if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Lockdown); }
+
+                if (raidTimeLeft < 900 || ROPlayer.Location == "laboratory")
+                {
+                    Weighting.DoRandomEvent(Weighting.weightedEvents);
+                }
+
+                else
+                {
+                    NotificationManagerClass.DisplayMessageNotification("Lockdown Event: All extracts are unavailable for 15 minutes", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
+
+                    if (ConfigController.DebugConfig.DebugMode) {
+                        Utils.LogToServerConsole("Lockdown Event has started");
+                    }
+
+                    EventExfilPatch.IsLockdown = true;
+                    _exfilLockdown = true;
+
+                    foreach (var exfil in exfils)
+                    {
+                        if (!exfil.Settings.Name.Contains("Elevator"))
+                        {
+                            exfil.Disable();
+                        }
+                    }
+                    _exfilEventCount++;
+
+                    timeStart = System.DateTime.UtcNow.Second;
+
+                    await Task.Delay(600000, token);
+
+                    foreach (var exfil in exfils)
+                    {
+                        if (!exfil.Settings.Name.Contains("Elevator"))
+                        {
+                            exfil.Enable();
+                        }
+                    }
+
+                    EventExfilPatch.IsLockdown = false;
+                    _exfilLockdown = false;
+
+                    NotificationManagerClass.DisplayMessageNotification("Lockdown Event: Extracts are available again. Time to get out of there!", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
+
+                    if (ConfigController.DebugConfig.DebugMode) {
+                        Utils.LogToServerConsole("Lockdown Event has run");
+                    }
+                }
             }
-
-            else
+            catch (Exception ex)
             {
-                NotificationManagerClass.DisplayMessageNotification("Lockdown Event: All extracts are unavailable for 15 minutes", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
-
+                Plugin.Log.LogError($"[DoLockDownEvent] event failed: {ex}");
                 if (ConfigController.DebugConfig.DebugMode) {
-                    Utils.LogToServerConsole("Lockdown Event has started");
-                }
-
-                EventExfilPatch.IsLockdown = true;
-                _exfilLockdown = true;
-
-                foreach (var exfil in exfils)
-                {
-                    if (!exfil.Settings.Name.Contains("Elevator"))
-                    {
-                        exfil.Disable();
-                    }
-                }
-                _exfilEventCount++;
-
-                timeStart = System.DateTime.UtcNow.Second;
-
-                await Task.Delay(600000);
-
-                foreach (var exfil in exfils)
-                {
-                    if (!exfil.Settings.Name.Contains("Elevator"))
-                    {
-                        exfil.Enable();
-                    }
-                }
-
-                EventExfilPatch.IsLockdown = false;
-                _exfilLockdown = false;
-
-                NotificationManagerClass.DisplayMessageNotification("Lockdown Event: Extracts are available again. Time to get out of there!", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
-
-                if (ConfigController.DebugConfig.DebugMode) {
-                    Utils.LogToServerConsole("Lockdown Event has run");
+                    Utils.LogToServerConsole($"[DoLockDownEvent] event exception: {ex.Message}");
                 }
             }
         }
 
         public async void DoArtyEvent()
         {
-            if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Artillery); }
-
-            if (ROPlayer.Location != "factory4_day" && ROPlayer.Location != "factory4_night" && ROPlayer.Location != "laboratory" && !_artyEventHasRun)
+            try
             {
-                NotificationManagerClass.DisplayMessageNotification("Artillery Event: Get to cover. Shelling will commence in 30 seconds", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
+                var token = this.destroyCancellationToken;
+                if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Artillery); }
 
-                if (ConfigController.DebugConfig.DebugMode) {
-                    Utils.LogToServerConsole("Artillery Event has started");
+                if (ROPlayer.Location != "factory4_day" && ROPlayer.Location != "factory4_night" && ROPlayer.Location != "laboratory" && !_artyEventHasRun)
+                {
+                    NotificationManagerClass.DisplayMessageNotification("Artillery Event: Get to cover. Shelling will commence in 30 seconds", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
+
+                    if (ConfigController.DebugConfig.DebugMode) {
+                        Utils.LogToServerConsole("Artillery Event has started");
+                    }
+
+                    await Task.Delay(30000, token);
+
+                    NotificationManagerClass.DisplayMessageNotification("Artillery Event: Shelling has started", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
+                    
+                    ROGameWorld.ServerShellingController?.StartShellingPosition(ROPlayer.Transform.position);
                 }
 
-                await Task.Delay(30000);
-
-                NotificationManagerClass.DisplayMessageNotification("Artillery Event: Shelling has started", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
-                
-                ROGameWorld.ServerShellingController?.StartShellingPosition(ROPlayer.Transform.position);
+                else
+                {
+                    Weighting.DoRandomEvent(Weighting.weightedEvents);
+                }
             }
-
-            else
+            catch (Exception ex)
             {
-                Weighting.DoRandomEvent(Weighting.weightedEvents);
+                Plugin.Log.LogError($"[DoArtyEvent] event failed: {ex}");
+                if (ConfigController.DebugConfig.DebugMode) {
+                    Utils.LogToServerConsole($"[DoArtyEvent] event exception: {ex.Message}");
+                }
             }
-
         }
 
         public void FlareLogicTrain()
@@ -1045,9 +1244,10 @@ namespace RaidOverhaul.Controllers
 
         public async void RunTrain()
         {
+            var token = this.destroyCancellationToken;
             FikaBridge.SendFlareEventPacket(Utils.Train);
             
-            await Task.Delay(3000);
+            await Task.Delay(3000, token);
             Locomotive trainExfil = FindObjectOfType<Locomotive>();
             if (trainExfil == null) { return; }
 
@@ -1059,7 +1259,7 @@ namespace RaidOverhaul.Controllers
                 Utils.LogToServerConsole("Train is arriving");
             }
 
-            await Task.Delay(420000);
+            await Task.Delay(420000, token);
             
             NotificationManagerClass.DisplayMessageNotification("Train is leaving the station.", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
             
@@ -1088,38 +1288,39 @@ namespace RaidOverhaul.Controllers
 
         public async void DoPmcExfilEvent()
         {
+            var token = this.destroyCancellationToken;
             if (!_pmcExfilEventRunning)
             {
                 FikaBridge.SendFlareEventPacket(Utils.PmcExfil);
 
                 _pmcExfilEventRunning = true;
 
-                await Task.Delay(3000);
+                await Task.Delay(3000, token);
                 NotificationManagerClass.DisplayMessageNotification("Extract is on it's way! Hold out for two minutes for help to arrive", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
                 if (ConfigController.DebugConfig.DebugMode) {
                     Utils.LogToServerConsole("Extract event has started");
                 }
-                await Task.Delay(120000);
+                await Task.Delay(120000, token);
                 NotificationManagerClass.DisplayMessageNotification("10", ENotificationDurationType.Default, ENotificationIconType.EntryPoint);
-                await Task.Delay(1000);
+                await Task.Delay(1000, token);
                 NotificationManagerClass.DisplayMessageNotification("9", ENotificationDurationType.Default, ENotificationIconType.EntryPoint);
-                await Task.Delay(1000);
+                await Task.Delay(1000, token);
                 NotificationManagerClass.DisplayMessageNotification("8", ENotificationDurationType.Default, ENotificationIconType.EntryPoint);
-                await Task.Delay(1000);
+                await Task.Delay(1000, token);
                 NotificationManagerClass.DisplayMessageNotification("7", ENotificationDurationType.Default, ENotificationIconType.EntryPoint);
-                await Task.Delay(1000);
+                await Task.Delay(1000, token);
                 NotificationManagerClass.DisplayMessageNotification("6", ENotificationDurationType.Default, ENotificationIconType.EntryPoint);
-                await Task.Delay(1000);
+                await Task.Delay(1000, token);
                 NotificationManagerClass.DisplayMessageNotification("5", ENotificationDurationType.Default, ENotificationIconType.EntryPoint);
-                await Task.Delay(1000);
+                await Task.Delay(1000, token);
                 NotificationManagerClass.DisplayMessageNotification("4", ENotificationDurationType.Default, ENotificationIconType.EntryPoint);
-                await Task.Delay(1000);
+                await Task.Delay(1000, token);
                 NotificationManagerClass.DisplayMessageNotification("3", ENotificationDurationType.Default, ENotificationIconType.EntryPoint);
-                await Task.Delay(1000);
+                await Task.Delay(1000, token);
                 NotificationManagerClass.DisplayMessageNotification("2", ENotificationDurationType.Default, ENotificationIconType.EntryPoint);
-                await Task.Delay(1000);
+                await Task.Delay(1000, token);
                 NotificationManagerClass.DisplayMessageNotification("1", ENotificationDurationType.Default, ENotificationIconType.EntryPoint);
-                await Task.Delay(1000);
+                await Task.Delay(1000, token);
                 NotificationManagerClass.DisplayMessageNotification("Help has arrived", ENotificationDurationType.Default, ENotificationIconType.EntryPoint);
 
                 EndByExitTrigerScenario.GInterface129 exfilSession = Singleton<AbstractGame>.Instance as EndByExitTrigerScenario.GInterface129;
@@ -1141,6 +1342,7 @@ namespace RaidOverhaul.Controllers
             _pswitchs = null;
             _keydoor = null;
             _lamp = null;
+            _objectsFound = false;
         }
 
         public void CheckForFlag()
@@ -1154,6 +1356,20 @@ namespace RaidOverhaul.Controllers
                 {
                     CorrectRep();
                 }
+            }
+        }
+
+        private IEnumerator RestoreMetabolism(float originalEnergyRate, float originalHydrationRate)
+        {
+            yield return new WaitForSeconds(900f);
+            if (_metabolismDisabled && ROPlayer != null && ROPlayer.ActiveHealthController != null)
+            {
+                AccessTools.Property(typeof(ActiveHealthController), "EnergyRate").SetValue(
+                    ROPlayer.ActiveHealthController, originalEnergyRate);
+                AccessTools.Property(typeof(ActiveHealthController), "HydrationRate").SetValue(
+                    ROPlayer.ActiveHealthController, originalHydrationRate);
+                _metabolismDisabled = false;
+                NotificationManagerClass.DisplayMessageNotification("Metabolism Event: Your iron stomach has worn off.", ENotificationDurationType.Long, ENotificationIconType.Default);
             }
         }
         #endregion

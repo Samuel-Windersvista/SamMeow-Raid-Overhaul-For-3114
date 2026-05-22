@@ -5,6 +5,7 @@ using EFT.Interactive;
 using EFT.Communications;
 using System.Reflection;
 using System.Collections;
+using System.Collections.Generic;
 using RaidOverhaul.Helpers;
 using RaidOverhaul.Configs;
 using RaidOverhaul.Fika;
@@ -13,9 +14,9 @@ namespace RaidOverhaul.Controllers
 {
     internal class DoorController : MonoBehaviour
     {
-        private Switch[] _switchs = null;
-        private Door[] _door = null;
-        private KeycardDoor[] _kdoor = null;
+        private List<Switch> _switchs = null;
+        private List<Door> _door = null;
+        private List<KeycardDoor> _kdoor = null;
         private bool _dooreventisRunning = false;
 
         private static int _doorChangedCount = 0;
@@ -35,17 +36,17 @@ namespace RaidOverhaul.Controllers
 
             if (_switchs == null)
             {
-                _switchs = FindObjectsOfType<Switch>();
+                _switchs = new List<Switch>(FindObjectsOfType<Switch>());
             }
 
             if (_door == null)
             {
-                _door = FindObjectsOfType<Door>();
+                _door = new List<Door>(FindObjectsOfType<Door>());
             }
 
             if (_kdoor == null)
             {
-                _kdoor = FindObjectsOfType<KeycardDoor>();
+                _kdoor = new List<KeycardDoor>(FindObjectsOfType<KeycardDoor>());
             }
 
             if (!_dooreventisRunning && FikaBridge.IAmHost())
@@ -89,7 +90,7 @@ namespace RaidOverhaul.Controllers
                 return;
             }
 
-            if (_switchs == null || _switchs.Length <= 0)
+            if (_switchs == null || _switchs.Count <= 0)
             {
                 if (ConfigController.DebugConfig.DebugMode) {
                     Plugin.Log.LogInfo("No switches left to open, returning.");
@@ -99,7 +100,7 @@ namespace RaidOverhaul.Controllers
 
             System.Random random = new System.Random();
 
-            int selection = random.Next(_switchs.Length + 1);
+            int selection = random.Next(_switchs.Count);
             Switch _switch = _switchs[selection];
 
             if (_switch.DoorState == EDoorState.Shut)
@@ -111,18 +112,18 @@ namespace RaidOverhaul.Controllers
                     Utils.LogToServerConsole("A random switch has been thrown.");
                 }
 
-                RemoveAt(ref _switchs, selection);
+                _switchs.RemoveAt(selection);
             }
 
             else
             {
-                RemoveAt(ref _door, selection);
+                _door.RemoveAt(selection);
             }
         }
 
         public void DoUnlock()
         {
-            if (_door == null || _door.Length <= 0)
+            if (_door == null || _door.Count <= 0)
             {
                 if (ConfigController.DebugConfig.DebugMode) {
                     Plugin.Log.LogInfo("No locked doors available, returning.");
@@ -132,7 +133,7 @@ namespace RaidOverhaul.Controllers
 
             System.Random random = new System.Random();
 
-            int selection = random.Next(_door.Length + 1);
+            int selection = random.Next(_door.Count);
             Door door = _door[selection];
 
             if (door.gameObject.layer != LayerMaskClass.InteractiveLayer)
@@ -153,12 +154,12 @@ namespace RaidOverhaul.Controllers
                     Utils.LogToServerConsole("A random door has been unlocked.");
                 }
 
-                RemoveAt(ref _door, selection);
+                _door.RemoveAt(selection);
             }
 
             else
             {
-                RemoveAt(ref _door, selection);
+                _door.RemoveAt(selection);
             }
         }
 
@@ -172,7 +173,7 @@ namespace RaidOverhaul.Controllers
                 return;
             }
 
-            if (_kdoor == null || _kdoor.Length <= 0)
+            if (_kdoor == null || _kdoor.Count <= 0)
             {
                 if (ConfigController.DebugConfig.DebugMode) {
                     Plugin.Log.LogInfo("No keycard doors left to open, returning.");
@@ -182,7 +183,7 @@ namespace RaidOverhaul.Controllers
 
             System.Random random = new System.Random();
 
-            int selection = random.Next(_kdoor.Length + 1);
+            int selection = random.Next(_kdoor.Count);
             KeycardDoor kdoor = _kdoor[selection];
 
             if (kdoor.DoorState == EDoorState.Locked)
@@ -195,12 +196,12 @@ namespace RaidOverhaul.Controllers
                     Utils.LogToServerConsole("A random keycard door has been unlocked.");
                 }
 
-                RemoveAt(ref _kdoor, selection);
+                _kdoor.RemoveAt(selection);
             }
 
             else
             {
-                RemoveAt(ref _door, selection);
+                _kdoor.RemoveAt(selection);
             }
         }
         #endregion
@@ -282,19 +283,6 @@ namespace RaidOverhaul.Controllers
             }
         }
         #endregion
-
-        static void RemoveAt<T>(ref T[] array, int index)
-        {
-            if (index >= 0 && index < array.Length)
-            {
-                for (int i = index; i < array.Length - 1; i++)
-                {
-                    array[i] = array[i + 1];
-                }
-
-                Array.Resize(ref array, array.Length - 1);
-            }
-        }
 
         public bool Ready()
         {

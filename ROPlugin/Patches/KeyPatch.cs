@@ -37,10 +37,16 @@ namespace RaidOverhaul.Patches
                         Action = new Action(() =>
                         {
                             var originalKey = door.KeyId;
-                            door.KeyId = Utils.SkeletonKey;
-                            doorUnlockClass.key = owner.GetKey(door);
-                            doorUnlockClass.method_0();
-                            door.KeyId = originalKey;
+                            try
+                            {
+                                door.KeyId = Utils.SkeletonKey;
+                                doorUnlockClass.key = owner.GetKey(door);
+                                doorUnlockClass.method_0();
+                            }
+                            finally
+                            {
+                                door.KeyId = originalKey;
+                            }
                         }),
                         Disabled = !doorUnlockClass.worldInteractiveObject.Operatable
                     });
@@ -50,7 +56,14 @@ namespace RaidOverhaul.Patches
 
         private static bool HasKey(string keyId)
         {
-            return Singleton<GameWorld>.Instance.MainPlayer.Profile.Inventory.Equipment.GetAllItems().Any(x => x.TemplateId == keyId);
+            // Walk equipment slots directly instead of traversing all inventory items
+            var equipment = Singleton<GameWorld>.Instance.MainPlayer.Profile.Inventory.Equipment;
+            foreach (var slot in equipment.GetAllSlots())
+            {
+                if (slot.ContainedItem?.TemplateId == keyId)
+                    return true;
+            }
+            return false;
         }
     }
 }

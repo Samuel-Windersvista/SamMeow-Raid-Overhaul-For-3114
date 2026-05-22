@@ -1,0 +1,104 @@
+{
+  "version": 4,
+  "targets": {
+    "net471": {
+      "LegionPrePatch/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.7.1",
+        "compile": {
+          "bin/placeholder/LegionPrePatch.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/LegionPrePatch.dll": {}
+        }
+      },
+      "RaidOverhaul/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.7.1",
+        "dependencies": {
+          "LegionPrePatch": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/RaidOverhaul.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RaidOverhaul.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "LegionPrePatch/1.0.0": {
+      "type": "project",
+      "path": "../ROPrepatch/LegionPrePatch.csproj",
+      "msbuildProject": "../ROPrepatch/LegionPrePatch.csproj"
+    },
+    "RaidOverhaul/1.0.0": {
+      "type": "project",
+      "path": "../ROPlugin/RaidOverhaul.csproj",
+      "msbuildProject": "../ROPlugin/RaidOverhaul.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net471": [
+      "RaidOverhaul >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Winde\\.nuget\\packages\\": {},
+    "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "E:\\云文件\\GitHub\\SamMeow-Raid-Overhaul-For-3114\\ROPackets\\RaidOverhaulFika.csproj",
+      "projectName": "RaidOverhaulFika",
+      "projectPath": "E:\\云文件\\GitHub\\SamMeow-Raid-Overhaul-For-3114\\ROPackets\\RaidOverhaulFika.csproj",
+      "packagesPath": "C:\\Users\\Winde\\.nuget\\packages\\",
+      "outputPath": "E:\\云文件\\GitHub\\SamMeow-Raid-Overhaul-For-3114\\ROPackets\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\Winde\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
+      ],
+      "originalTargetFrameworks": [
+        "net471"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net471": {
+          "framework": "net471",
+          "targetAlias": "net471",
+          "projectReferences": {
+            "E:\\云文件\\GitHub\\SamMeow-Raid-Overhaul-For-3114\\ROPlugin\\RaidOverhaul.csproj": {
+              "projectPath": "E:\\云文件\\GitHub\\SamMeow-Raid-Overhaul-For-3114\\ROPlugin\\RaidOverhaul.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "10.0.300"
+    },
+    "frameworks": {
+      "net471": {
+        "framework": "net471",
+        "targetAlias": "net471",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
