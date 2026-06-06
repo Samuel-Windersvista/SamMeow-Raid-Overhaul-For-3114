@@ -222,7 +222,7 @@ namespace RaidOverhaul.Controllers
 
                 if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Heal); }
 
-                NotificationManagerClass.DisplayMessageNotification("Heal Event: On your feet you ain't dead yet.", ENotificationDurationType.Long, ENotificationIconType.Default);
+                NotificationManagerClass.DisplayMessageNotification("治愈事件: 站起来，你还没死。", ENotificationDurationType.Long, ENotificationIconType.Default);
                 ROPlayer.ActiveHealthController.RestoreFullHealth();
                 _healthEventCount++;
 
@@ -247,7 +247,7 @@ namespace RaidOverhaul.Controllers
 
                 if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Damage); }
 
-                NotificationManagerClass.DisplayMessageNotification("Heart Attack Event: Better get to a medic quick, you don't have long left.", ENotificationDurationType.Long, ENotificationIconType.Alert);
+                NotificationManagerClass.DisplayMessageNotification("心脏骤停事件: 赶紧找医生，你撑不了多久了。", ENotificationDurationType.Long, ENotificationIconType.Alert);
                 ROPlayer.ActiveHealthController.DoContusion(4f, 50f);
                 ROPlayer.ActiveHealthController.DoStun(5f, 0f);
                 ROPlayer.ActiveHealthController.DoFracture(EBodyPart.LeftArm);
@@ -275,7 +275,7 @@ namespace RaidOverhaul.Controllers
 
                 if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Repair); }
 
-                NotificationManagerClass.DisplayMessageNotification("Armor Repair Event: All equipped armor repaired... nice!", ENotificationDurationType.Long, ENotificationIconType.Default);
+                NotificationManagerClass.DisplayMessageNotification("护甲修复事件: 所有装备护甲已修复... nice!", ENotificationDurationType.Long, ENotificationIconType.Default);
                 ROPlayer.Profile.Inventory.GetPlayerItems().ExecuteForEach((item) =>
                 {
                     if (item.GetItemComponent<ArmorComponent>() != null) item.GetItemComponent<RepairableComponent>().Durability = item.GetItemComponent<RepairableComponent>().MaxDurability;
@@ -305,7 +305,7 @@ namespace RaidOverhaul.Controllers
                     
                     ROPlayer.HandleFlareSuccessEvent(ROPlayer.Transform.position, ammoTemplate);
 
-                    NotificationManagerClass.DisplayMessageNotification("Aidrop Event: Incoming Airdrop!", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                    NotificationManagerClass.DisplayMessageNotification("空投事件: 空投 incoming!", ENotificationDurationType.Long, ENotificationIconType.Quest);
 
                     _airdropEventHasRun = true;
 
@@ -338,11 +338,11 @@ namespace RaidOverhaul.Controllers
                 {
                     if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.Jokes); }
 
-                    NotificationManagerClass.DisplayMessageNotification("Heart Attack Event: Nice knowing ya, you've got 10 seconds", ENotificationDurationType.Long, ENotificationIconType.Alert);
+                    NotificationManagerClass.DisplayMessageNotification("心脏骤停事件: 很高兴认识你，你还有10秒。", ENotificationDurationType.Long, ENotificationIconType.Alert);
 
                     await Task.Delay(10000, token);
 
-                    NotificationManagerClass.DisplayMessageNotification("jk", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                    NotificationManagerClass.DisplayMessageNotification("骗你的 / 开玩笑", ENotificationDurationType.Long, ENotificationIconType.Quest);
 
                     await Task.Delay(2000, token);
 
@@ -397,13 +397,21 @@ namespace RaidOverhaul.Controllers
                     }
                 }
 
-                NotificationManagerClass.DisplayMessageNotification("Blackout Event: All power switches and lights disabled for 10 minutes", ENotificationDurationType.Long, ENotificationIconType.Alert);
+                NotificationManagerClass.DisplayMessageNotification("停电事件: 所有电闸和灯光已关闭，持续10分钟", ENotificationDurationType.Long, ENotificationIconType.Alert);
 
                 if (ConfigController.DebugConfig.DebugMode) {
                     Utils.LogToServerConsole("Blackout Event: All power switches and lights disabled for 10 minutes");
                 }
 
-                await Task.Delay(600000, token);
+                await Task.Delay(300000, token);
+                if (!token.IsCancellationRequested)
+                    NotificationManagerClass.DisplayMessageNotification("停电事件: 电力仍中断，剩余5分钟", ENotificationDurationType.Long, ENotificationIconType.Alert);
+
+                await Task.Delay(240000, token);
+                if (!token.IsCancellationRequested)
+                    NotificationManagerClass.DisplayMessageNotification("停电事件: 电力将在1分钟后恢复", ENotificationDurationType.Long, ENotificationIconType.Alert);
+
+                await Task.Delay(60000, token);
 
                 foreach (Switch pSwitch in _pswitchs)
                 {
@@ -416,7 +424,7 @@ namespace RaidOverhaul.Controllers
                     lamp.enabled = true;
                 }
 
-                NotificationManagerClass.DisplayMessageNotification("Blackout Event over", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                NotificationManagerClass.DisplayMessageNotification("停电事件结束", ENotificationDurationType.Long, ENotificationIconType.Quest);
 
                 if (ConfigController.DebugConfig.DebugMode) {
                     Utils.LogToServerConsole("Blackout Event has run");
@@ -461,7 +469,7 @@ namespace RaidOverhaul.Controllers
 
                     selectedSkill.SetLevel(level + 1);
                     _skillEventCount++;
-                    NotificationManagerClass.DisplayMessageNotification("Skill Event: You've advanced a skill to the next level!", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                    NotificationManagerClass.DisplayMessageNotification("技能事件: 你的某项技能升了一级!", ENotificationDurationType.Long, ENotificationIconType.Quest);
                 }
                 else
                 {
@@ -469,7 +477,7 @@ namespace RaidOverhaul.Controllers
 
                     selectedSkill.SetLevel(level - 1);
                     _skillEventCount++;
-                    NotificationManagerClass.DisplayMessageNotification("Skill Event: You've lost a skill level, unlucky!", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                    NotificationManagerClass.DisplayMessageNotification("技能事件: 你的某项技能降了一级，运气真差!", ENotificationDurationType.Long, ENotificationIconType.Quest);
                 }
 
                 if (ConfigController.DebugConfig.DebugMode) {
@@ -505,7 +513,7 @@ namespace RaidOverhaul.Controllers
                         float originalHydrationRate = ROPlayer.ActiveHealthController.HydrationRate;
                         ROPlayer.ActiveHealthController.DisableMetabolism();
                         _metabolismDisabled = true;
-                        NotificationManagerClass.DisplayMessageNotification("Metabolism Event: You've got an iron stomach, No hunger or hydration drain!", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                        NotificationManagerClass.DisplayMessageNotification("代谢事件: 你拥有钢铁般的胃，不再感到饥饿和口渴!", ENotificationDurationType.Long, ENotificationIconType.Quest);
                         StartCoroutine(RestoreMetabolism(originalEnergyRate, originalHydrationRate));
                     }
                     else if (chance >= 34f && chance <= 66)
@@ -518,7 +526,7 @@ namespace RaidOverhaul.Controllers
                             ROPlayer.ActiveHealthController,
                             ROPlayer.ActiveHealthController.HydrationRate * 0.80f);
 
-                        NotificationManagerClass.DisplayMessageNotification("Metabolism Event: Your metabolism has slowed. Decreased hunger and hydration drain!", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                        NotificationManagerClass.DisplayMessageNotification("代谢事件: 你的代谢减慢了，饥饿和口渴消耗降低!", ENotificationDurationType.Long, ENotificationIconType.Quest);
                     }
                     else if (chance >= 67 && chance <= 100f)
                     {
@@ -530,7 +538,7 @@ namespace RaidOverhaul.Controllers
                             ROPlayer.ActiveHealthController,
                             ROPlayer.ActiveHealthController.HydrationRate * 1.20f);
 
-                        NotificationManagerClass.DisplayMessageNotification("Metabolism Event: Your metabolism has fastened. Increased hunger and hydration drain!", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                        NotificationManagerClass.DisplayMessageNotification("代谢事件: 你的代谢加速了，饥饿和口渴消耗增加!", ENotificationDurationType.Long, ENotificationIconType.Quest);
                     }
                 }
 
@@ -592,13 +600,21 @@ namespace RaidOverhaul.Controllers
                             }
                         }
 
-                        NotificationManagerClass.DisplayMessageNotification("Malfunction Event: Be careful not to jam up!", ENotificationDurationType.Long, ENotificationIconType.Alert);
+                        NotificationManagerClass.DisplayMessageNotification("武器故障事件: 小心卡壳!", ENotificationDurationType.Long, ENotificationIconType.Alert);
 
                         if (ConfigController.DebugConfig.DebugMode) {
                             Utils.LogToServerConsole("Malfunction Event has started");
                         }
 
-                        await Task.Delay(300000, token);
+                        await Task.Delay(150000, token);
+                        if (!token.IsCancellationRequested)
+                            NotificationManagerClass.DisplayMessageNotification("武器故障事件: 武器仍不稳定，剩余2.5分钟", ENotificationDurationType.Long, ENotificationIconType.Alert);
+
+                        await Task.Delay(90000, token);
+                        if (!token.IsCancellationRequested)
+                            NotificationManagerClass.DisplayMessageNotification("武器故障事件: 武器状态即将恢复正常", ENotificationDurationType.Long, ENotificationIconType.Default);
+
+                        await Task.Delay(60000, token);
                     }
                     finally
                     {
@@ -612,7 +628,7 @@ namespace RaidOverhaul.Controllers
                             }
                         }
 
-                        NotificationManagerClass.DisplayMessageNotification("Malfunction Event: Your weapon has had time to cool off, shouldn't have any more troubles!", ENotificationDurationType.Long, ENotificationIconType.Default);
+                        NotificationManagerClass.DisplayMessageNotification("武器故障事件: 你的武器已经冷却，应该不会再出问题了!", ENotificationDurationType.Long, ENotificationIconType.Default);
 
                         if (ConfigController.DebugConfig.DebugMode) {
                             Utils.LogToServerConsole("Malfunction Event has run");
@@ -650,7 +666,7 @@ namespace RaidOverhaul.Controllers
                     if (chance is >= 0 && chance is <= 49)
                     {
                         Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing + 0.1);
-                        NotificationManagerClass.DisplayMessageNotification("Trader Event: A random Trader has gained a little more respect for you.", ENotificationDurationType.Default, ENotificationIconType.Achievement);
+                        NotificationManagerClass.DisplayMessageNotification("商人事件: 某位随机商人对你多了几分敬意。", ENotificationDurationType.Default, ENotificationIconType.Achievement);
 
                         if (ConfigController.DebugConfig.DebugMode) {
                             Utils.LogToServerConsole("Trader Rep Gain Event has run");
@@ -662,7 +678,7 @@ namespace RaidOverhaul.Controllers
                         if (Session.Profile.TradersInfo[Trader].Standing >= 0.05)
                         {
                             Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing - 0.05);
-                            NotificationManagerClass.DisplayMessageNotification("Trader Event: A random Trader has lost a little faith in you.", ENotificationDurationType.Default, ENotificationIconType.Achievement);
+                            NotificationManagerClass.DisplayMessageNotification("商人事件: 某位随机商人对你失去了一些信任。", ENotificationDurationType.Default, ENotificationIconType.Achievement);
 
                             if (ConfigController.DebugConfig.DebugMode) {
                                 Utils.LogToServerConsole("Trader Rep Loss Event has run");
@@ -683,7 +699,7 @@ namespace RaidOverhaul.Controllers
                     if (chance is >= 0 && chance is <= 49)
                     {
                         Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing + 0.1);
-                        NotificationManagerClass.DisplayMessageNotification("Trader Event: A random Trader has gained a little more respect for you.", ENotificationDurationType.Default, ENotificationIconType.Achievement);
+                        NotificationManagerClass.DisplayMessageNotification("商人事件: 某位随机商人对你多了几分敬意。", ENotificationDurationType.Default, ENotificationIconType.Achievement);
 
                         if (ConfigController.DebugConfig.DebugMode) {
                             Utils.LogToServerConsole("Trader Rep Gain Event has run");
@@ -695,7 +711,7 @@ namespace RaidOverhaul.Controllers
                         if (Session.Profile.TradersInfo[Trader].Standing >= 0.05)
                         {
                             Session.Profile.TradersInfo[Trader].SetStanding(Session.Profile.TradersInfo[Trader].Standing - 0.05);
-                            NotificationManagerClass.DisplayMessageNotification("Trader Event: A random Trader has lost a little faith in you.", ENotificationDurationType.Default, ENotificationIconType.Achievement);
+                            NotificationManagerClass.DisplayMessageNotification("商人事件: 某位随机商人对你失去了一些信任。", ENotificationDurationType.Default, ENotificationIconType.Achievement);
 
                             if (ConfigController.DebugConfig.DebugMode) {
                                 Utils.LogToServerConsole("Trader Rep Loss Event has run");
@@ -770,13 +786,21 @@ namespace RaidOverhaul.Controllers
                             }
                         }
 
-                        NotificationManagerClass.DisplayMessageNotification("Berserk Event: You're seeing red, I feel bad for any scavs and PMCs in your way!", ENotificationDurationType.Long, ENotificationIconType.Alert);
+                        NotificationManagerClass.DisplayMessageNotification("狂暴事件: 你双眼泛红，挡在你路上的Scav和PMC们可惨了!", ENotificationDurationType.Long, ENotificationIconType.Alert);
 
                         if (ConfigController.DebugConfig.DebugMode) {
                             Utils.LogToServerConsole("Berserk Event has started");
                         }
 
-                        await Task.Delay(180000, token);
+                        await Task.Delay(90000, token);
+                        if (!token.IsCancellationRequested)
+                            NotificationManagerClass.DisplayMessageNotification("狂暴事件: 你的愤怒仍在燃烧，剩余1.5分钟", ENotificationDurationType.Long, ENotificationIconType.Alert);
+
+                        await Task.Delay(60000, token);
+                        if (!token.IsCancellationRequested)
+                            NotificationManagerClass.DisplayMessageNotification("狂暴事件: 30秒后恢复理智", ENotificationDurationType.Long, ENotificationIconType.Alert);
+
+                        await Task.Delay(30000, token);
                     }
                     finally
                     {
@@ -795,7 +819,7 @@ namespace RaidOverhaul.Controllers
                             }
                         }
 
-                        NotificationManagerClass.DisplayMessageNotification("Berserk Event: Your vision has cleared up, I guess you got all your rage out!", ENotificationDurationType.Long, ENotificationIconType.Alert);
+                        NotificationManagerClass.DisplayMessageNotification("狂暴事件: 你的视线恢复了清晰，看来怒气发泄完了!", ENotificationDurationType.Long, ENotificationIconType.Alert);
 
                         if (ConfigController.DebugConfig.DebugMode) {
                             Utils.LogToServerConsole("Berserk Event has run");
@@ -854,13 +878,21 @@ namespace RaidOverhaul.Controllers
                             }
                             Session.Profile.Inventory.UpdateTotalWeight();
 
-                            NotificationManagerClass.DisplayMessageNotification("Weight Event: Better hunker down until you get your stamina back!", ENotificationDurationType.Long, ENotificationIconType.Alert);
+                            NotificationManagerClass.DisplayMessageNotification("负重事件: 最好蹲好别动，等体力恢复!", ENotificationDurationType.Long, ENotificationIconType.Alert);
 
                             if (ConfigController.DebugConfig.DebugMode) {
                                 Utils.LogToServerConsole("Weight Event has started");
                             }
 
-                            await Task.Delay(180000, token);
+                            await Task.Delay(90000, token);
+                            if (!token.IsCancellationRequested)
+                                NotificationManagerClass.DisplayMessageNotification("负重事件: 体重仍异常，剩余1.5分钟", ENotificationDurationType.Long, ENotificationIconType.Alert);
+
+                            await Task.Delay(60000, token);
+                            if (!token.IsCancellationRequested)
+                                NotificationManagerClass.DisplayMessageNotification("负重事件: 30秒后恢复正常", ENotificationDurationType.Long, ENotificationIconType.Alert);
+
+                            await Task.Delay(30000, token);
                         }
                         finally
                         {
@@ -873,7 +905,7 @@ namespace RaidOverhaul.Controllers
                             }
                             Session.Profile.Inventory.UpdateTotalWeight();
 
-                            NotificationManagerClass.DisplayMessageNotification("Weight Event: You're rested and ready to get back out there!", ENotificationDurationType.Long, ENotificationIconType.Alert);
+                            NotificationManagerClass.DisplayMessageNotification("负重事件: 你已休息好，可以重新出发了!", ENotificationDurationType.Long, ENotificationIconType.Alert);
 
                             if (ConfigController.DebugConfig.DebugMode) {
                                 Utils.LogToServerConsole("Weight Event has run");
@@ -898,13 +930,21 @@ namespace RaidOverhaul.Controllers
                             }
                             Session.Profile.Inventory.UpdateTotalWeight();
 
-                            NotificationManagerClass.DisplayMessageNotification("Weight Event: You feel light on your feet, stock up on everything you can!", ENotificationDurationType.Long, ENotificationIconType.Alert);
+                            NotificationManagerClass.DisplayMessageNotification("负重事件: 你感到身轻如燕，能拿多少就拿多少!", ENotificationDurationType.Long, ENotificationIconType.Alert);
 
                             if (ConfigController.DebugConfig.DebugMode) {
                                 Utils.LogToServerConsole("Weight Event has started");
                             }
 
-                            await Task.Delay(180000, token);
+                            await Task.Delay(90000, token);
+                            if (!token.IsCancellationRequested)
+                                NotificationManagerClass.DisplayMessageNotification("负重事件: 体重仍异常，剩余1.5分钟", ENotificationDurationType.Long, ENotificationIconType.Alert);
+
+                            await Task.Delay(60000, token);
+                            if (!token.IsCancellationRequested)
+                                NotificationManagerClass.DisplayMessageNotification("负重事件: 30秒后恢复正常", ENotificationDurationType.Long, ENotificationIconType.Alert);
+
+                            await Task.Delay(30000, token);
                         }
                         finally
                         {
@@ -917,7 +957,7 @@ namespace RaidOverhaul.Controllers
                             }
                             Session.Profile.Inventory.UpdateTotalWeight();
 
-                            NotificationManagerClass.DisplayMessageNotification("Weight Event: You've lost your extra energy, hope you didn't fill your backpack too much!", ENotificationDurationType.Long, ENotificationIconType.Alert);
+                            NotificationManagerClass.DisplayMessageNotification("负重事件: 你的额外能量消失了，希望你背包没塞太满!", ENotificationDurationType.Long, ENotificationIconType.Alert);
 
                             if (ConfigController.DebugConfig.DebugMode) {
                                 Utils.LogToServerConsole("Weight Event has run");
@@ -977,13 +1017,21 @@ namespace RaidOverhaul.Controllers
                             ConfigController.flags.traderRepFlag = true;
                             JsonHandler.SaveToJson(ConfigController.flags, "TraderRep", "Flags");
 
-                            NotificationManagerClass.DisplayMessageNotification("Shopping Spree Event: All Traders have maxed out standing. Better get to them in the next ten minutes!", ENotificationDurationType.Default, ENotificationIconType.Mail);
+                            NotificationManagerClass.DisplayMessageNotification("购物狂欢事件: 所有商人声望已达最高。最好在这十分钟内去光顾他们!", ENotificationDurationType.Default, ENotificationIconType.Mail);
 
                             if (ConfigController.DebugConfig.DebugMode) {
                                 Utils.LogToServerConsole("Shopping Spree Event has started");
                             }
 
-                            await Task.Delay(600000, token);
+                            await Task.Delay(300000, token);
+                            if (!token.IsCancellationRequested)
+                                NotificationManagerClass.DisplayMessageNotification("购物狂欢事件: 还有5分钟，抓紧采购！", ENotificationDurationType.Default, ENotificationIconType.Mail);
+
+                            await Task.Delay(240000, token);
+                            if (!token.IsCancellationRequested)
+                                NotificationManagerClass.DisplayMessageNotification("购物狂欢事件: 1分钟后声望恢复，最后机会！", ENotificationDurationType.Default, ENotificationIconType.Mail);
+
+                            await Task.Delay(60000, token);
 
                             foreach (var Trader in Traders)
                             {
@@ -997,7 +1045,7 @@ namespace RaidOverhaul.Controllers
                             ConfigController.flags.traderRepFlag = false;
                             JsonHandler.SaveToJson(ConfigController.flags, "TraderRep", "Flags");
 
-                            NotificationManagerClass.DisplayMessageNotification("Shopping Spree Event: All Traders standing has been set back to normal. This is a fickle business after all.", ENotificationDurationType.Default, ENotificationIconType.Mail);
+                            NotificationManagerClass.DisplayMessageNotification("购物狂欢事件: 所有商人声望已恢复正常。毕竟这生意就是这样变幻无常。", ENotificationDurationType.Default, ENotificationIconType.Mail);
 
                             if (ConfigController.DebugConfig.DebugMode) {
                                 Utils.LogToServerConsole("Shopping Spree Event has run");
@@ -1021,13 +1069,21 @@ namespace RaidOverhaul.Controllers
                             ConfigController.flags.traderRepFlag = true;
                             JsonHandler.SaveToJson(ConfigController.flags, "TraderRep", "Flags");
 
-                            NotificationManagerClass.DisplayMessageNotification("Shopping Spree Event: All Traders have maxed out standing. Better get to them in the next ten minutes!", ENotificationDurationType.Default, ENotificationIconType.Mail);
+                            NotificationManagerClass.DisplayMessageNotification("购物狂欢事件: 所有商人声望已达最高。最好在这十分钟内去光顾他们!", ENotificationDurationType.Default, ENotificationIconType.Mail);
 
                             if (ConfigController.DebugConfig.DebugMode) {
                                 Utils.LogToServerConsole("Shopping Spree Event has started");
                             }
 
-                            await Task.Delay(600000, token);
+                            await Task.Delay(300000, token);
+                            if (!token.IsCancellationRequested)
+                                NotificationManagerClass.DisplayMessageNotification("购物狂欢事件: 还有5分钟，抓紧采购！", ENotificationDurationType.Default, ENotificationIconType.Mail);
+
+                            await Task.Delay(240000, token);
+                            if (!token.IsCancellationRequested)
+                                NotificationManagerClass.DisplayMessageNotification("购物狂欢事件: 1分钟后声望恢复，最后机会！", ENotificationDurationType.Default, ENotificationIconType.Mail);
+
+                            await Task.Delay(60000, token);
 
                             foreach (var Trader in Traders)
                             {
@@ -1041,7 +1097,7 @@ namespace RaidOverhaul.Controllers
                             ConfigController.flags.traderRepFlag = false;
                             JsonHandler.SaveToJson(ConfigController.flags, "TraderRep", "Flags");
 
-                            NotificationManagerClass.DisplayMessageNotification("Shopping Spree Event: All Traders standing has been set back to normal. This is a fickle business after all.", ENotificationDurationType.Default, ENotificationIconType.Mail);
+                            NotificationManagerClass.DisplayMessageNotification("购物狂欢事件: 所有商人声望已恢复正常。毕竟这生意就是这样变幻无常。", ENotificationDurationType.Default, ENotificationIconType.Mail);
 
                             if (ConfigController.DebugConfig.DebugMode) {
                                 Utils.LogToServerConsole("Shopping Spree Event has run");
@@ -1141,7 +1197,7 @@ namespace RaidOverhaul.Controllers
 
                 else
                 {
-                    NotificationManagerClass.DisplayMessageNotification("Lockdown Event: All extracts are unavailable for 15 minutes", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
+                    NotificationManagerClass.DisplayMessageNotification("撤离封锁事件: 所有撤离点已关闭，持续15分钟", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
 
                     if (ConfigController.DebugConfig.DebugMode) {
                         Utils.LogToServerConsole("Lockdown Event has started");
@@ -1161,7 +1217,15 @@ namespace RaidOverhaul.Controllers
 
                     timeStart = System.DateTime.UtcNow.Second;
 
-                    await Task.Delay(600000, token);
+                    await Task.Delay(450000, token);
+                    if (!token.IsCancellationRequested)
+                        NotificationManagerClass.DisplayMessageNotification("撤离封锁事件: 撤离点仍关闭，剩余7.5分钟", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
+
+                    await Task.Delay(390000, token);
+                    if (!token.IsCancellationRequested)
+                        NotificationManagerClass.DisplayMessageNotification("撤离封锁事件: 1分钟后解除封锁，准备撤离！", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
+
+                    await Task.Delay(60000, token);
 
                     foreach (var exfil in exfils)
                     {
@@ -1174,7 +1238,7 @@ namespace RaidOverhaul.Controllers
                     EventExfilPatch.IsLockdown = false;
                     _exfilLockdown = false;
 
-                    NotificationManagerClass.DisplayMessageNotification("Lockdown Event: Extracts are available again. Time to get out of there!", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
+                    NotificationManagerClass.DisplayMessageNotification("撤离封锁事件: 撤离点已重新开放。是时候撤了!", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
 
                     if (ConfigController.DebugConfig.DebugMode) {
                         Utils.LogToServerConsole("Lockdown Event has run");
@@ -1199,15 +1263,19 @@ namespace RaidOverhaul.Controllers
 
                 if (ROPlayer.Location != "factory4_day" && ROPlayer.Location != "factory4_night" && ROPlayer.Location != "laboratory" && !_artyEventHasRun)
                 {
-                    NotificationManagerClass.DisplayMessageNotification("Artillery Event: Get to cover. Shelling will commence in 30 seconds", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
+                    NotificationManagerClass.DisplayMessageNotification("炮击事件: 找掩体。炮击将在30秒后开始", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
 
                     if (ConfigController.DebugConfig.DebugMode) {
                         Utils.LogToServerConsole("Artillery Event has started");
                     }
 
-                    await Task.Delay(30000, token);
+                    await Task.Delay(20000, token);
+                    if (!token.IsCancellationRequested)
+                        NotificationManagerClass.DisplayMessageNotification("炮击事件: 10秒后开始炮击！快找掩体！", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
 
-                    NotificationManagerClass.DisplayMessageNotification("Artillery Event: Shelling has started", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
+                    await Task.Delay(10000, token);
+
+                    NotificationManagerClass.DisplayMessageNotification("炮击事件: 炮击开始", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
                     
                     ROGameWorld.ServerShellingController?.StartShellingPosition(ROPlayer.Transform.position);
                 }
@@ -1253,15 +1321,19 @@ namespace RaidOverhaul.Controllers
 
             trainExfil?.Init(System.DateTime.UtcNow);
             
-            NotificationManagerClass.DisplayMessageNotification("Train is arriving. Get out if you're ready!", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
+            NotificationManagerClass.DisplayMessageNotification("火车即将到达。准备好就上车!", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
 
             if (ConfigController.DebugConfig.DebugMode) {
                 Utils.LogToServerConsole("Train is arriving");
             }
 
-            await Task.Delay(420000, token);
+            await Task.Delay(210000, token);
+            if (!token.IsCancellationRequested)
+                NotificationManagerClass.DisplayMessageNotification("火车即将离站，剩余3.5分钟", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
+
+            await Task.Delay(210000, token);
             
-            NotificationManagerClass.DisplayMessageNotification("Train is leaving the station.", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
+            NotificationManagerClass.DisplayMessageNotification("火车正在离站。", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
             
             if (ConfigController.DebugConfig.DebugMode) {
                 Utils.LogToServerConsole("Train is leaving");
@@ -1296,11 +1368,15 @@ namespace RaidOverhaul.Controllers
                 _pmcExfilEventRunning = true;
 
                 await Task.Delay(3000, token);
-                NotificationManagerClass.DisplayMessageNotification("Extract is on it's way! Hold out for two minutes for help to arrive", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
+                NotificationManagerClass.DisplayMessageNotification("撤离支援正在路上! 坚持两分钟等待救援到达", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
                 if (ConfigController.DebugConfig.DebugMode) {
                     Utils.LogToServerConsole("Extract event has started");
                 }
-                await Task.Delay(120000, token);
+                await Task.Delay(60000, token);
+                if (!token.IsCancellationRequested)
+                    NotificationManagerClass.DisplayMessageNotification("撤离支援: 还有1分钟到达", ENotificationDurationType.Long, ENotificationIconType.EntryPoint);
+
+                await Task.Delay(60000, token);
                 NotificationManagerClass.DisplayMessageNotification("10", ENotificationDurationType.Default, ENotificationIconType.EntryPoint);
                 await Task.Delay(1000, token);
                 NotificationManagerClass.DisplayMessageNotification("9", ENotificationDurationType.Default, ENotificationIconType.EntryPoint);
@@ -1321,7 +1397,7 @@ namespace RaidOverhaul.Controllers
                 await Task.Delay(1000, token);
                 NotificationManagerClass.DisplayMessageNotification("1", ENotificationDurationType.Default, ENotificationIconType.EntryPoint);
                 await Task.Delay(1000, token);
-                NotificationManagerClass.DisplayMessageNotification("Help has arrived", ENotificationDurationType.Default, ENotificationIconType.EntryPoint);
+                NotificationManagerClass.DisplayMessageNotification("救援已到达", ENotificationDurationType.Default, ENotificationIconType.EntryPoint);
 
                 EndByExitTrigerScenario.GInterface129 exfilSession = Singleton<AbstractGame>.Instance as EndByExitTrigerScenario.GInterface129;
                 exfilSession.StopSession(GamePlayerOwner.MyPlayer.ProfileId, ExitStatus.Survived, Singleton<GameWorld>.Instance.ExfiltrationController.ExfiltrationPoints.FirstOrDefault().name);
@@ -1361,7 +1437,15 @@ namespace RaidOverhaul.Controllers
 
         private IEnumerator RestoreMetabolism(float originalEnergyRate, float originalHydrationRate)
         {
-            yield return new WaitForSeconds(900f);
+            yield return new WaitForSeconds(450f);
+            if (_metabolismDisabled && ROPlayer != null)
+                NotificationManagerClass.DisplayMessageNotification("代谢事件: 铁胃效果剩余7.5分钟", ENotificationDurationType.Long, ENotificationIconType.Default);
+
+            yield return new WaitForSeconds(390f);
+            if (_metabolismDisabled && ROPlayer != null)
+                NotificationManagerClass.DisplayMessageNotification("代谢事件: 铁胃效果将在1分钟后消退", ENotificationDurationType.Long, ENotificationIconType.Default);
+
+            yield return new WaitForSeconds(60f);
             if (_metabolismDisabled && ROPlayer != null && ROPlayer.ActiveHealthController != null)
             {
                 AccessTools.Property(typeof(ActiveHealthController), "EnergyRate").SetValue(
@@ -1369,7 +1453,7 @@ namespace RaidOverhaul.Controllers
                 AccessTools.Property(typeof(ActiveHealthController), "HydrationRate").SetValue(
                     ROPlayer.ActiveHealthController, originalHydrationRate);
                 _metabolismDisabled = false;
-                NotificationManagerClass.DisplayMessageNotification("Metabolism Event: Your iron stomach has worn off.", ENotificationDurationType.Long, ENotificationIconType.Default);
+                NotificationManagerClass.DisplayMessageNotification("代谢事件: 你的铁胃效果消退了。", ENotificationDurationType.Long, ENotificationIconType.Default);
             }
         }
         #endregion

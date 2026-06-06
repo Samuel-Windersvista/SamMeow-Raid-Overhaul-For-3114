@@ -5,8 +5,7 @@
             "Prefab": {
                 "path": "assets/content/items/ammo/patrons/patron_1143x23_rip.bundle",
                 "rcid": ""
-            },
-            "Caliber": "Caliber1143x23ACP"
+            }
         },
         "LocalePush": {
             "name": "Judge Flechette Round",
@@ -24,8 +23,7 @@
             "Prefab": {
                 "path": "assets/content/items/ammo/patrons/patron_1143x23_acp_ap.bundle",
                 "rcid": ""
-            },
-            "Caliber": "Caliber1143x23ACP"
+            }
         },
         "LocalePush": {
             "name": "Judge AP Slug Round",
@@ -43,8 +41,7 @@
             "Prefab": {
                 "path": "assets/content/items/ammo/patrons/patron_1143x23_acp_hydra_shok.bundle",
                 "rcid": ""
-            },
-            "Caliber": "Caliber1143x23ACP"
+            }
         },
         "LocalePush": {
             "name": "Judge Buckshot Round",
@@ -100,8 +97,7 @@
             "Prefab": {
                 "path": "assets/content/items/ammo/patrons/patron_762x51_m61.bundle",
                 "rcid": ""
-            },
-            "Caliber": "Caliber762x51"
+            }
         },
         "LocalePush": {
             "name": "Executioner AT Round",
@@ -119,8 +115,7 @@
             "Prefab": {
                 "path": "assets/content/items/ammo/patrons/patron_762x51_m993.bundle",
                 "rcid": ""
-            },
-            "Caliber": "Caliber762x51"
+            }
         },
         "LocalePush": {
             "name": "Executioner AP Round",

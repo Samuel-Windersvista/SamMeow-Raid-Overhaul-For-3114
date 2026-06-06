@@ -1,6 +1,6 @@
 {
     "6628f76df1a913e3afc16360": {
-        "ItemToClone": "PISTOL_GLOCK_17",
+        "ItemToClone": "576165642459773c7a400233",
         "OverrideProperties": {
             "Chambers": [
                 {
@@ -23,18 +23,20 @@
                     "_proto": "55d4af244bdc2d962f8b4571"
                 }
             ],
-            "ammoCaliber": "Caliber1143x23ACP",
-            "defAmmo": "5efb0cabfb3e451d70735af5",
+            "ammoCaliber": "Caliber12g",
+            "defAmmo": "66280a30d3b6f288cb6b9653",
             "defMagType": "6628f77390fd0c39ebfa1125",
-            "weapFireType": ["single", "fullauto"]
+            "weapFireType": ["single"]
         },
         "LocalePush": {
             "name": "The Judge",
             "shortName": "Judge",
             "description": "The Judge is a handgun capable of loading 12 gauge shotgun shells. Many scavs quiver in fear when they hear the name."
         },
-        "HandbookParent": "Pistols",
-        "HandbookPrice": 55999,
+        "Handbook": {
+            "HandbookParent": "Pistols",
+            "HandbookPrice": 55999
+        },
         "PushMastery": true,
         "CloneToFilters": true,
         "LootPush": {
@@ -50,7 +52,7 @@
         "PushToFleaBlacklist": true
     },
     "6628f7705124be8295a0bdd9": {
-        "ItemToClone": "RECEIVER_G_AW_C",
+        "ItemToClone": "57616c112459773cce774d66",
         "OverrideProperties": {
             "ConflictingItems": [
                 "5efb0da7a29a85116f6ea05f",
@@ -69,11 +71,13 @@
             "shortName": "Judge Lone Wolf",
             "description": "A custom Lone Wolf receiver modified to fit on the Judge handgun. The sound of the slide brings nightmares to many."
         },
-        "HandbookParent": "ReceiversAndSlides",
-        "HandbookPrice": 41999
+        "Handbook": {
+            "HandbookParent": "ReceiversAndSlides",
+            "HandbookPrice": 41999
+        }
     },
     "6628f77390fd0c39ebfa1125": {
-        "ItemToClone": "MAGAZINE_9X19_GLOCK_9X19_17RND",
+        "ItemToClone": "57616a9e2459773c7a400234",
         "OverrideProperties": {
             "Cartridges": [
                 {
@@ -101,11 +105,13 @@
             "shortName": "Judge 17 Mag",
             "description": "A 17-round magazine made for the Judge handgun, the sound of which causes scavs to quiver in fear."
         },
-        "HandbookParent": "Magazines",
-        "HandbookPrice": 11999
+        "Handbook": {
+            "HandbookParent": "Magazines",
+            "HandbookPrice": 11999
+        }
     },
     "6628f7750e470be83e65dc76": {
-        "ItemToClone": "MAGAZINE_9X19_BIG_STICK_33RND",
+        "ItemToClone": "5a966f51a2750c00156aacf6",
         "OverrideProperties": {
             "Cartridges": [
                 {
@@ -133,11 +139,13 @@
             "shortName": "Judge 33 Mag",
             "description": "A 33-round magazine made for the Judge handgun, the sound of which causes scavs to quiver in fear."
         },
-        "HandbookParent": "Magazines",
-        "HandbookPrice": 15499
+        "Handbook": {
+            "HandbookParent": "Magazines",
+            "HandbookPrice": 15499
+        }
     },
     "6628f7786fbce2d268af4913": {
-        "ItemToClone": "MAGAZINE_9X19_G_SGMT_50RND",
+        "ItemToClone": "5cf8f3b0d7f00c00217872ef",
         "OverrideProperties": {
             "Cartridges": [
                 {
@@ -165,7 +173,9 @@
             "shortName": "Judge Drum",
             "description": "A 50-round Drum magazine made for the Judge handgun, the sound of which causes scavs to quiver in fear."
         },
-        "HandbookParent": "Magazines",
-        "HandbookPrice": 25999
+        "Handbook": {
+            "HandbookParent": "Magazines",
+            "HandbookPrice": 25999
+        }
     }
 }

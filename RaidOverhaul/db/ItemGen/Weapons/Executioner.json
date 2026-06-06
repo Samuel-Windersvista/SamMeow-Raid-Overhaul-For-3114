@@ -1,6 +1,6 @@
 {
     "6628f96fd59ab54dedb55801": {
-        "ItemToClone": "SNIPERRIFLE_M700",
+        "ItemToClone": "5bfea6e90db834001b7347f3",
         "OverrideProperties": {
             "Chambers": [
                 {
@@ -19,17 +19,20 @@
                     "_proto": "55d4af244bdc2d962f8b4571"
                 }
             ],
+            "_comment_defMagType": "verify this property is valid for SPT CustomItemService",
             "defMagType": "6628f973b21453a8afc0db68",
             "defAmmo": "66281ab7fca966e5021f81b5",
-            "ammoCaliber": "Caliber762x51"
+            "ammoCaliber": "Caliber127x108"
         },
         "LocalePush": {
             "name": "The Executioner",
             "shortName": "Executioner",
             "description": "The Executioner. This is the final stop for many scavs and PMCs. It truly does live up to its name."
         },
-        "HandbookParent": "BoltActionRifles",
-        "HandbookPrice": 91999,
+        "Handbook": {
+            "HandbookParent": "BoltActionRifles",
+            "HandbookPrice": 91999
+        },
         "PushMastery": true,
         "CloneToFilters": true,
         "LootPush": {
@@ -69,8 +72,10 @@
             "shortName": "Executioner Mag",
             "description": "A custom Wyatt outdoor magazine for the Executioner sniper rifle. With the stopping power loaded inside, you probably only need one of these."
         },
-        "HandbookParent": "Magazines",
-        "HandbookPrice": 14999
+        "Handbook": {
+            "HandbookParent": "Magazines",
+            "HandbookPrice": 14999
+        }
     },
     "6628f977030da8d4c028f5c7": {
         "ItemToClone": "MAGAZINE_762X51_AICS_5RND",
@@ -97,8 +102,10 @@
             "shortName": "Executioner AICS",
             "description": "A custom AICS magazine for the Executioner sniper rifle. With the stopping power loaded inside, you probably only need one of these."
         },
-        "HandbookParent": "Magazines",
-        "HandbookPrice": 14999
+        "Handbook": {
+            "HandbookParent": "Magazines",
+            "HandbookPrice": 14999
+        }
     },
     "6628f979c3da61a625d97d69": {
         "ItemToClone": "MAGAZINE_762X51_PMAG_AC_5RND",
@@ -125,7 +132,9 @@
             "shortName": "Executioner PMAG",
             "description": "A custom PMAG for the Executioner sniper rifle. With the stopping power loaded inside, you probably only need one of these."
         },
-        "HandbookParent": "Magazines",
-        "HandbookPrice": 14999
+        "Handbook": {
+            "HandbookParent": "Magazines",
+            "HandbookPrice": 14999
+        }
     }
 }

@@ -32,11 +32,13 @@ export class SlotGenerator {
         items[CustomMap.Mcm4]._props.Slots[2]._props.filters[0].Filter.push(CustomMap.Rec762);
         items[CustomMap.Mcm4]._props.Slots[2]._props.filters[0].Filter.push(CustomMap.Rec939);
 
+        // Judge magazines - slot index may need game testing after switching clone base to SHOTGUN_SAIGA12
         items[CustomMap.Judge]._props.Slots[3]._props.filters[0].Filter = [
             CustomMap.Judge17Rd,
             CustomMap.Judge33Rd,
             CustomMap.Judge50Rd,
         ];
+        // Judge receiver - verify slot index on Saiga-12 base
         items[CustomMap.Judge]._props.Slots[2]._props.filters[0].Filter = [CustomMap.JudgeSlide];
 
         items[CustomMap.Jury]._props.Slots[1]._props.filters[0].Filter = [
@@ -46,7 +48,9 @@ export class SlotGenerator {
         ];
         items[CustomMap.Jury]._props.Slots[2]._props.filters[0].Filter = [CustomMap.JuryRec];
 
-        items[CustomMap.Exec]._props.Slots[0]._props.filters[0].Filter = [
+        // Executioner magazines - slot index may need game testing
+        // Executioner magazines on M700 base - slot index needs game verification
+        items[CustomMap.Exec]._props.Slots[1]._props.filters[0].Filter = [
             CustomMap.ExecAics,
             CustomMap.ExecPmag,
             CustomMap.ExecWyatt,

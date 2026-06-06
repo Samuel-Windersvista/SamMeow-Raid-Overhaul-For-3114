@@ -21,7 +21,7 @@ namespace RaidOverhaul.Patches
             {
                 if (IsLockdown)
                 {
-                    NotificationManagerClass.DisplayMessageNotification("Cannot extract during a lockdown", ENotificationDurationType.Long, ENotificationIconType.Alert);
+                    NotificationManagerClass.DisplayMessageNotification("封锁期间无法撤离", ENotificationDurationType.Long, ENotificationIconType.Alert);
                 }
             }
             __result = true;

@@ -32,7 +32,7 @@ namespace RaidOverhaul.Patches
                     
                     __result.Actions.Insert(Position, new ActionsTypesClass
                     {
-                        Name = "Unlock With Skeleton Key",
+                        Name = "使用万能钥匙解锁",
 
                         Action = new Action(() =>
                         {

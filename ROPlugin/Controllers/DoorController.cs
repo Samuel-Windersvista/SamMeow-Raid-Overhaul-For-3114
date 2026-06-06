@@ -255,7 +255,7 @@ namespace RaidOverhaul.Controllers
                 });
 
                 if (ConfigController.DebugConfig.DebugMode) {
-                    NotificationManagerClass.DisplayMessageNotification($"[{_doorChangedCount}] total Doors have had their states changed. [{_doorNotChangedCount}] haven't been modified.", ENotificationDurationType.Long, ENotificationIconType.Default);
+                    NotificationManagerClass.DisplayMessageNotification($"[{_doorChangedCount}] 扇门状态已更改，[{_doorNotChangedCount}] 扇未更改。", ENotificationDurationType.Long, ENotificationIconType.Default);
                     Utils.LogToServerConsole($"[{_doorChangedCount}] total Doors have had their states changed. [{_doorNotChangedCount}] haven't been modified.");
                 }
             }
@@ -277,7 +277,7 @@ namespace RaidOverhaul.Controllers
                 });
 
                 if (ConfigController.DebugConfig.DebugMode) {
-                    NotificationManagerClass.DisplayMessageNotification($"[{_lampCount}] total Lamps have been modified.", ENotificationDurationType.Long, ENotificationIconType.Default);
+                    NotificationManagerClass.DisplayMessageNotification($"[{_lampCount}] 盏灯已被修改。", ENotificationDurationType.Long, ENotificationIconType.Default);
                     Utils.LogToServerConsole($"[{_lampCount}] total Lamps have been modified.");
                 }
             }
