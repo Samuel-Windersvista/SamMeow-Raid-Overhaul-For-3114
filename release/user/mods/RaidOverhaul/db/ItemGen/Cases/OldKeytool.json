@@ -1,0 +1,54 @@
+{
+    "67fefe885041d8c121e93bf8": {
+        "ItemToClone": "CONTAINER_KEY_TOOL",
+        "OverrideProperties": {
+            "Prefab": {
+                "path": "Containers/old_keytool.bundle",
+                "rcid": ""
+            },
+            "Height": 1,
+            "Width": 1,
+            "Grids": [
+                {
+                    "_id": "67fefebe348ff1ece0e1e484",
+                    "_name": "1",
+                    "_parent": "67fefe885041d8c121e93bf8",
+                    "_props": {
+                        "cellsH": 4,
+                        "cellsV": 2,
+                        "filters": [
+                            {
+                                "ExcludedFilter": [],
+                                "Filter": ["5c99f98d86f7745c314214b3", "67449b6c89d5e1ddc603f504"]
+                            }
+                        ],
+                        "isSortingTable": false,
+                        "maxCount": 0,
+                        "maxWeight": 0,
+                        "minCount": 0
+                    },
+                    "_proto": "55d329c24bdc2d892f8b4567"
+                }
+            ]
+        },
+        "LocalePush": {
+            "name": "Old Keytool (Req)",
+            "shortName": "Keytool (R)",
+            "description": "An old keytool scrounged up by the Req Shop. Not as much space as newer tools but it should do the job for you temporarily."
+        },
+        "HandbookParent": "StorageContainers",
+        "HandbookPrice": 409999,
+        "CloneToFilters": true,
+        "CasePush": {
+            "CaseFiltersToAdd": [
+                "SECURE_ALPHA",
+                "SECURE_BETA",
+                "SECURE_EPSILON",
+                "SECURE_GAMMA",
+                "SECURE_KAPPA",
+                "SECURE_WAIST_POUCH",
+                "SECURE_THETA"
+            ]
+        }
+    }
+}

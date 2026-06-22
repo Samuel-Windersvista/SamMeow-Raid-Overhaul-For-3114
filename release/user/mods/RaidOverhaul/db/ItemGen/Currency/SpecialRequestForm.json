@@ -1,0 +1,44 @@
+{
+    "67c95a09708ee99e7a575da5": {
+        "ItemToClone": "INFO_BLUE_FOLDERS",
+        "OverrideProperties": {
+            "Prefab": {
+                "path": "Items/special_request_form.bundle",
+                "rcid": ""
+            },
+            "Height": 1,
+            "Width": 2,
+            "StackMaxSize": 10,
+            "BackgroundColor": "green"
+        },
+        "LocalePush": {
+            "name": "Special Request Form",
+            "shortName": "SpecForm",
+            "description": "A special form used to trade for premium items with the Requisitions Office. No idea who made these, or what they contain, but they must be important for how much they seem to be worth."
+        },
+        "Handbook": {
+            "HandbookParent": "5b47574386f77428ca22b341",
+            "HandbookPrice": 2999999
+        },
+        "CloneToFilters": true,
+        "LootPush": {
+            "LootContainersToAdd": [
+                "LOOTCONTAINER_SAFE",
+                "LOOTCONTAINER_COMMON_FUND_STASH",
+                "LOOTCONTAINER_CASH_REGISTER",
+                "LOOTCONTAINER_CASH_REGISTER_TAR22"
+            ],
+            "StaticLootProbability": 150
+        },
+        "CasePush": {
+            "CaseFiltersToAdd": [
+                "CONTAINER_DOCS",
+                "CONTAINER_SICC",
+                "CONTAINER_WALLET",
+                "CONTAINER_WZ",
+                "CONTAINER_MONEY"
+            ]
+        },
+        "PushToFleaBlacklist": true
+    }
+}

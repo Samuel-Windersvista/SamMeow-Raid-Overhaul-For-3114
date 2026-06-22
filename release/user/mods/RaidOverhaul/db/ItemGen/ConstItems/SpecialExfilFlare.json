@@ -1,0 +1,16 @@
+{
+    "67cda57f8f59300db5c0ec5b": {
+        "ItemToClone": "GRENADELAUNCHER_FLARE",
+        "OverrideProperties": {},
+        "LocalePush": {
+            "name": "Special White Flare (R)",
+            "shortName": "SWF",
+            "description": "A special white flare used to signal the Requisitions Office. Once signaled they will send their QRF to extract you."
+        },
+        "Handbook": {
+            "HandbookParent": "SpecialWeapons",
+            "HandbookPrice": 499999
+        },
+        "CloneToFilters": true
+    }
+}

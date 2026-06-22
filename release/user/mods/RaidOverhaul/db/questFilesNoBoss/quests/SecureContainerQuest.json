@@ -1,0 +1,1137 @@
+{
+    "66f0eb896991c5ce3a1b02cc": {
+        "QuestName": "The Crown Jewel",
+        "_id": "66f0eb896991c5ce3a1b02cc",
+        "canShowNotificationsInGame": true,
+        "conditions": {
+            "AvailableForFinish": [
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf3298f181358908f2b93",
+                    "index": 0,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["6389c8c5dbfd5e4b95197e6b"],
+                    "value": 2,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf33450137fa74d9c34ad",
+                    "index": 1,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5c94bbff86f7747ee735c08f"],
+                    "value": 3,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf33642661fcc2726eb6a",
+                    "index": 1,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["59faff1d86f7746c51718c9c"],
+                    "value": 10,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf3378ab0f5ab0359e7b5",
+                    "index": 1,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["619bddc6c9546643a67df6ee"],
+                    "value": 1,
+                    "visibilityConditions": []
+                }
+            ],
+            "AvailableForStart": [
+                {
+                    "compareMethod": ">=",
+                    "conditionType": "Level",
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf35d08ba60039cd1c058",
+                    "index": 0,
+                    "parentId": "",
+                    "value": 50,
+                    "visibilityConditions": []
+                },
+                {
+                    "availableAfter": 0,
+                    "conditionType": "Quest",
+                    "dispersion": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf35f9cb2add80ee992df",
+                    "index": 1,
+                    "parentId": "",
+                    "status": [4],
+                    "target": "5c51aac186f77432ea65c552",
+                    "visibilityConditions": []
+                }
+            ],
+            "Fail": []
+        },
+        "declinePlayerMessage": "66f0eb896991c5ce3a1b02cc declinePlayerMessage",
+        "description": "66f0eb896991c5ce3a1b02cc description",
+        "image": "/files/quest/icon/Dead_skull.jpg",
+        "instantComplete": false,
+        "isKey": false,
+        "location": "any",
+        "name": "66f0eb896991c5ce3a1b02cc name",
+        "note": "",
+        "restartable": false,
+        "rewards": {
+            "Fail": [],
+            "Started": [],
+            "Success": [
+                {
+                    "id": "672bf3692931875c22d8d566",
+                    "index": 0,
+                    "type": "Experience",
+                    "value": "4999"
+                },
+                {
+                    "findInRaid": true,
+                    "id": "672bf36b35ff13b6b003d4be",
+                    "index": 1,
+                    "items": [
+                        {
+                            "_id": "672bf36c508fb06da98f5435",
+                            "_tpl": "6621b0dcbcfe66cdbbab48c7",
+                            "upd": {
+                                "StackObjectsCount": 1
+                            }
+                        }
+                    ],
+                    "target": "672bf36c508fb06da98f5435",
+                    "type": "Item",
+                    "value": "1"
+                }
+            ]
+        },
+        "secretQuest": false,
+        "side": "Pmc",
+        "startedMessageText": "66f0eb896991c5ce3a1b02cc startedMessageText",
+        "successMessageText": "66f0eb896991c5ce3a1b02cc successMessageText",
+        "traderId": "66f0eaa93f6cc015bc1f3acb",
+        "type": "PickUp"
+    },
+    "66f0ebd77d8d561a54c699d8": {
+        "QuestName": "Threadbare: Waist Pouch",
+        "_id": "66f0ebd77d8d561a54c699d8",
+        "canShowNotificationsInGame": true,
+        "conditions": {
+            "AvailableForFinish": [
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf377c06a900d09a0d5b9",
+                    "index": 0,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": true,
+                    "parentId": "",
+                    "target": ["61bf83814088ec1a363d7097"],
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf37840eb6735bee11649",
+                    "index": 1,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": true,
+                    "parentId": "",
+                    "target": ["590a3c0a86f774385a33c450"],
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf3792c468c680385df6d",
+                    "index": 2,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": true,
+                    "parentId": "",
+                    "target": ["5732ee6a24597719ae0c0281"],
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf37ab1c13fad1a7e0bda",
+                    "index": 3,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["668b3c71042c73c6f9b00704"],
+                    "value": 1,
+                    "visibilityConditions": []
+                }
+            ],
+            "AvailableForStart": [
+                {
+                    "compareMethod": ">=",
+                    "conditionType": "Level",
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf3adc682c1bfb1973305",
+                    "index": 0,
+                    "parentId": "",
+                    "value": 1,
+                    "visibilityConditions": []
+                }
+            ],
+            "Fail": []
+        },
+        "declinePlayerMessage": "66f0ebd77d8d561a54c699d8 declinePlayerMessage",
+        "description": "66f0ebd77d8d561a54c699d8 description",
+        "image": "/files/quest/icon/Sec_Container0.jpg",
+        "instantComplete": false,
+        "isKey": false,
+        "location": "any",
+        "name": "66f0ebd77d8d561a54c699d8 name",
+        "note": "",
+        "restartable": false,
+        "rewards": {
+            "Fail": [],
+            "Started": [],
+            "Success": [
+                {
+                    "id": "672bf3b914c3847764365810",
+                    "index": 0,
+                    "type": "Experience",
+                    "value": "1999"
+                },
+                {
+                    "findInRaid": true,
+                    "id": "672bf3baea146d9e80778da2",
+                    "index": 1,
+                    "items": [
+                        {
+                            "_id": "672bf3bbd129e48f20a1dae8",
+                            "_tpl": "6621b12c9f46c3eb4a0c8f40",
+                            "upd": {
+                                "StackObjectsCount": 1
+                            }
+                        }
+                    ],
+                    "target": "672bf3bbd129e48f20a1dae8",
+                    "type": "Item",
+                    "value": "1"
+                }
+            ]
+        },
+        "secretQuest": false,
+        "side": "Pmc",
+        "startedMessageText": "66f0ebd77d8d561a54c699d8 startedMessageText",
+        "successMessageText": "66f0ebd77d8d561a54c699d8 successMessageText",
+        "traderId": "66f0eaa93f6cc015bc1f3acb",
+        "type": "PickUp"
+    },
+    "66f0ec06429200aee5f594eb": {
+        "QuestName": "Threadbare: Alpha",
+        "_id": "66f0ec06429200aee5f594eb",
+        "canShowNotificationsInGame": true,
+        "conditions": {
+            "AvailableForFinish": [
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf37b7c71c9211a29716c",
+                    "index": 0,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["63a0b208f444d32d6f03ea1e"],
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf37c4ef070b96f0fe2f7",
+                    "index": 1,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5d0376a486f7747d8050965c"],
+                    "value": 2,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf37d6809be1d9ea169a5",
+                    "index": 2,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5d1b313086f77425227d1678"],
+                    "value": 2,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf37d934dde0efef4b85d",
+                    "index": 3,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["544a11ac4bdc2d470e8b456a"],
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf37e98d244304103ba40",
+                    "index": 4,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["668b3c71042c73c6f9b00704"],
+                    "value": 3,
+                    "visibilityConditions": []
+                }
+            ],
+            "AvailableForStart": [
+                {
+                    "compareMethod": ">=",
+                    "conditionType": "Level",
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf3d41b8e52c0aa0ca663",
+                    "index": 4,
+                    "parentId": "",
+                    "value": 5,
+                    "visibilityConditions": []
+                }
+            ],
+            "Fail": []
+        },
+        "declinePlayerMessage": "66f0ec06429200aee5f594eb declinePlayerMessage",
+        "description": "66f0ec06429200aee5f594eb description",
+        "image": "/files/quest/icon/Sec_Container1.jpg",
+        "instantComplete": false,
+        "isKey": false,
+        "location": "any",
+        "name": "66f0ec06429200aee5f594eb name",
+        "note": "",
+        "restartable": false,
+        "rewards": {
+            "Fail": [],
+            "Started": [],
+            "Success": [
+                {
+                    "id": "672bf3d71237845c3a9d2eef",
+                    "index": 0,
+                    "type": "Experience",
+                    "value": "2999"
+                },
+                {
+                    "findInRaid": true,
+                    "id": "672bf3d8abd4442b725aadb4",
+                    "index": 1,
+                    "items": [
+                        {
+                            "_id": "672bf3d9bc42331e2ccc659e",
+                            "_tpl": "6621b143edb81061ceb5d7cc",
+                            "upd": {
+                                "StackObjectsCount": 1
+                            }
+                        }
+                    ],
+                    "target": "672bf3d9bc42331e2ccc659e",
+                    "type": "Item",
+                    "value": "1"
+                }
+            ]
+        },
+        "secretQuest": false,
+        "side": "Pmc",
+        "startedMessageText": "66f0ec06429200aee5f594eb startedMessageText",
+        "successMessageText": "66f0ec06429200aee5f594eb successMessageText",
+        "traderId": "66f0eaa93f6cc015bc1f3acb",
+        "type": "PickUp"
+    },
+    "66f0ec2f16dec610c8e9e422": {
+        "QuestName": "Threadbare: Beta",
+        "_id": "66f0ec2f16dec610c8e9e422",
+        "canShowNotificationsInGame": true,
+        "conditions": {
+            "AvailableForFinish": [
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf37f527f57ce8ec6b72e",
+                    "index": 0,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5d0379a886f77420407aa271"],
+                    "value": 2,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf38003fe5ae09dc443b2",
+                    "index": 1,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5d0376a486f7747d8050965c"],
+                    "value": 3,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf381088b5a6d18cc4797",
+                    "index": 2,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["6389c70ca33d8c4cdf4932c6"],
+                    "value": 3,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf382bfc51c8a9e4c4528",
+                    "index": 3,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5bc9b720d4351e450201234b"],
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf3826520369604333288",
+                    "index": 4,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5857a8b324597729ab0a0e7d"],
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf383965b25149b74e87d",
+                    "index": 5,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["668b3c71042c73c6f9b00704"],
+                    "value": 5,
+                    "visibilityConditions": []
+                }
+            ],
+            "AvailableForStart": [
+                {
+                    "compareMethod": ">=",
+                    "conditionType": "Level",
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf3f567385070fda1575e",
+                    "index": 0,
+                    "parentId": "",
+                    "value": 10,
+                    "visibilityConditions": []
+                }
+            ],
+            "Fail": []
+        },
+        "declinePlayerMessage": "66f0ec2f16dec610c8e9e422 declinePlayerMessage",
+        "description": "66f0ec2f16dec610c8e9e422 description",
+        "image": "/files/quest/icon/Sec_Container2.jpg",
+        "instantComplete": false,
+        "isKey": false,
+        "location": "any",
+        "name": "66f0ec2f16dec610c8e9e422 name",
+        "note": "",
+        "restartable": false,
+        "rewards": {
+            "Fail": [],
+            "Started": [],
+            "Success": [
+                {
+                    "id": "672bf3f8b9b7be104d99a971",
+                    "index": 0,
+                    "type": "Experience",
+                    "value": "3999"
+                },
+                {
+                    "findInRaid": true,
+                    "id": "672bf3fabc9810c09ffd4008",
+                    "index": 1,
+                    "items": [
+                        {
+                            "_id": "672bf404ca8739f635eb6a46",
+                            "_tpl": "6621b177ce1b117550362db5",
+                            "upd": {
+                                "StackObjectsCount": 1
+                            }
+                        }
+                    ],
+                    "target": "672bf404ca8739f635eb6a46",
+                    "type": "Item",
+                    "value": "1"
+                }
+            ]
+        },
+        "secretQuest": false,
+        "side": "Pmc",
+        "startedMessageText": "66f0ec2f16dec610c8e9e422 startedMessageText",
+        "successMessageText": "66f0ec2f16dec610c8e9e422 successMessageText",
+        "traderId": "66f0eaa93f6cc015bc1f3acb",
+        "type": "PickUp"
+    },
+    "66f0ec550d7c99f5297f8170": {
+        "QuestName": "Threadbare: Gamma",
+        "_id": "66f0ec550d7c99f5297f8170",
+        "canShowNotificationsInGame": true,
+        "conditions": {
+            "AvailableForFinish": [
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf385fee5077e71b8bcb9",
+                    "index": 0,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5d03775b86f774203e7e0c4b"],
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf3860c1c96969d104e07",
+                    "index": 1,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5bc9b720d4351e450201234b"],
+                    "value": 3,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf3868bbe031bf155d264",
+                    "index": 2,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5d0377ce86f774186372f689"],
+                    "value": 2,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf3870b124342c38c3eb6",
+                    "index": 3,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5c94bbff86f7747ee735c08f"],
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf38885a8f2c864419d5a",
+                    "index": 4,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5857a8bc2459772bad15db29"],
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf389390edae0ee500682",
+                    "index": 5,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["668b3c71042c73c6f9b00704"],
+                    "value": 7,
+                    "visibilityConditions": []
+                }
+            ],
+            "AvailableForStart": [
+                {
+                    "compareMethod": ">=",
+                    "conditionType": "Level",
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf470c9bc735328a67bd8",
+                    "index": 0,
+                    "parentId": "",
+                    "value": 15,
+                    "visibilityConditions": []
+                }
+            ],
+            "Fail": []
+        },
+        "declinePlayerMessage": "66f0ec550d7c99f5297f8170 declinePlayerMessage",
+        "description": "66f0ec550d7c99f5297f8170 description",
+        "image": "/files/quest/icon/Sec_Container3.jpg",
+        "instantComplete": false,
+        "isKey": false,
+        "location": "any",
+        "name": "66f0ec550d7c99f5297f8170 name",
+        "note": "",
+        "restartable": false,
+        "rewards": {
+            "Fail": [],
+            "Started": [],
+            "Success": [
+                {
+                    "id": "672bf47624082c34412dd14b",
+                    "index": 0,
+                    "type": "Experience",
+                    "value": "4999"
+                },
+                {
+                    "findInRaid": true,
+                    "id": "672bf47a0199b0e29da60172",
+                    "index": 1,
+                    "items": [
+                        {
+                            "_id": "672bf47bee59f813a4ee2094",
+                            "_tpl": "6621b1895c9cd0794d536d14",
+                            "upd": {
+                                "StackObjectsCount": 1
+                            }
+                        }
+                    ],
+                    "target": "672bf47bee59f813a4ee2094",
+                    "type": "Item",
+                    "value": "1"
+                }
+            ]
+        },
+        "secretQuest": false,
+        "side": "Pmc",
+        "startedMessageText": "66f0ec550d7c99f5297f8170 startedMessageText",
+        "successMessageText": "66f0ec550d7c99f5297f8170 successMessageText",
+        "traderId": "66f0eaa93f6cc015bc1f3acb",
+        "type": "PickUp"
+    },
+    "66f0ec7e3a00512ef4300b5e": {
+        "QuestName": "Threadbare: Epsilon",
+        "_id": "66f0ec7e3a00512ef4300b5e",
+        "canShowNotificationsInGame": true,
+        "conditions": {
+            "AvailableForFinish": [
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf38a4bd9876427f64d03",
+                    "index": 0,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5d03775b86f774203e7e0c4b"],
+                    "value": 2,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf38b8fcf576c392a4d19",
+                    "index": 1,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5d0376a486f7747d8050965c"],
+                    "value": 2,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf38cc200b60dfbfb4a36",
+                    "index": 2,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["57347ca924597744596b4e71"],
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf38df65c13334dd91eaf",
+                    "index": 3,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5c94bbff86f7747ee735c08f"],
+                    "value": 2,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf38eb3f9951733471609",
+                    "index": 4,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["59db794186f77448bc595262"],
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf38ffb6d4855e79757b6",
+                    "index": 5,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["668b3c71042c73c6f9b00704"],
+                    "value": 10,
+                    "visibilityConditions": []
+                }
+            ],
+            "AvailableForStart": [
+                {
+                    "compareMethod": ">=",
+                    "conditionType": "Level",
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf49acf3a3d277b84f495",
+                    "index": 0,
+                    "parentId": "",
+                    "value": 25,
+                    "visibilityConditions": []
+                }
+            ],
+            "Fail": []
+        },
+        "declinePlayerMessage": "66f0ec7e3a00512ef4300b5e declinePlayerMessage",
+        "description": "66f0ec7e3a00512ef4300b5e description",
+        "image": "/files/quest/icon/Sec_Container4.jpg",
+        "instantComplete": false,
+        "isKey": false,
+        "location": "any",
+        "name": "66f0ec7e3a00512ef4300b5e name",
+        "note": "",
+        "restartable": false,
+        "rewards": {
+            "Fail": [],
+            "Started": [],
+            "Success": [
+                {
+                    "id": "672bf49d0ac1e9474aff9c09",
+                    "index": 0,
+                    "type": "Experience",
+                    "value": "7999"
+                },
+                {
+                    "findInRaid": true,
+                    "id": "672bf49f405176f24635a3a2",
+                    "index": 1,
+                    "items": [
+                        {
+                            "_id": "672bf49fd145b2943614c666",
+                            "_tpl": "6621b1986f4ebd47e39eacb5",
+                            "upd": {
+                                "StackObjectsCount": 1
+                            }
+                        }
+                    ],
+                    "target": "672bf49fd145b2943614c666",
+                    "type": "Item",
+                    "value": "1"
+                }
+            ]
+        },
+        "secretQuest": false,
+        "side": "Pmc",
+        "startedMessageText": "66f0ec7e3a00512ef4300b5e startedMessageText",
+        "successMessageText": "66f0ec7e3a00512ef4300b5e successMessageText",
+        "traderId": "66f0eaa93f6cc015bc1f3acb",
+        "type": "PickUp"
+    },
+    "66f0ecad7d6d9736b17c2167": {
+        "QuestName": "Threadbare: Kappa",
+        "_id": "66f0ecad7d6d9736b17c2167",
+        "canShowNotificationsInGame": true,
+        "conditions": {
+            "AvailableForFinish": [
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf390e2c571e9f95c1be4",
+                    "index": 0,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["59e35de086f7741778269d84"],
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf39152047176b40f3189",
+                    "index": 1,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5d1b2fa286f77425227d1674"],
+                    "value": 2,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf3919931c84711f63fe0",
+                    "index": 2,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["6389c8c5dbfd5e4b95197e6b"],
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf392a88a8ba1b9a8c4b3",
+                    "index": 3,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["57347ca924597744596b4e71"],
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf39333134338e9b61f41",
+                    "index": 4,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5d0376a486f7747d8050965c"],
+                    "value": 4,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf39490bf772171ee5045",
+                    "index": 5,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5c94bbff86f7747ee735c08f"],
+                    "value": 3,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf394ec5704d6c34c0ba1",
+                    "index": 6,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["59faff1d86f7746c51718c9c"],
+                    "value": 10,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf396101a95dcde20ae03",
+                    "index": 7,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["5c093ca986f7740a1867ab12"],
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf397f564c404b2f88c48",
+                    "index": 8,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["668b3c71042c73c6f9b00704"],
+                    "value": 15,
+                    "visibilityConditions": []
+                }
+            ],
+            "AvailableForStart": [
+                {
+                    "compareMethod": ">=",
+                    "conditionType": "Level",
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf4c7ab760f657ef0a736",
+                    "index": 0,
+                    "parentId": "",
+                    "value": 50,
+                    "visibilityConditions": []
+                },
+                {
+                    "availableAfter": 0,
+                    "conditionType": "Quest",
+                    "dispersion": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf4caa8ada984447b8fe9",
+                    "index": 1,
+                    "parentId": "",
+                    "status": [4],
+                    "target": "5c51aac186f77432ea65c552",
+                    "visibilityConditions": []
+                }
+            ],
+            "Fail": []
+        },
+        "declinePlayerMessage": "66f0ecad7d6d9736b17c2167 declinePlayerMessage",
+        "description": "66f0ecad7d6d9736b17c2167 description",
+        "image": "/files/quest/icon/Sec_Container5.jpg",
+        "instantComplete": false,
+        "isKey": false,
+        "location": "any",
+        "name": "66f0ecad7d6d9736b17c2167 name",
+        "note": "",
+        "restartable": false,
+        "rewards": {
+            "Fail": [],
+            "Started": [],
+            "Success": [
+                {
+                    "id": "672bf4cdbfed4ec0cdd357fb",
+                    "index": 0,
+                    "type": "Experience",
+                    "value": "10999"
+                },
+                {
+                    "findInRaid": true,
+                    "id": "672bf4cf52a954786c0d5086",
+                    "index": 1,
+                    "items": [
+                        {
+                            "_id": "672bf4d1b8d3e807d12d0b01",
+                            "_tpl": "6621b1b3166c301c04facfc8",
+                            "upd": {
+                                "StackObjectsCount": 1
+                            }
+                        }
+                    ],
+                    "target": "672bf4d1b8d3e807d12d0b01",
+                    "type": "Item",
+                    "value": "1"
+                }
+            ]
+        },
+        "secretQuest": false,
+        "side": "Pmc",
+        "startedMessageText": "66f0ecad7d6d9736b17c2167 startedMessageText",
+        "successMessageText": "66f0ecad7d6d9736b17c2167 successMessageText",
+        "traderId": "66f0eaa93f6cc015bc1f3acb",
+        "type": "PickUp"
+    }
+}

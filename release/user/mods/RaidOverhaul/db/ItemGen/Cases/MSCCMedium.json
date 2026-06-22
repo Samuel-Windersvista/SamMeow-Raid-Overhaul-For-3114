@@ -1,0 +1,112 @@
+{
+    "6722254fd847a7aafccfbb54": {
+        "ItemToClone": "CONTAINER_SICC",
+        "OverrideProperties": {
+            "Prefab": {
+                "path": "Containers/medium_medcase.bundle",
+                "rcid": ""
+            },
+            "Height": 1,
+            "Width": 2,
+            "Grids": [
+                {
+                    "_id": "6722246e81672dea7504bdb4",
+                    "_name": "1",
+                    "_parent": "6722254fd847a7aafccfbb54",
+                    "_props": {
+                        "cellsH": 1,
+                        "cellsV": 2,
+                        "filters": [
+                            {
+                                "ExcludedFilter": ["5448bf274bdc2dfc2f8b456a"],
+                                "Filter": [
+                                    "5448f39d4bdc2d0a728b4568",
+                                    "5448f3a14bdc2d27728b4569",
+                                    "5448f3a64bdc2d60728b456a",
+                                    "5448f3ac4bdc2dce718b4569",
+                                    "57864c8c245977548867e7f1"
+                                ]
+                            }
+                        ],
+                        "isSortingTable": false,
+                        "maxCount": 0,
+                        "maxWeight": 0,
+                        "minCount": 0
+                    },
+                    "_proto": "55d329c24bdc2d892f8b4567"
+                },
+                {
+                    "_id": "6722246c8422810cb020e16b",
+                    "_name": "2",
+                    "_parent": "6722254fd847a7aafccfbb54",
+                    "_props": {
+                        "cellsH": 1,
+                        "cellsV": 2,
+                        "filters": [
+                            {
+                                "ExcludedFilter": ["5448bf274bdc2dfc2f8b456a"],
+                                "Filter": [
+                                    "5448f39d4bdc2d0a728b4568",
+                                    "5448f3a14bdc2d27728b4569",
+                                    "5448f3a64bdc2d60728b456a",
+                                    "5448f3ac4bdc2dce718b4569",
+                                    "57864c8c245977548867e7f1"
+                                ]
+                            }
+                        ],
+                        "isSortingTable": false,
+                        "maxCount": 0,
+                        "maxWeight": 0,
+                        "minCount": 0
+                    },
+                    "_proto": "55d329c24bdc2d892f8b4567"
+                },
+                {
+                    "_id": "6722246be7c6c6e433dccc15",
+                    "_name": "3",
+                    "_parent": "6722254fd847a7aafccfbb54",
+                    "_props": {
+                        "cellsH": 1,
+                        "cellsV": 1,
+                        "filters": [
+                            {
+                                "ExcludedFilter": ["5448bf274bdc2dfc2f8b456a"],
+                                "Filter": [
+                                    "5448f39d4bdc2d0a728b4568",
+                                    "5448f3a14bdc2d27728b4569",
+                                    "5448f3a64bdc2d60728b456a",
+                                    "5448f3ac4bdc2dce718b4569",
+                                    "57864c8c245977548867e7f1"
+                                ]
+                            }
+                        ],
+                        "isSortingTable": false,
+                        "maxCount": 0,
+                        "maxWeight": 0,
+                        "minCount": 0
+                    },
+                    "_proto": "55d329c24bdc2d892f8b4567"
+                }
+            ]
+        },
+        "LocalePush": {
+            "name": "Medical Supplies Carrying Case (Medium)",
+            "shortName": "MSCC (M)",
+            "description": "A carrying case used by the wolves of the Requisitions Office to haul their supplies into the field. This case was stored in their vehicles as a stopgap measure for when supplies elsewhere were depleted."
+        },
+        "HandbookParent": "StorageContainers",
+        "HandbookPrice": 279999,
+        "CloneToFilters": true,
+        "CasePush": {
+            "CaseFiltersToAdd": [
+                "SECURE_ALPHA",
+                "SECURE_BETA",
+                "SECURE_EPSILON",
+                "SECURE_GAMMA",
+                "SECURE_KAPPA",
+                "SECURE_WAIST_POUCH",
+                "SECURE_THETA"
+            ]
+        }
+    }
+}

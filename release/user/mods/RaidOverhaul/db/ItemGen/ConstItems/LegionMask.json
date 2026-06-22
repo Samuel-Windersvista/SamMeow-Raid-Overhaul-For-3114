@@ -1,0 +1,27 @@
+{
+    "6621b200cb248c192d90e324": {
+        "ItemToClone": "FACECOVER_DEATH_KNIGHT",
+        "OverrideProperties": {
+            "Prefab": {
+                "path": "FaceCover/legion_facemask.bundle",
+                "rcid": ""
+            },
+            "BlocksEarpiece": false,
+            "BlocksEyewear": false,
+            "BlocksHeadwear": false,
+            "BlocksFaceCover": false,
+            "ConflictingItems": [],
+            "armorClass": 6
+        },
+        "LocalePush": {
+            "name": "Legion Mask (Wrath)",
+            "shortName": "Wrath",
+            "description": "A haunting mask worn by the Legion as they stalk across Tarkov. If you are close enough to see this mask, it's too late."
+        },
+        "Handbook": {
+            "HandbookParent": "Facecovers",
+            "HandbookPrice": 159999
+        },
+        "CloneToFilters": true
+    }
+}

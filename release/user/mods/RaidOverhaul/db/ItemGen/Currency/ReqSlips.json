@@ -1,0 +1,45 @@
+{
+    "668b3c71042c73c6f9b00704": {
+        "ItemToClone": "INFO_BLUE_FOLDERS",
+        "OverrideProperties": {
+            "Prefab": {
+                "path": "Items/requisition_slip.bundle",
+                "rcid": ""
+            },
+            "Height": 1,
+            "Width": 2,
+            "StackMaxSize": 99,
+            "BackgroundColor": "green",
+            "StackMaxRandom": 25,
+            "StackMinRandom": 1
+        },
+        "LocalePush": {
+            "name": "Requisition Slips",
+            "shortName": "ReqSlips",
+            "description": "A requisition slip used to trade with the Requisitions Office. You'll want to keep a stack of these handy in case you run into trouble and need some quick provisions. A larger denomination for trading apparently."
+        },
+        "Handbook": {
+            "HandbookParent": "5b47574386f77428ca22b341",
+            "HandbookPrice": 53999
+        },
+        "CloneToFilters": true,
+        "LootPush": {
+            "LootContainersToAdd": [
+                "LOOTCONTAINER_SAFE",
+                "LOOTCONTAINER_COMMON_FUND_STASH",
+                "LOOTCONTAINER_CASH_REGISTER",
+                "LOOTCONTAINER_CASH_REGISTER_TAR22"
+            ],
+            "StaticLootProbability": 150
+        },
+        "CasePush": {
+            "CaseFiltersToAdd": [
+                "CONTAINER_DOCS",
+                "CONTAINER_SICC",
+                "CONTAINER_WALLET",
+                "CONTAINER_WZ",
+                "CONTAINER_MONEY"
+            ]
+        }
+    }
+}

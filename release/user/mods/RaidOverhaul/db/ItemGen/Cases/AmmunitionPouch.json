@@ -1,0 +1,94 @@
+{
+    "67d4373526a3cfb1ff5338bb": {
+        "ItemToClone": "CONTAINER_SICC",
+        "OverrideProperties": {
+            "Prefab": {
+                "path": "Containers/ammo_pouch.bundle",
+                "rcid": ""
+            },
+            "Height": 1,
+            "Width": 1,
+            "Grids": [
+                {
+                    "_id": "67d437f486bd84b6c23704a6",
+                    "_name": "1",
+                    "_parent": "67d4373526a3cfb1ff5338bb",
+                    "_props": {
+                        "cellsH": 1,
+                        "cellsV": 2,
+                        "filters": [
+                            {
+                                "ExcludedFilter": ["5448bf274bdc2dfc2f8b456a"],
+                                "Filter": ["5485a8684bdc2da71d8b4567"]
+                            }
+                        ],
+                        "isSortingTable": false,
+                        "maxCount": 0,
+                        "maxWeight": 0,
+                        "minCount": 0
+                    },
+                    "_proto": "55d329c24bdc2d892f8b4567"
+                },
+                {
+                    "_id": "67d437f2c39c3fd6b42e1422",
+                    "_name": "2",
+                    "_parent": "67d4373526a3cfb1ff5338bb",
+                    "_props": {
+                        "cellsH": 1,
+                        "cellsV": 2,
+                        "filters": [
+                            {
+                                "ExcludedFilter": ["5448bf274bdc2dfc2f8b456a"],
+                                "Filter": ["5485a8684bdc2da71d8b4567"]
+                            }
+                        ],
+                        "isSortingTable": false,
+                        "maxCount": 0,
+                        "maxWeight": 0,
+                        "minCount": 0
+                    },
+                    "_proto": "55d329c24bdc2d892f8b4567"
+                },
+                {
+                    "_id": "67d437efb7de44849ed1d2d6",
+                    "_name": "3",
+                    "_parent": "67d4373526a3cfb1ff5338bb",
+                    "_props": {
+                        "cellsH": 1,
+                        "cellsV": 2,
+                        "filters": [
+                            {
+                                "ExcludedFilter": ["5448bf274bdc2dfc2f8b456a"],
+                                "Filter": ["5485a8684bdc2da71d8b4567"]
+                            }
+                        ],
+                        "isSortingTable": false,
+                        "maxCount": 0,
+                        "maxWeight": 0,
+                        "minCount": 0
+                    },
+                    "_proto": "55d329c24bdc2d892f8b4567"
+                }
+            ]
+        },
+        "LocalePush": {
+            "name": "Ammunition Pouch (Req)",
+            "shortName": "AmmoPouch (R)",
+            "description": "A carrying case used by the wolves of the Requisitions Office to bring their spare ammunition into the field. This case was carried on the person of each member once they step foot outside."
+        },
+        "HandbookParent": "StorageContainers",
+        "HandbookPrice": 429999,
+        "CloneToFilters": true,
+        "CasePush": {
+            "CaseFiltersToAdd": [
+                "SECURE_ALPHA",
+                "SECURE_BETA",
+                "SECURE_EPSILON",
+                "SECURE_GAMMA",
+                "SECURE_KAPPA",
+                "SECURE_WAIST_POUCH",
+                "SECURE_THETA"
+            ]
+        }
+    }
+}

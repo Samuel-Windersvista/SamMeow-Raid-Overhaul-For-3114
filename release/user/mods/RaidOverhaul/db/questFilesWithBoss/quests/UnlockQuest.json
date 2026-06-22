@@ -1,0 +1,131 @@
+{
+    "66f0eb2c12fb0ed12fbcfd46": {
+        "QuestName": "Lets Work Out a Deal",
+        "_id": "66f0eb2c12fb0ed12fbcfd46",
+        "canShowNotificationsInGame": true,
+        "conditions": {
+            "AvailableForFinish": [
+                {
+                    "conditionType": "CounterCreator",
+                    "counter": {
+                        "conditions": [
+                            {
+                                "conditionType": "Kills",
+                                "dynamicLocale": false,
+                                "id": "672bf2cff9f55c95279ce23a",
+                                "target": "Savage",
+                                "savageRole": ["bosslegion"],
+                                "value": 1
+                            }
+                        ],
+                        "id": "672bf2d01752645fa9916de3"
+                    },
+                    "doNotResetIfCounterCompleted": false,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf2b1896303adeb9a1b49",
+                    "index": 0,
+                    "oneSessionOnly": false,
+                    "parentId": "",
+                    "type": "Elimination",
+                    "value": 1,
+                    "visibilityConditions": []
+                },
+                {
+                    "conditionType": "HandoverItem",
+                    "dogtagLevel": 0,
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf2b91cddb3f9a03c512a",
+                    "index": 1,
+                    "isEncoded": false,
+                    "maxDurability": 100,
+                    "minDurability": 0,
+                    "onlyFoundInRaid": false,
+                    "parentId": "",
+                    "target": ["6621b200cb248c192d90e324"],
+                    "value": 1,
+                    "visibilityConditions": []
+                }
+            ],
+            "AvailableForStart": [
+                {
+                    "compareMethod": ">=",
+                    "conditionType": "Level",
+                    "dynamicLocale": false,
+                    "globalQuestCounterId": "",
+                    "id": "672bf2edc97b177effe413bc",
+                    "index": 0,
+                    "parentId": "",
+                    "value": 1,
+                    "visibilityConditions": []
+                }
+            ],
+            "Fail": []
+        },
+        "declinePlayerMessage": "66f0eb2c12fb0ed12fbcfd46 declinePlayerMessage",
+        "description": "66f0eb2c12fb0ed12fbcfd46 description",
+        "image": "/files/quest/icon/Req_Deal.png",
+        "instantComplete": false,
+        "isKey": false,
+        "location": "any",
+        "name": "66f0eb2c12fb0ed12fbcfd46 name",
+        "note": "",
+        "restartable": false,
+        "rewards": {
+            "Fail": [],
+            "Started": [],
+            "Success": [
+                {
+                    "id": "672bf305c0990ce58ee16b1a",
+                    "index": 0,
+                    "type": "Experience",
+                    "value": "19749"
+                },
+                {
+                    "id": "672bf306cb083d6c1fd1c7b6",
+                    "index": 1,
+                    "target": "579dc571d53a0658a154fbec",
+                    "type": "TraderStanding",
+                    "value": "0.25"
+                },
+                {
+                    "findInRaid": false,
+                    "id": "672bf3077992698a55438927",
+                    "index": 2,
+                    "items": [
+                        {
+                            "_id": "672bf30937b6a0ec77673131",
+                            "_tpl": "668b3c71042c73c6f9b00704",
+                            "upd": {
+                                "StackObjectsCount": 15
+                            }
+                        }
+                    ],
+                    "target": "672bf30937b6a0ec77673131",
+                    "type": "Item",
+                    "value": "5"
+                },
+                {
+                    "id": "672bf30f2e70d6b32bc368e1",
+                    "index": 3,
+                    "target": "66f0eaa93f6cc015bc1f3acb",
+                    "type": "TraderUnlock"
+                },
+                {
+                    "id": "672bf311b92a5871b78c6e0c",
+                    "index": 4,
+                    "target": "66f0eaa93f6cc015bc1f3acb",
+                    "type": "TraderStanding",
+                    "value": "0.25"
+                }
+            ]
+        },
+        "secretQuest": false,
+        "side": "Pmc",
+        "startedMessageText": "66f0eb2c12fb0ed12fbcfd46 startedMessageText",
+        "successMessageText": "66f0eb2c12fb0ed12fbcfd46 successMessageText",
+        "traderId": "579dc571d53a0658a154fbec",
+        "type": "Elimination"
+    }
+}

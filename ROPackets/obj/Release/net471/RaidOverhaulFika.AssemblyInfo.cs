@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Fika Packets for Raid Overhaul")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+796605b446dcd75d59fcf526a295d67e5c3fe60a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5d349d3e7a0cb3c4f31dfc28a667a94030c9bfc3")]
 [assembly: System.Reflection.AssemblyProductAttribute("RaidOverhaulFika")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RaidOverhaulFika")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

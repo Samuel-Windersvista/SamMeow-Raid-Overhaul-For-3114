@@ -1,0 +1,29 @@
+{
+    "66a2fc926af26cc365283f23": {
+        "ItemToClone": "KEY_DORM_MRK",
+        "OverrideProperties": {
+            "MaximumNumberOfUsage": 0,
+            "BackgroundColor": "violet"
+        },
+        "LocalePush": {
+            "name": "Skeleton Key",
+            "shortName": "Skeleton",
+            "description": "A simple looking key with a lot of potential. I don't know who made this, but don't let it out of your grasp."
+        },
+        "Handbook": {
+            "HandbookParent": "MechanicalKeys",
+            "HandbookPrice": 49999999
+        },
+        "CloneToFilters": true,
+        "PushToFleaBlacklist": true,
+        "CasePush": {
+            "CaseFiltersToAdd": [
+                "CONTAINER_DOCS",
+                "CONTAINER_SICC",
+                "CONTAINER_WALLET",
+                "CONTAINER_WZ",
+                "CONTAINER_KEY_TOOL"
+            ]
+        }
+    }
+}

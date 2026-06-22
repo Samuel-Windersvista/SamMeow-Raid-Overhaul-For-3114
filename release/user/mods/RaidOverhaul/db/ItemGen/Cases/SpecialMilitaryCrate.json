@@ -1,0 +1,81 @@
+{
+    "67c957ce411e6263333a1c38": {
+        "ItemToClone": "CONTAINER_THICC_ITEM_CASE",
+        "OverrideProperties": {
+            "Prefab": {
+                "path": "Containers/special_storage_crate.bundle",
+                "rcid": ""
+            },
+            "Grids": [
+                {
+                    "_id": "6722253c6d0bd31f095130a0",
+                    "_name": "1",
+                    "_parent": "67c957ce411e6263333a1c38",
+                    "_props": {
+                        "cellsH": 20,
+                        "cellsV": 14,
+                        "filters": [
+                            {
+                                "ExcludedFilter": [],
+                                "Filter": [
+                                    "5448eb774bdc2d0a728b4567",
+                                    "543be5f84bdc2dd4348b456a",
+                                    "567143bf4bdc2d1a0f8b4567",
+                                    "5448fe124bdc2da5018b4567",
+                                    "5448e53e4bdc2d60728b4567",
+                                    "5448e5284bdc2dcb718b4567",
+                                    "60b0f6c058e0b0481a09ad11",
+                                    "5aafbde786f774389d0cbc0f",
+                                    "619cbf9e0a7c3a1a2731940a",
+                                    "5c093db286f7740a1b2617e3",
+                                    "5e2af55f86f7746d4159f07c",
+                                    "619cbf7d23893217ec30b689",
+                                    "59fafd4b86f7745ca07e1232",
+                                    "62a09d3bcf4a99369e262447",
+                                    "5d235bb686f77443f4331278",
+                                    "5c127c4486f7745625356c13",
+                                    "5aafbcd986f7745e590fff23",
+                                    "59fb016586f7746d0d4b423a",
+                                    "5c093e3486f77430cb02e593",
+                                    "590c60fc86f77412b13fddcf",
+                                    "5783c43d2459774bbe137486",
+                                    "5422acb9af1c889c16000029",
+                                    "543be6674bdc2df1348b4569",
+                                    "5448ecbe4bdc2d60728b4568",
+                                    "543be5e94bdc2df1348b4568",
+                                    "5447e1d04bdc2dff2f8b4567",
+                                    "567849dd4bdc2d150f8b456e",
+                                    "543be5664bdc2dd4348b4569",
+                                    "5f4fbaaca5573a5ac31db429",
+                                    "61605ddea09d851a0a0c1bbc",
+                                    "616eb7aea207f41933308f46",
+                                    "5991b51486f77447b112d44f",
+                                    "5ac78a9b86f7741cca0bbd8d",
+                                    "5b4391a586f7745321235ab2",
+                                    "5af056f186f7746da511291f",
+                                    "544fb5454bdc2df8738b456a",
+                                    "5661632d4bdc2d903d8b456b",
+                                    "543be6564bdc2df4348b4568"
+                                ]
+                            }
+                        ],
+                        "isSortingTable": false,
+                        "maxCount": 0,
+                        "maxWeight": 0,
+                        "minCount": 0
+                    },
+                    "_proto": "55d329c24bdc2d892f8b4567"
+                }
+            ]
+        },
+        "LocalePush": {
+            "name": "Special Storage Crate (Requisitions)",
+            "shortName": "SpecCase (R)",
+            "description": "A special storage crate rarely used by the Requisitions Office to keep their rarest items safe and secure. The largest and most prized case in Tarkov as of now..."
+        },
+        "HandbookParent": "StorageContainers",
+        "HandbookPrice": 2999999,
+        "CloneToFilters": true,
+        "PushToFleaBlacklist": true
+    }
+}

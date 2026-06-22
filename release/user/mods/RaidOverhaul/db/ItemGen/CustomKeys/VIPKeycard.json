@@ -1,0 +1,29 @@
+{
+    "66a2fc9886fbd5d38c5ca2a6": {
+        "ItemToClone": "KEYCARD_SANITAR",
+        "OverrideProperties": {
+            "MaximumNumberOfUsage": 0,
+            "BackgroundColor": "violet"
+        },
+        "LocalePush": {
+            "name": "VIP Keycard",
+            "shortName": "VIP",
+            "description": "A modified keycard said to give access to all of the terragroup areas scattered throughout Tarkov. You will want to keep this on you at all times if you're lucky enough to find one, but guard it closely."
+        },
+        "Handbook": {
+            "HandbookParent": "ElectronicKeys",
+            "HandbookPrice": 49999999
+        },
+        "CloneToFilters": true,
+        "PushToFleaBlacklist": true,
+        "CasePush": {
+            "CaseFiltersToAdd": [
+                "CONTAINER_DOCS",
+                "CONTAINER_SICC",
+                "CONTAINER_WALLET",
+                "CONTAINER_WZ",
+                "CONTAINER_KEYCARDS"
+            ]
+        }
+    }
+}

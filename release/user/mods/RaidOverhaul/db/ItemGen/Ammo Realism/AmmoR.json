@@ -1,0 +1,222 @@
+{
+    "662808ec26a8e83120bb25fe": {
+        "ItemToClone": "AMMO_12G_FLECHETTE",
+        "OverrideProperties": {
+            "Prefab": {
+                "path": "assets/content/items/ammo/patrons/patron_1143x23_rip.bundle",
+                "rcid": ""
+            },
+            "Caliber": "Caliber1143x23ACP",
+            "PenetrationPower": 5,
+            "ArmorDamage": 1,
+            "ProjectileCount": 20,
+            "Damage": 8,
+            "InitialSpeed": 300,
+            "BallisticCoeficient": 0.015,
+            "RicochetChance": 0.5,
+            "FragmentationChance": 0.6,
+            "BulletMassGram": 0.47,
+            "HeavyBleedingDelta": 0.8,
+            "LightBleedingDelta": 1,
+            "ammoAccr": -90,
+            "ammoHear": 0,
+            "ammoRec": -20
+        },
+        "LocalePush": {
+            "name": "Judge Flechette Round",
+            "shortName": "JFR",
+            "description": "A tightly packed Flechette round for the Judge Handgun. How they managed to fit all of that into a small 9x19 casing is beyond me."
+        },
+        "Handbook": {
+            "HandbookParent": "Ammo",
+            "HandbookPrice": 999
+        }
+    },
+    "662809f445b5ff428e21ac0a": {
+        "ItemToClone": "AMMO_12G_AP20",
+        "OverrideProperties": {
+            "Prefab": {
+                "path": "assets/content/items/ammo/patrons/patron_1143x23_acp_ap.bundle",
+                "rcid": ""
+            },
+            "Caliber": "Caliber1143x23ACP",
+            "PenetrationPower": 62,
+            "ArmorDamage": 1,
+            "Damage": 160,
+            "InitialSpeed": 510,
+            "RicochetChance": 0.35,
+            "FragmentationChance": 0,
+            "BulletMassGram": 28.3,
+            "HeavyBleedingDelta": 0.7,
+            "LightBleedingDelta": 0.95,
+            "ammoAccr": -15,
+            "ammoHear": 0,
+            "ammoRec": 40
+        },
+        "LocalePush": {
+            "name": "Judge AP Slug Round",
+            "shortName": "JSR",
+            "description": "A tightly packed Armor Piercing Slug round for the Judge Handgun. How they managed to fit all of that into a small .45 casing is beyond me."
+        },
+        "Handbook": {
+            "HandbookParent": "Ammo",
+            "HandbookPrice": 879
+        }
+    },
+    "66280a30d3b6f288cb6b9653": {
+        "ItemToClone": "AMMO_12G_MAGNUM",
+        "OverrideProperties": {
+            "Prefab": {
+                "path": "assets/content/items/ammo/patrons/patron_1143x23_acp_hydra_shok.bundle",
+                "rcid": ""
+            },
+            "Caliber": "Caliber1143x23ACP",
+            "PenetrationPower": 17,
+            "ArmorDamage": 1,
+            "ProjectileCount": 9,
+            "Damage": 25,
+            "InitialSpeed": 385,
+            "RicochetChance": 0.24,
+            "FragmentationChance": 0,
+            "BulletMassGram": 3.38,
+            "HeavyBleedingDelta": 0.4,
+            "LightBleedingDelta": 0.9,
+            "ammoAccr": 0,
+            "ammoHear": 0,
+            "ammoRec": 25
+        },
+        "LocalePush": {
+            "name": "Judge Buckshot Round",
+            "shortName": "JBR",
+            "description": "A tightly packed Buckshot round for the Judge Handgun. How they managed to fit all of that into a small .45 casing is beyond me."
+        },
+        "Handbook": {
+            "HandbookParent": "Ammo",
+            "HandbookPrice": 599
+        }
+    },
+    "6628185208dd86f969db7e03": {
+        "ItemToClone": "AMMO_86X70_TACX",
+        "OverrideProperties": {
+            "Prefab": {
+                "path": "assets/content/items/ammo/patrons/patron_68x51_fmj.bundle",
+                "rcid": ""
+            },
+            "Caliber": "Caliber68x51",
+            "PenetrationPower": 75,
+            "ArmorDamage": 1,
+            "Damage": 217,
+            "InitialSpeed": 846,
+            "RicochetChance": 0.1,
+            "FragmentationChance": 0,
+            "BulletMassGram": 18.5,
+            "HeavyBleedingDelta": 0.9,
+            "LightBleedingDelta": 1,
+            "ammoAccr": 12,
+            "ammoHear": 0,
+            "ammoRec": 10
+        },
+        "LocalePush": {
+            "name": "Jury TacX Round",
+            "shortName": "JuryX",
+            "description": "A modified TacX round for the Jury Marksman Rifle. This is the last thing many scavs and PMCs around Tarkov ever saw."
+        },
+        "Handbook": {
+            "HandbookParent": "Ammo",
+            "HandbookPrice": 1349
+        }
+    },
+    "662818a23a552da6aef8fada": {
+        "ItemToClone": "AMMO_86X70_AP",
+        "OverrideProperties": {
+            "Prefab": {
+                "path": "assets/content/items/ammo/patrons/patron_68x51.bundle",
+                "rcid": ""
+            },
+            "Caliber": "Caliber68x51",
+            "PenetrationPower": 115,
+            "ArmorDamage": 1,
+            "Damage": 152,
+            "InitialSpeed": 900,
+            "RicochetChance": 0.3,
+            "FragmentationChance": 0,
+            "BulletMassGram": 15.5,
+            "HeavyBleedingDelta": 0.75,
+            "LightBleedingDelta": 1,
+            "ammoAccr": -20,
+            "ammoHear": 0,
+            "ammoRec": 20
+        },
+        "LocalePush": {
+            "name": "Jury AP Round",
+            "shortName": "JuryAP",
+            "description": "An Armor Piercing round for the Jury Marksman Rifle. This is the last thing many scavs and PMCs around Tarkov ever saw."
+        },
+        "Handbook": {
+            "HandbookParent": "Ammo",
+            "HandbookPrice": 1949
+        }
+    },
+    "66281ab7fca966e5021f81b5": {
+        "ItemToClone": "AMMO_127X108_B32",
+        "OverrideProperties": {
+            "Prefab": {
+                "path": "assets/content/items/ammo/patrons/patron_762x51_m61.bundle",
+                "rcid": ""
+            },
+            "Caliber": "Caliber762x51",
+            "PenetrationPower": 85,
+            "ArmorDamage": 1,
+            "Damage": 250,
+            "InitialSpeed": 818,
+            "RicochetChance": 0.37,
+            "FragmentationChance": 0,
+            "BulletMassGram": 48.3,
+            "HeavyBleedingDelta": 1,
+            "LightBleedingDelta": 1,
+            "ammoAccr": 0,
+            "ammoHear": 0,
+            "ammoRec": 0
+        },
+        "LocalePush": {
+            "name": "Executioner AP Round",
+            "shortName": "ExecAP",
+            "description": "An Armor Piercing round for the Executioner Sniper Rifle. If you hear the sound this round makes, it's already too late."
+        },
+        "Handbook": {
+            "HandbookParent": "Ammo",
+            "HandbookPrice": 1879
+        }
+    },
+    "66281ac038f9aebf6f914138": {
+        "ItemToClone": "AMMO_127X108_BZT44M",
+        "OverrideProperties": {
+            "Prefab": {
+                "path": "assets/content/items/ammo/patrons/patron_762x51_m993.bundle",
+                "rcid": ""
+            },
+            "Caliber": "Caliber762x51",
+            "PenetrationPower": 85,
+            "ArmorDamage": 1,
+            "Damage": 250,
+            "InitialSpeed": 818,
+            "RicochetChance": 0.37,
+            "FragmentationChance": 0,
+            "BulletMassGram": 48.3,
+            "HeavyBleedingDelta": 1,
+            "LightBleedingDelta": 1,
+            "ammoAccr": 0,
+            "ammoHear": 0,
+            "ammoRec": 0
+        },
+        "LocalePush": {
+            "name": "Executioner AP Round",
+            "shortName": "ExecAP",
+            "description": "An Armor Piercing round for the Executioner Sniper Rifle. If you hear the sound this round makes, it's already too late."
+        },
+        "Handbook": {
+            "HandbookParent": "Ammo",
+            "HandbookPrice": 2399
+        }
+    }
+}

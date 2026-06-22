@@ -1,0 +1,54 @@
+{
+    "67fefea22cc2bce48d31e21f": {
+        "ItemToClone": "CONTAINER_WZ",
+        "OverrideProperties": {
+            "Prefab": {
+                "path": "Containers/army_wallet.bundle",
+                "rcid": ""
+            },
+            "Height": 1,
+            "Width": 1,
+            "Grids": [
+                {
+                    "_id": "67fefebb36a38f9bd44340ca",
+                    "_name": "1",
+                    "_parent": "67fefea22cc2bce48d31e21f",
+                    "_props": {
+                        "cellsH": 3,
+                        "cellsV": 4,
+                        "filters": [
+                            {
+                                "ExcludedFilter": [],
+                                "Filter": ["5c164d2286f774194c5e69fa", "543be5dd4bdc2deb348b4569"]
+                            }
+                        ],
+                        "isSortingTable": false,
+                        "maxCount": 0,
+                        "maxWeight": 0,
+                        "minCount": 0
+                    },
+                    "_proto": "55d329c24bdc2d892f8b4567"
+                }
+            ]
+        },
+        "LocalePush": {
+            "name": "Army Wallet (Req)",
+            "shortName": "ArmyWallet (R)",
+            "description": "A military issued wallet. Able to be fitted to a modular tactical vest so you never lose your money. As long as you make it home that is"
+        },
+        "HandbookParent": "StorageContainers",
+        "HandbookPrice": 139999,
+        "CloneToFilters": true,
+        "CasePush": {
+            "CaseFiltersToAdd": [
+                "SECURE_ALPHA",
+                "SECURE_BETA",
+                "SECURE_EPSILON",
+                "SECURE_GAMMA",
+                "SECURE_KAPPA",
+                "SECURE_WAIST_POUCH",
+                "SECURE_THETA"
+            ]
+        }
+    }
+}

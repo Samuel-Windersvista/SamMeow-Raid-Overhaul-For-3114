@@ -92,6 +92,11 @@ namespace RaidOverhaul.Patches
         static void Prefix(ref TimeSpan timeSpan) => timeSpan = new TimeSpan(RaidTime.GetDateTime().Ticks);
     }
 
+    /// <summary>
+    /// 工厂地图的时间面板补丁。工厂地图的 day/night 是两个独立 Location（factory4_day / factory4_night），
+    /// 本质上是白图和夜图，不是两个时间窗口。本补丁用系统时间替换硬编码时间（与 GameWorldPatch 保持一致），
+    /// 并追加 [日间] / [夜间] 标识让玩家可以区分。
+    /// </summary>
     public class FactoryTimerPanelPatch : ModulePatch
     {
 
@@ -112,13 +117,13 @@ namespace RaidOverhaul.Patches
             catch (Exception) { return; }
 
             if (raidSettings.SelectedLocation.Id == "factory4_day") {
-
-                SetTimePanelText(timePanel, "15:28:00");
+                // 使用真实系统时间，与 GameWorldPatch 设置的 Raid 时间一致
+                SetTimePanelText(timePanel, RaidTime.GetDateTime().ToString("HH:mm:ss") + " [日间]");
             }
 
             if (raidSettings.SelectedLocation.Id == "factory4_night") {
-
-                SetTimePanelText(timePanel, "03:28:00");
+                // 使用真实系统时间，与 GameWorldPatch 设置的 Raid 时间一致
+                SetTimePanelText(timePanel, RaidTime.GetDateTime().ToString("HH:mm:ss") + " [夜间]");
             }
         }
 

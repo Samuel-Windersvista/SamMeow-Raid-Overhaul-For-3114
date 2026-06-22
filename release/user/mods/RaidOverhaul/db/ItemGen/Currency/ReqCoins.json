@@ -1,0 +1,45 @@
+{
+    "66292e79a4d9da25e683ab55": {
+        "ItemToClone": "INFO_DIARY",
+        "OverrideProperties": {
+            "Prefab": {
+                "path": "Items/requisition_coin.bundle",
+                "rcid": ""
+            },
+            "Height": 1,
+            "Width": 1,
+            "StackMaxSize": 50000,
+            "BackgroundColor": "green",
+            "StackMaxRandom": 5000,
+            "StackMinRandom": 1
+        },
+        "LocalePush": {
+            "name": "Requisition Coin",
+            "shortName": "ReqCoins",
+            "description": "A coin used to trade with the Requisitions Office bearing the form of an eastern dragon. You'll want to keep a stack of these handy in case you run into trouble and need some quick provisions. A smaller denomination for trading apparently. They look fancy but are next to worthless as a currency in Tarkov. Who knows why the Requisition Office values them as much as they do."
+        },
+        "Handbook": {
+            "HandbookParent": "5b47574386f77428ca22b341",
+            "HandbookPrice": 175
+        },
+        "CloneToFilters": true,
+        "LootPush": {
+            "LootContainersToAdd": [
+                "LOOTCONTAINER_SAFE",
+                "LOOTCONTAINER_COMMON_FUND_STASH",
+                "LOOTCONTAINER_CASH_REGISTER",
+                "LOOTCONTAINER_CASH_REGISTER_TAR22"
+            ],
+            "StaticLootProbability": 150
+        },
+        "CasePush": {
+            "CaseFiltersToAdd": [
+                "CONTAINER_DOCS",
+                "CONTAINER_SICC",
+                "CONTAINER_WALLET",
+                "CONTAINER_WZ",
+                "CONTAINER_MONEY"
+            ]
+        }
+    }
+}

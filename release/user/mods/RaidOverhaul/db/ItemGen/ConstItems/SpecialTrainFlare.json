@@ -1,0 +1,16 @@
+{
+    "67cde31eea2d15e888fa7dee": {
+        "ItemToClone": "GRENADELAUNCHER_FLARE",
+        "OverrideProperties": {},
+        "LocalePush": {
+            "name": "Train Calling Flare (R)",
+            "shortName": "TCF",
+            "description": "A special white flare used to signal the trains on Lighthouse and Rezerve. Once signaled they will start making their way to station."
+        },
+        "Handbook": {
+            "HandbookParent": "SpecialWeapons",
+            "HandbookPrice": 99999
+        },
+        "CloneToFilters": true
+    }
+}

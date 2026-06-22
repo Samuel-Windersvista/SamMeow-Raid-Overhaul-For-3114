@@ -1,0 +1,31 @@
+{
+    "DoorEvents": {
+        "SwitchToggle": 2,
+        "DoorUnlock": 12,
+        "KeycardUnlock": 1
+    },
+
+    "DoorEventRangeMinimum": 1,
+    "DoorEventRangeMaximum": 3,
+
+    "RaidEvents": {
+        "DamageEvent": 40,
+        "AirdropEvent": 110,
+        "BlackoutEvent": 80,
+        "JokeEvent": 40,
+        "HealEvent": 120,
+        "ArmorEvent": 140,
+        "SkillEvent": 60,
+        "MetabolismEvent": 60,
+        "MalfunctionEvent": 40,
+        "TraderEvent": 25,
+        "BerserkEvent": 40,
+        "WeightEvent": 40,
+        "MaxLLEvent": 5,
+        "LockdownEvent": 10,
+        "ArtilleryEvent": 10
+    },
+
+    "RandomEventRangeMinimum": 5,
+    "RandomEventRangeMaximum": 25
+}
