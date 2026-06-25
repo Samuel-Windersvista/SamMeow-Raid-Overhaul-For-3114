@@ -14,9 +14,9 @@
             "StackMinRandom": 1
         },
         "LocalePush": {
-            "name": "Requisition Slips",
-            "shortName": "ReqSlips",
-            "description": "A requisition slip used to trade with the Requisitions Office. You'll want to keep a stack of these handy in case you run into trouble and need some quick provisions. A larger denomination for trading apparently."
+            "name": "征用券",
+            "shortName": "征用券",
+            "description": "一种用来与征用处交易的征用券。你最好随身带上一叠，以备遇到麻烦时能快速获取补给。看起来像是较大面额的交易凭证。"
         },
         "Handbook": {
             "HandbookParent": "5b47574386f77428ca22b341",

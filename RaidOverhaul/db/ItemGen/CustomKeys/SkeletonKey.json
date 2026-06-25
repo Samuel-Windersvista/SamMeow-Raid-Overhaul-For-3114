@@ -6,9 +6,9 @@
             "BackgroundColor": "violet"
         },
         "LocalePush": {
-            "name": "Skeleton Key",
-            "shortName": "Skeleton",
-            "description": "A simple looking key with a lot of potential. I don't know who made this, but don't let it out of your grasp."
+            "name": "万能钥匙",
+            "shortName": "万能钥",
+            "description": "一把看似简单但潜力巨大的钥匙。不知道是谁制作的，但千万别让它从你手中溜走。"
         },
         "Handbook": {
             "HandbookParent": "MechanicalKeys",

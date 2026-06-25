@@ -45,7 +45,7 @@
             "6707d0804e617ec94f0e562f"
         ]
     },
-    "location": "The old School near Kamchatskaya Arch.",
+    "location": "卡姆恰茨卡亚拱门附近的旧学校",
     "loyaltyLevels": [
         {
             "minLevel": 1,
@@ -89,9 +89,9 @@
         }
     ],
     "medic": false,
-    "name": "Requisitions Office",
+    "name": "征用办公室",
     "nextResupply": 1615141448,
-    "nickname": "Requisitions Office",
+    "nickname": "征用办公室",
     "prohibitedTransferableItems": {
         "category": [],
         "id_list": []

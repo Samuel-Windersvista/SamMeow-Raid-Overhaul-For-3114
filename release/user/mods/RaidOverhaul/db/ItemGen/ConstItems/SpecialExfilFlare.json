@@ -3,9 +3,9 @@
         "ItemToClone": "GRENADELAUNCHER_FLARE",
         "OverrideProperties": {},
         "LocalePush": {
-            "name": "Special White Flare (R)",
-            "shortName": "SWF",
-            "description": "A special white flare used to signal the Requisitions Office. Once signaled they will send their QRF to extract you."
+            "name": "特殊白色信号弹（征）",
+            "shortName": "特白弹",
+            "description": "一种特殊的白色信号弹，用于向征用处发出信号。一旦发出信号，他们将派遣快速反应部队前来撤离你。"
         },
         "Handbook": {
             "HandbookParent": "SpecialWeapons",

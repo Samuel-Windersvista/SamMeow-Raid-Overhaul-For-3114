@@ -70,9 +70,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Secure Container Onyx",
-            "shortName": "Onyx",
-            "description": "The best of the best. The rarest case found in the land of Tarkov, used by only the most skilled and seasoned PMC's."
+            "name": "安全容器·缟玛瑙",
+            "shortName": "缟玛瑙",
+            "description": "最好的容器。塔科夫最稀有的箱子，只有最老练、最有经验的PMC才有资格使用。"
         },
         "Handbook": {
             "HandbookParent": "SecureContainers",

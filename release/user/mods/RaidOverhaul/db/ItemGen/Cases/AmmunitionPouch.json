@@ -72,9 +72,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Ammunition Pouch (Req)",
-            "shortName": "AmmoPouch (R)",
-            "description": "A carrying case used by the wolves of the Requisitions Office to bring their spare ammunition into the field. This case was carried on the person of each member once they step foot outside."
+            "name": "弹药袋（征用）",
+            "shortName": "弹药袋（征）",
+            "description": "征用处之狼使用的弹药携带袋，用于将备用弹药带入战场。每位成员在外出时都会随身携带此袋。"
         },
         "HandbookParent": "StorageContainers",
         "HandbookPrice": 429999,

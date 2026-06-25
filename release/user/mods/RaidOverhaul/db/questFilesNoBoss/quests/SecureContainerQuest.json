@@ -1,6 +1,6 @@
 {
     "66f0eb896991c5ce3a1b02cc": {
-        "QuestName": "The Crown Jewel",
+        "QuestName": "王冠宝石",
         "_id": "66f0eb896991c5ce3a1b02cc",
         "canShowNotificationsInGame": true,
         "conditions": {
@@ -144,7 +144,7 @@
         "type": "PickUp"
     },
     "66f0ebd77d8d561a54c699d8": {
-        "QuestName": "Threadbare: Waist Pouch",
+        "QuestName": "破旧不堪：腰包",
         "_id": "66f0ebd77d8d561a54c699d8",
         "canShowNotificationsInGame": true,
         "conditions": {
@@ -275,7 +275,7 @@
         "type": "PickUp"
     },
     "66f0ec06429200aee5f594eb": {
-        "QuestName": "Threadbare: Alpha",
+        "QuestName": "破旧不堪：Alpha",
         "_id": "66f0ec06429200aee5f594eb",
         "canShowNotificationsInGame": true,
         "conditions": {
@@ -422,7 +422,7 @@
         "type": "PickUp"
     },
     "66f0ec2f16dec610c8e9e422": {
-        "QuestName": "Threadbare: Beta",
+        "QuestName": "破旧不堪：Beta",
         "_id": "66f0ec2f16dec610c8e9e422",
         "canShowNotificationsInGame": true,
         "conditions": {
@@ -585,7 +585,7 @@
         "type": "PickUp"
     },
     "66f0ec550d7c99f5297f8170": {
-        "QuestName": "Threadbare: Gamma",
+        "QuestName": "破旧不堪：Gamma",
         "_id": "66f0ec550d7c99f5297f8170",
         "canShowNotificationsInGame": true,
         "conditions": {
@@ -748,7 +748,7 @@
         "type": "PickUp"
     },
     "66f0ec7e3a00512ef4300b5e": {
-        "QuestName": "Threadbare: Epsilon",
+        "QuestName": "破旧不堪：Epsilon",
         "_id": "66f0ec7e3a00512ef4300b5e",
         "canShowNotificationsInGame": true,
         "conditions": {
@@ -911,7 +911,7 @@
         "type": "PickUp"
     },
     "66f0ecad7d6d9736b17c2167": {
-        "QuestName": "Threadbare: Kappa",
+        "QuestName": "破旧不堪：Kappa",
         "_id": "66f0ecad7d6d9736b17c2167",
         "canShowNotificationsInGame": true,
         "conditions": {

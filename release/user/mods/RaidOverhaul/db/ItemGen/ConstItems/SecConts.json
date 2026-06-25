@@ -46,9 +46,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Custom Waist Pouch",
-            "shortName": "CWP",
-            "description": "A modified Waist Pouch with more storage sown into it. It is a durable and convenient waist pouch for a variety of things you would want to keep close."
+            "name": "定制腰包",
+            "shortName": "定腰包",
+            "description": "一款改装过的腰包，缝制了更多存储空间。耐用且方便，适合放置各种你想随身携带的物品。"
         },
         "Handbook": {
             "HandbookParent": "SecureContainers",
@@ -104,9 +104,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Custom Secure Container Alpha",
-            "shortName": "CSCA",
-            "description": "A modified Alpha Container with more storage compartments added. A small secure container used by PMCs formerly deployed in Tarkov."
+            "name": "定制安全容器·阿尔法",
+            "shortName": "定容器-A",
+            "description": "一款改装过的阿尔法容器，增加了更多存储隔层。曾经部署在塔科夫的PMC使用的小型安全容器。"
         },
         "Handbook": {
             "HandbookParent": "SecureContainers",
@@ -162,9 +162,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Custom Secure Container Beta",
-            "shortName": "CSCB",
-            "description": "A modified Beta Container with more storage compartments added. A medium-sized secure container used by PMCs formerly deployed in Tarkov."
+            "name": "定制安全容器·贝塔",
+            "shortName": "定容器-B",
+            "description": "一款改装过的贝塔容器，增加了更多存储隔层。曾经部署在塔科夫的PMC使用的中型安全容器。"
         },
         "Handbook": {
             "HandbookParent": "SecureContainers",
@@ -240,9 +240,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Custom Secure Container Gamma",
-            "shortName": "CSCG",
-            "description": "A modified Gamma Container with more storage compartments added. A unique secure container used only by veteran PMCs formerly deployed in Tarkov."
+            "name": "定制安全容器·伽马",
+            "shortName": "定容器-G",
+            "description": "一款改装过的伽马容器，增加了更多存储隔层。仅限曾经部署在塔科夫的老兵PMC使用的独特安全容器。"
         },
         "Handbook": {
             "HandbookParent": "SecureContainers",
@@ -318,9 +318,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Custom Secure Container Epsilon",
-            "shortName": "CSCE",
-            "description": "A modified Epsilon Container with more storage compartments added. One of TerraGroup's latest inventions in secure container technology - the Epsilon secured container."
+            "name": "定制安全容器·厄普西隆",
+            "shortName": "定容器-E",
+            "description": "一款改装过的厄普西隆容器，增加了更多存储隔层。泰拉集团在安全容器技术方面的最新发明之一——厄普西隆安全容器。"
         },
         "Handbook": {
             "HandbookParent": "SecureContainers",
@@ -400,9 +400,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Custom Secure Container Kappa",
-            "shortName": "CSCK",
-            "description": "A modified Kappa Container with more storage compartments added. A secret TerraGroup invention - the Kappa secured container."
+            "name": "定制安全容器·卡帕",
+            "shortName": "定容器-K",
+            "description": "一款改装过的卡帕容器，增加了更多存储隔层。泰拉集团的一项秘密发明——卡帕安全容器。"
         },
         "Handbook": {
             "HandbookParent": "SecureContainers",

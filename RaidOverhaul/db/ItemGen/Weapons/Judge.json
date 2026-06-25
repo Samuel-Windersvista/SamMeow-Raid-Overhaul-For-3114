@@ -29,9 +29,9 @@
             "weapFireType": ["single"]
         },
         "LocalePush": {
-            "name": "The Judge",
-            "shortName": "Judge",
-            "description": "The Judge is a handgun capable of loading 12 gauge shotgun shells. Many scavs quiver in fear when they hear the name."
+            "name": "法官",
+            "shortName": "法官",
+            "description": "法官是一把能够装填12号霰弹的手枪。许多 scav 听到这个名字就会吓得发抖。"
         },
         "Handbook": {
             "HandbookParent": "Pistols",
@@ -67,9 +67,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Judge custom Lone Wolf Slide",
-            "shortName": "Judge Lone Wolf",
-            "description": "A custom Lone Wolf receiver modified to fit on the Judge handgun. The sound of the slide brings nightmares to many."
+            "name": "法官定制Lone Wolf套筒",
+            "shortName": "法官Lone Wolf",
+            "description": "定制的Lone Wolf机匣，经改装适配法官手枪。套筒的滑动声给许多人带来了噩梦。"
         },
         "Handbook": {
             "HandbookParent": "ReceiversAndSlides",
@@ -101,9 +101,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Judge 17 Round Magazine",
-            "shortName": "Judge 17 Mag",
-            "description": "A 17-round magazine made for the Judge handgun, the sound of which causes scavs to quiver in fear."
+            "name": "法官17发弹匣",
+            "shortName": "法官17发",
+            "description": "为法官手枪设计的17发弹匣，其声音让 scav 闻风丧胆。"
         },
         "Handbook": {
             "HandbookParent": "Magazines",
@@ -135,9 +135,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Judge 33 Round Magazine",
-            "shortName": "Judge 33 Mag",
-            "description": "A 33-round magazine made for the Judge handgun, the sound of which causes scavs to quiver in fear."
+            "name": "法官33发弹匣",
+            "shortName": "法官33发",
+            "description": "为法官手枪设计的33发弹匣，其声音让 scav 闻风丧胆。"
         },
         "Handbook": {
             "HandbookParent": "Magazines",
@@ -169,9 +169,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Judge Drum Magazine",
-            "shortName": "Judge Drum",
-            "description": "A 50-round Drum magazine made for the Judge handgun, the sound of which causes scavs to quiver in fear."
+            "name": "法官弹鼓",
+            "shortName": "法官弹鼓",
+            "description": "为法官手枪设计的50发弹鼓，其声音让 scav 闻风丧胆。"
         },
         "Handbook": {
             "HandbookParent": "Magazines",

@@ -69,9 +69,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Special Storage Crate (Requisitions)",
-            "shortName": "SpecCase (R)",
-            "description": "A special storage crate rarely used by the Requisitions Office to keep their rarest items safe and secure. The largest and most prized case in Tarkov as of now..."
+            "name": "特殊储存箱（征用处）",
+            "shortName": "特箱（征）",
+            "description": "一个征用处极少使用的特殊储存箱，用于安全保管他们最稀有的物品。目前塔科夫最大最珍贵的箱子……"
         },
         "HandbookParent": "StorageContainers",
         "HandbookPrice": 2999999,

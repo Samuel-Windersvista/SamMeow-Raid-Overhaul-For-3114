@@ -90,9 +90,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Medical Supplies Carrying Case (Small)",
-            "shortName": "MSCC (S)",
-            "description": "A carrying case used by the wolves of the Requisitions Office to haul their supplies into the field. This case was carried on the person of each member once they step foot outside."
+            "name": "军用医疗箱（小型）",
+            "shortName": "医箱（小）",
+            "description": "征用处之狼使用的物资携带箱，用于将补给运入战场。每位成员在外出时都会随身携带此箱。"
         },
         "HandbookParent": "StorageContainers",
         "HandbookPrice": 139999,

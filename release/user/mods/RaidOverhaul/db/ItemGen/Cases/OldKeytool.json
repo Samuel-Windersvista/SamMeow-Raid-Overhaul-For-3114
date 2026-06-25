@@ -32,9 +32,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Old Keytool (Req)",
-            "shortName": "Keytool (R)",
-            "description": "An old keytool scrounged up by the Req Shop. Not as much space as newer tools but it should do the job for you temporarily."
+            "name": "旧钥匙工具（征用）",
+            "shortName": "钥具（征）",
+            "description": "一个由征用处搜刮来的旧钥匙工具。空间不如新款工具大，但应该够你临时凑合用了。"
         },
         "HandbookParent": "StorageContainers",
         "HandbookPrice": 409999,

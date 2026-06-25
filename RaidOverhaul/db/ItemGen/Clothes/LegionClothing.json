@@ -6,12 +6,12 @@
         "BundlePath": "Clothing/top_tshirt_black.bundle",
         "HandsToClone": "5d1f5aa286f7744bca3f0b9c",
         "HandsBundlePath": "assets/content/hands/hands_tshirt_bear_black/hands_tshirt_bear_black.skin.bundle",
-        "LocaleName": "Legion Black Shirt"
+        "LocaleName": "军团黑色上衣"
     },
     "Pants": {
         "NewBottomsID": "672bd1b188d490219f21bced",
         "NewSetID": "672bee7e68ee1ce890a733d3",
         "BundlePath": "Clothing/bottom_urbanresponder_ucp.bundle",
-        "LocaleName": "Legion Urban Responder Pants"
+        "LocaleName": "军团城市应答者作战裤"
     }
 }

@@ -42,9 +42,9 @@
             "weapFireType": ["single", "fullauto"]
         },
         "LocalePush": {
-            "name": "Soyuz-TM STM-46 Gen.2 4.6x30 carbine",
+            "name": "Soyuz-TM STM-46 Gen.2 4.6x30卡宾枪",
             "shortName": "STM 4.6x30",
-            "description": "A PCC carbine with excellent performance already 'out of the box', manufactured by Soyuz-TM Arms. Designed with the participation of world bronze medalist in Semi-Auto Rifle Vadim Mikhailov. Accuracy, speed, comfort of recoil. Compatible with custom 4.6x30mm magazines."
+            "description": "由Soyuz-TM Arms制造的PCC卡宾枪，开箱即拥有卓越性能。半自动步枪项目世界铜牌得主Vadim Mikhailov参与了设计。精准、快速、后坐力舒适。兼容定制的4.6x30mm弹匣。"
         },
         "HandbookParent": "SMGs",
         "HandbookPrice": 47999,
@@ -88,9 +88,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Glock 4.6x30 'Big Stick' 33-round magazine",
+            "name": "Glock 4.6x30 'Big Stick' 33发弹匣",
             "shortName": "STM-46M",
-            "description": "A factory-produced 33-round 4.6x30 magazine for the custom Soyuz-TM STM-46 Gen.2 4.6x30mm carbine."
+            "description": "为定制Soyuz-TM STM-46 Gen.2 4.6x30mm卡宾枪生产的原厂33发4.6x30弹匣。"
         },
         "HandbookParent": "Magazines",
         "HandbookPrice": 8999,
@@ -132,9 +132,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Custom Glock 4.6x30 SGM Tactical 50-round drum magazine",
+            "name": "定制Glock 4.6x30 SGM Tactical 50发弹鼓",
             "shortName": "STM-46D",
-            "description": "A high-capacity 50-round magazine for the custom Soyuz-TM STM-46 Gen.2 4.6x30mm carbine. Made in Korea and imported by SGM Tactical. Can hold even more than 50 rounds, but the manufacturer does not recommend loading more."
+            "description": "为定制Soyuz-TM STM-46 Gen.2 4.6x30mm卡宾枪设计的大容量50发弹鼓。韩国制造，由SGM Tactical进口。实际可容纳超过50发，但制造商不建议装填更多。"
         },
         "HandbookParent": "Magazines",
         "HandbookPrice": 18499,
@@ -165,9 +165,9 @@
             ]
         },
         "LocalePush": {
-            "name": "STM-46 4.6x30 upper receiver",
-            "shortName": "6628f3786c4f8a10a65adee4 Rec",
-            "description": "An upper receiver for the STM-46 Gen.2 4.6x30 carbine. Equipped with a mount for attaching additional tactical devices."
+            "name": "STM-46 4.6x30上机匣",
+            "shortName": "STM-46机匣",
+            "description": "STM-46 Gen.2 4.6x30卡宾枪的上机匣。配备附件安装接口，可加装额外的战术设备。"
         },
         "HandbookParent": "ReceiversAndSlides",
         "HandbookPrice": 31999,

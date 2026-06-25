@@ -6,9 +6,9 @@
             "BackgroundColor": "violet"
         },
         "LocalePush": {
-            "name": "VIP Keycard",
+            "name": "VIP钥匙卡",
             "shortName": "VIP",
-            "description": "A modified keycard said to give access to all of the terragroup areas scattered throughout Tarkov. You will want to keep this on you at all times if you're lucky enough to find one, but guard it closely."
+            "description": "一张据说能访问塔科夫所有泰拉集团区域的改装钥匙卡。如果你有幸找到一张，一定要时刻随身携带，但也要严加看管。"
         },
         "Handbook": {
             "HandbookParent": "ElectronicKeys",

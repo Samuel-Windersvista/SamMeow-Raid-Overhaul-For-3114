@@ -50,9 +50,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Oakley Kitchen Sink support backpack",
+            "name": "奥克利厨房水槽支援背包",
             "shortName": "OKSB (R)",
-            "description": "This backpack truly lives up to it's name. Meant for support forces carrying a large amount of supplies to stranded troops, it was been repurposed for more nefarious deeds in Tarkov."
+            "description": "这款背包名副其实——除了厨房水槽什么都能装得下。它原为支援部队向被困部队运送大量补给品而设计，如今在塔科夫被重新用于更为危险的任务。"
         },
         "HandbookParent": "Backpacks",
         "HandbookPrice": 43999,

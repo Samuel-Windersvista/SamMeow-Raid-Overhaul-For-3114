@@ -14,9 +14,9 @@
             "armorClass": 6
         },
         "LocalePush": {
-            "name": "Legion Mask (Wrath)",
-            "shortName": "Wrath",
-            "description": "A haunting mask worn by the Legion as they stalk across Tarkov. If you are close enough to see this mask, it's too late."
+            "name": "军团面具（怒）",
+            "shortName": "怒",
+            "description": "军团在塔科夫潜行时所佩戴的令人胆寒的面具。如果你能近距离看到这副面具，那就已经太迟了。"
         },
         "Handbook": {
             "HandbookParent": "Facecovers",

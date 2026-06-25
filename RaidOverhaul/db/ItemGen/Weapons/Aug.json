@@ -53,9 +53,9 @@
             "defMagType": "6628f31d2e4dbf64427b378d"
         },
         "LocalePush": {
-            "name": "Modified AUG A3 7.62x39 assault rifle",
+            "name": "改装AUG A3 7.62x39突击步枪",
             "shortName": "AUG 762",
-            "description": "Steyr AUG A3 is a 5.56x45 bullpup assault rifle, developed by the Austrian company Steyr-Daimler-Puch. AUG is known for good ergonomics, decent accuracy, low recoil and sufficient reliability. The rifle also stands out for its futuristic design. The A3 version features a bolt-catch button. This rifle has been modified to be compatible with 7.62x39mm caliber ammunition while retaining it's standout characteristics."
+            "description": "Steyr AUG A3是一款5.56x45无托突击步枪，由奥地利公司Steyr-Daimler-Puch开发。AUG以其出色的人体工学、精准度、低后坐力和高可靠性而闻名，其未来主义设计也独树一帜。A3版本配备了空仓挂机按钮。该枪已被改装为兼容7.62x39mm口径弹药，同时保留了其卓越特性。"
         },
         "HandbookParent": "MarksmanRifles",
         "HandbookPrice": 61999,
@@ -104,9 +104,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Steyr AUG 7.62x39 30-round magazine",
+            "name": "Steyr AUG 7.62x39 30发弹匣",
             "shortName": "AUG",
-            "description": "A 30-round polymer Steyr AUG magazine, for 7.62x39 ammunition."
+            "description": "适用于7.62x39弹药的30发聚合物Steyr AUG弹匣。"
         },
         "HandbookParent": "Magazines",
         "HandbookPrice": 11999,
@@ -152,9 +152,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Steyr AUG 7.62x39 42-round magazine",
+            "name": "Steyr AUG 7.62x39 42发弹匣",
             "shortName": "AUG",
-            "description": "A 42-round polymer Steyr AUG magazine, for 7.62x39 ammunition."
+            "description": "适用于7.62x39弹药的42发聚合物Steyr AUG弹匣。"
         },
         "HandbookParent": "Magazines",
         "HandbookPrice": 19999,

@@ -211,9 +211,9 @@
             "RigLayoutName": "robigrig"
         },
         "LocalePush": {
-            "name": "Lone Dragon Plate Carrier",
-            "shortName": "Lone Dragon (R)",
-            "description": "The Lone Dragon plate carrier has been used by the most elite of operators in the US army. It has a modular design allowing you to bring everything you would conceivably need into the field with you. If you're going behind enemy lines, look no further."
+            "name": "独龙板甲背心",
+            "shortName": "独龙 (R)",
+            "description": "独龙板甲背心曾为美军最精锐的特战人员所使用。其模块化设计让你能将所需的一切装备随身带入战场。若要深入敌后作战，它是不二之选。"
         },
         "HandbookParent": "TacticalRigs",
         "HandbookPrice": 189999,

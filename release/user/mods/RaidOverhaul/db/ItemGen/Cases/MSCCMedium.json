@@ -90,9 +90,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Medical Supplies Carrying Case (Medium)",
-            "shortName": "MSCC (M)",
-            "description": "A carrying case used by the wolves of the Requisitions Office to haul their supplies into the field. This case was stored in their vehicles as a stopgap measure for when supplies elsewhere were depleted."
+            "name": "军用医疗箱（中型）",
+            "shortName": "医箱（中）",
+            "description": "征用处之狼使用的物资携带箱，用于将补给运入战场。此箱存放在他们的车辆中，作为其他补给耗尽时的应急措施。"
         },
         "HandbookParent": "StorageContainers",
         "HandbookPrice": 279999,

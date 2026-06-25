@@ -12,9 +12,9 @@
             "BackgroundColor": "green"
         },
         "LocalePush": {
-            "name": "Special Request Form",
-            "shortName": "SpecForm",
-            "description": "A special form used to trade for premium items with the Requisitions Office. No idea who made these, or what they contain, but they must be important for how much they seem to be worth."
+            "name": "特殊征用表",
+            "shortName": "特征表",
+            "description": "一份用来与征用处交易高级物品的特殊表单。不知道是谁制作的，也不知道里面写了什么，但它们价值连城，一定很重要。"
         },
         "Handbook": {
             "HandbookParent": "5b47574386f77428ca22b341",

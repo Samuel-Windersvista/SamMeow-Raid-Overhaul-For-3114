@@ -25,9 +25,9 @@
             "ammoCaliber": "Caliber127x108"
         },
         "LocalePush": {
-            "name": "The Executioner",
-            "shortName": "Executioner",
-            "description": "The Executioner. This is the final stop for many scavs and PMCs. It truly does live up to its name."
+            "name": "处刑人",
+            "shortName": "处刑人",
+            "description": "处刑人。这是许多 scav 和 PMC 的终点站。它名副其实。"
         },
         "Handbook": {
             "HandbookParent": "BoltActionRifles",
@@ -68,9 +68,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Executioner Wyatt Magazine",
-            "shortName": "Executioner Mag",
-            "description": "A custom Wyatt outdoor magazine for the Executioner sniper rifle. With the stopping power loaded inside, you probably only need one of these."
+            "name": "处刑人Wyatt弹匣",
+            "shortName": "处刑人弹匣",
+            "description": "为处刑人狙击步枪定制的Wyatt户外弹匣。装填其中的强大停止力意味着你可能只需要一梭子。"
         },
         "Handbook": {
             "HandbookParent": "Magazines",
@@ -98,9 +98,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Executioner AICS Magazine",
-            "shortName": "Executioner AICS",
-            "description": "A custom AICS magazine for the Executioner sniper rifle. With the stopping power loaded inside, you probably only need one of these."
+            "name": "处刑人AICS弹匣",
+            "shortName": "处刑人AICS",
+            "description": "为处刑人狙击步枪定制的AICS弹匣。装填其中的强大停止力意味着你可能只需要一梭子。"
         },
         "Handbook": {
             "HandbookParent": "Magazines",
@@ -128,9 +128,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Executioner PMAG",
-            "shortName": "Executioner PMAG",
-            "description": "A custom PMAG for the Executioner sniper rifle. With the stopping power loaded inside, you probably only need one of these."
+            "name": "处刑人PMAG弹匣",
+            "shortName": "处刑人PMAG",
+            "description": "为处刑人狙击步枪定制的PMAG弹匣。装填其中的强大停止力意味着你可能只需要一梭子。"
         },
         "Handbook": {
             "HandbookParent": "Magazines",

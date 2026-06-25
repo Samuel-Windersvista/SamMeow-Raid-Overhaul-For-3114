@@ -135,9 +135,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Legions Armor (Carrion)",
-            "shortName": "Carrion",
-            "description": "This custom plate carrier is worn by the mysterious Legion. Nicknamed `Carrion` due to the likelihood you will find this being worn in the midst of the bloodiest battles."
+            "name": "军团护甲（腐肉）",
+            "shortName": "腐肉",
+            "description": "这款定制板甲由神秘的军团成员穿戴。因其常在最血腥的战斗中出现，故得名「腐肉」。"
         },
         "HandbookParent": "BodyArmor",
         "HandbookPrice": 209999,

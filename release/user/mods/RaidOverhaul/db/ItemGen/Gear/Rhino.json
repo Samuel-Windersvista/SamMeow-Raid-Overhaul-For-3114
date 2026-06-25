@@ -173,9 +173,9 @@
             "RigLayoutName": "rorhinobonk"
         },
         "LocalePush": {
-            "name": "CQC Rhino plate carrier (MTP)",
-            "shortName": "Rhino Rig (R)",
-            "description": "Rhino is based on the Osprey body armour system but without neck, shoulder and groin protection. Rhino has proved to be a very popular system as it has a simple but effective design."
+            "name": "CQC犀牛板甲背心（MTP）",
+            "shortName": "犀牛战术背心 (R)",
+            "description": "犀牛基于Osprey防弹衣系统设计，但去除了颈部、肩部和裆部防护。犀牛因其简洁高效的设计而备受青睐。"
         },
         "HandbookParent": "TacticalRigs",
         "HandbookPrice": 239999,

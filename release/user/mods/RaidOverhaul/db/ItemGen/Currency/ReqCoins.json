@@ -14,9 +14,9 @@
             "StackMinRandom": 1
         },
         "LocalePush": {
-            "name": "Requisition Coin",
-            "shortName": "ReqCoins",
-            "description": "A coin used to trade with the Requisitions Office bearing the form of an eastern dragon. You'll want to keep a stack of these handy in case you run into trouble and need some quick provisions. A smaller denomination for trading apparently. They look fancy but are next to worthless as a currency in Tarkov. Who knows why the Requisition Office values them as much as they do."
+            "name": "征用币",
+            "shortName": "征用币",
+            "description": "一种用来与征用处交易的硬币，正面印有东方龙的图案。你最好随身带上一叠，以备遇到麻烦时能快速获取补给。看起来像是较小面额的交易货币。虽然看起来很精致，但在塔科夫几乎一文不值。不知道征用处为什么这么看重它们。"
         },
         "Handbook": {
             "HandbookParent": "5b47574386f77428ca22b341",

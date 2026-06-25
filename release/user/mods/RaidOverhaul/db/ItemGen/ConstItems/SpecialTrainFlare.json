@@ -3,9 +3,9 @@
         "ItemToClone": "GRENADELAUNCHER_FLARE",
         "OverrideProperties": {},
         "LocalePush": {
-            "name": "Train Calling Flare (R)",
-            "shortName": "TCF",
-            "description": "A special white flare used to signal the trains on Lighthouse and Rezerve. Once signaled they will start making their way to station."
+            "name": "火车召唤信号弹（征）",
+            "shortName": "召车弹",
+            "description": "一种特殊的白色信号弹，用于向灯塔和储备站的火车发出信号。一旦发出信号，火车将开始驶往车站。"
         },
         "Handbook": {
             "HandbookParent": "SpecialWeapons",

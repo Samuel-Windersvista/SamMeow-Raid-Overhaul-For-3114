@@ -74,9 +74,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Multi-Calibre M4A1 Assault Rifle",
+            "name": "多口径M4A1突击步枪",
             "shortName": "MCM4",
-            "description": "A Multi-Calibre variant of the standard M4A1 assault rifle. Modified to be compatible with 5.45, 5.56, 5.7, .300, 7.62 and 9x39 ammunition with the accompanying receivers."
+            "description": "标准M4A1突击步枪的多口径改型。经过改装后，配合相应的机匣可兼容5.45、5.56、5.7、.300、7.62和9x39弹药。"
         },
         "HandbookParent": "AssaultRifles",
         "HandbookPrice": 51999,
@@ -134,9 +134,9 @@
             ]
         },
         "LocalePush": {
-            "name": "MCM4 5.7mm Receiver",
+            "name": "MCM4 5.7mm机匣",
             "shortName": "MCM4 57",
-            "description": "The MUR-1S modular upper receiver for AR-based weapons, manufactured by Vltor. Fitted with mounts for attaching additional equipment. Chambered in 5.7mm."
+            "description": "由Vltor生产的MUR-1S模块化上机匣，适用于AR系武器。配备附件安装接口。弹膛为5.7mm口径。"
         },
         "HandbookParent": "ReceiversAndSlides",
         "HandbookPrice": 43999
@@ -194,9 +194,9 @@
             ]
         },
         "LocalePush": {
-            "name": "MCM4 .300 Receiver",
+            "name": "MCM4 .300机匣",
             "shortName": "MCM4 300",
-            "description": "The MUR-1S modular upper receiver for AR-based weapons, manufactured by Vltor. Fitted with mounts for attaching additional equipment. Chambered in .300 blackout."
+            "description": "由Vltor生产的MUR-1S模块化上机匣，适用于AR系武器。配备附件安装接口。弹膛为.300 Blackout口径。"
         },
         "HandbookParent": "ReceiversAndSlides",
         "HandbookPrice": 43999
@@ -247,9 +247,9 @@
             ]
         },
         "LocalePush": {
-            "name": "MCM4 5.45x39mm Receiver",
+            "name": "MCM4 5.45x39mm机匣",
             "shortName": "MCM4 545",
-            "description": "The MUR-1S modular upper receiver for AR-based weapons, manufactured by Vltor. Fitted with mounts for attaching additional equipment. Chambered in 5.45x39mm."
+            "description": "由Vltor生产的MUR-1S模块化上机匣，适用于AR系武器。配备附件安装接口。弹膛为5.45x39mm口径。"
         },
         "HandbookParent": "ReceiversAndSlides",
         "HandbookPrice": 43999
@@ -304,9 +304,9 @@
             ]
         },
         "LocalePush": {
-            "name": "MCM4 7.62x39mm Receiver",
+            "name": "MCM4 7.62x39mm机匣",
             "shortName": "MCM4 762",
-            "description": "The MUR-1S modular upper receiver for AR-based weapons, manufactured by Vltor. Fitted with mounts for attaching additional equipment. Chambered in 7.62x39mm."
+            "description": "由Vltor生产的MUR-1S模块化上机匣，适用于AR系武器。配备附件安装接口。弹膛为7.62x39mm口径。"
         },
         "HandbookParent": "ReceiversAndSlides",
         "HandbookPrice": 43999
@@ -364,9 +364,9 @@
             ]
         },
         "LocalePush": {
-            "name": "MCM4 9x39mm Receiver",
+            "name": "MCM4 9x39mm机匣",
             "shortName": "MCM4 9x39",
-            "description": "The MUR-1S modular upper receiver for AR-based weapons, manufactured by Vltor. Fitted with mounts for attaching additional equipment. Chambered in 9x39mm."
+            "description": "由Vltor生产的MUR-1S模块化上机匣，适用于AR系武器。配备附件安装接口。弹膛为9x39mm口径。"
         },
         "HandbookParent": "ReceiversAndSlides",
         "HandbookPrice": 43999
@@ -400,9 +400,9 @@
             ]
         },
         "LocalePush": {
-            "name": "5.7mm Magpul PMAG 32-round magazine",
+            "name": "5.7mm Magpul PMAG 32发弹匣",
             "shortName": "MCM4 57M",
-            "description": "A 32-round polymer Magpul PMAG magazine, for 5.7mm ammunition."
+            "description": "适用于5.7mm弹药的32发聚合物Magpul PMAG弹匣。"
         },
         "HandbookParent": "Magazines",
         "HandbookPrice": 7999
@@ -435,9 +435,9 @@
             ]
         },
         "LocalePush": {
-            "name": ".300 blackout Magpul PMAG 32-round magazine",
+            "name": ".300 Blackout Magpul PMAG 32发弹匣",
             "shortName": "MCM4 300M",
-            "description": "A 32-round polymer Magpul PMAG magazine, for .300 blackout ammunition."
+            "description": "适用于.300 Blackout弹药的32发聚合物Magpul PMAG弹匣。"
         },
         "HandbookParent": "Magazines",
         "HandbookPrice": 7999
@@ -477,9 +477,9 @@
             ]
         },
         "LocalePush": {
-            "name": "5.45x39mm Magpul PMAG 32-round magazine",
+            "name": "5.45x39mm Magpul PMAG 32发弹匣",
             "shortName": "MCM4 545M",
-            "description": "A 32-round polymer Magpul PMAG magazine, for 5.45x39mm ammunition."
+            "description": "适用于5.45x39mm弹药的32发聚合物Magpul PMAG弹匣。"
         },
         "HandbookParent": "Magazines",
         "HandbookPrice": 7999
@@ -515,9 +515,9 @@
             ]
         },
         "LocalePush": {
-            "name": "7.62x39mm Magpul PMAG 32-round magazine",
+            "name": "7.62x39mm Magpul PMAG 32发弹匣",
             "shortName": "MCM4 762M",
-            "description": "A 32-round polymer Magpul PMAG magazine, for 7.62x39mm ammunition."
+            "description": "适用于7.62x39mm弹药的32发聚合物Magpul PMAG弹匣。"
         },
         "HandbookParent": "Magazines",
         "HandbookPrice": 7999
@@ -550,9 +550,9 @@
             ]
         },
         "LocalePush": {
-            "name": "9x39mm Magpul PMAG 32-round magazine",
+            "name": "9x39mm Magpul PMAG 32发弹匣",
             "shortName": "MCM4 939M",
-            "description": "A 32-round polymer Magpul PMAG magazine, for 9x39mm ammunition."
+            "description": "适用于9x39mm弹药的32发聚合物Magpul PMAG弹匣。"
         },
         "HandbookParent": "Magazines",
         "HandbookPrice": 7999

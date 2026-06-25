@@ -8,9 +8,9 @@
             }
         },
         "LocalePush": {
-            "name": "Judge Flechette Round",
+            "name": "法官镖弹",
             "shortName": "JFR",
-            "description": "A tightly packed Flechette round for the Judge Handgun. How they managed to fit all of that into a small 9x19 casing is beyond me."
+            "description": "为法官手枪紧密装填的镖弹。他们是怎么把这么多东西塞进小小的9x19弹壳里的，我实在想不通。"
         },
         "Handbook": {
             "HandbookParent": "Ammo",
@@ -26,9 +26,9 @@
             }
         },
         "LocalePush": {
-            "name": "Judge AP Slug Round",
+            "name": "法官穿甲独头弹",
             "shortName": "JSR",
-            "description": "A tightly packed Armor Piercing Slug round for the Judge Handgun. How they managed to fit all of that into a small .45 casing is beyond me."
+            "description": "为法官手枪紧密装填的穿甲独头弹。他们是怎么把这么多东西塞进小小的.45弹壳里的，我实在想不通。"
         },
         "Handbook": {
             "HandbookParent": "Ammo",
@@ -44,9 +44,9 @@
             }
         },
         "LocalePush": {
-            "name": "Judge Buckshot Round",
+            "name": "法官霰弹",
             "shortName": "JBR",
-            "description": "A tightly packed Buckshot round for the Judge Handgun. How they managed to fit all of that into a small .45 casing is beyond me."
+            "description": "为法官手枪紧密装填的霰弹。他们是怎么把这么多东西塞进小小的.45弹壳里的，我实在想不通。"
         },
         "Handbook": {
             "HandbookParent": "Ammo",
@@ -63,9 +63,9 @@
             "Caliber": "Caliber68x51"
         },
         "LocalePush": {
-            "name": "Jury TacX Round",
+            "name": "陪审团TacX弹",
             "shortName": "JuryX",
-            "description": "A modified TacX round for the Jury Marksman Rifle. This is the last thing many scavs and PMCs around Tarkov ever saw."
+            "description": "为陪审团精确射手步枪改装的TacX弹药。这是Tarkov地区许多scav和PMC此生看到的最后一件事。"
         },
         "Handbook": {
             "HandbookParent": "Ammo",
@@ -82,9 +82,9 @@
             "Caliber": "Caliber68x51"
         },
         "LocalePush": {
-            "name": "Jury AP Round",
+            "name": "陪审团穿甲弹",
             "shortName": "JuryAP",
-            "description": "An Armor Piercing round for the Jury Marksman Rifle. This is the last thing many scavs and PMCs around Tarkov ever saw."
+            "description": "为陪审团精确射手步枪设计的穿甲弹。这是Tarkov地区许多scav和PMC此生看到的最后一件事。"
         },
         "Handbook": {
             "HandbookParent": "Ammo",
@@ -100,9 +100,9 @@
             }
         },
         "LocalePush": {
-            "name": "Executioner AT Round",
+            "name": "处刑人反器材弹",
             "shortName": "ExecAT",
-            "description": "An Anti-tank round for the Executioner Sniper Rifle. If you hear the sound this round makes, it's already too late."
+            "description": "为处刑人狙击步枪设计的反器材弹。如果你听到这种子弹的声音，一切都已经太迟了。"
         },
         "Handbook": {
             "HandbookParent": "Ammo",
@@ -118,9 +118,9 @@
             }
         },
         "LocalePush": {
-            "name": "Executioner AP Round",
+            "name": "处刑人穿甲弹",
             "shortName": "ExecAP",
-            "description": "An Armor Piercing round for the Executioner Sniper Rifle. If you hear the sound this round makes, it's already too late."
+            "description": "为处刑人狙击步枪设计的穿甲弹。如果你听到这种子弹的声音，一切都已经太迟了。"
         },
         "Handbook": {
             "HandbookParent": "Ammo",

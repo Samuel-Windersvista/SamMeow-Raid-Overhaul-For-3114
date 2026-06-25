@@ -76,11 +76,41 @@ namespace RaidOverhaul.Patches
         protected override MethodBase GetTargetMethod() => typeof(LocationConditionsPanel).GetMethod("method_1", BindingFlags.Instance | BindingFlags.Public);
 
         [PatchPostfix]
-        static void Postfix(ref TextMeshProUGUI ____currentPhaseTime, ref TextMeshProUGUI ____nextPhaseTime)
+        static void Postfix(
+            ref TextMeshProUGUI ____currentPhaseTime,
+            ref TextMeshProUGUI ____nextPhaseTime,
+            LocationConditionsPanel __instance)
         {
-            try { ____nextPhaseTime.text = RaidTime.GetInverseTime().ToString("HH:mm:ss"); }
-            catch (Exception) { }
-            finally { ____currentPhaseTime.text = RaidTime.GetCurrTime().ToString("HH:mm:ss"); }
+            string curTime = RaidTime.GetCurrTime().ToString("HH:mm:ss");
+            string invTime = RaidTime.GetInverseTime().ToString("HH:mm:ss");
+
+            ____nextPhaseTime.text = invTime;
+            ____currentPhaseTime.text = curTime;
+
+            // Factory 地图检测：通过 Traverse 反射获取 LocationConditionsPanel 的 location_0 字段
+            // 工厂的 day/night 是两个独立 Location（factory4_day / factory4_night），需要追加 [日间]/[夜间] 标签
+            if (IsFactoryLocation(__instance))
+            {
+                DateTime cur = RaidTime.GetCurrTime();
+                bool curIsDay = cur.Hour >= 6 && cur.Hour < 18;
+                ____currentPhaseTime.text = curTime + (curIsDay ? " [日间]" : " [夜间]");
+                ____nextPhaseTime.text = invTime + (curIsDay ? " [夜间]" : " [日间]");
+            }
+        }
+
+        private static bool IsFactoryLocation(LocationConditionsPanel panel)
+        {
+            try
+            {
+                var location = Traverse.Create(panel).Field("location_0").GetValue();
+                if (location != null)
+                {
+                    string id = Traverse.Create(location).Property("Id").GetValue<string>();
+                    return id == "factory4_day" || id == "factory4_night";
+                }
+            }
+            catch { }
+            return false;
         }
     }
 

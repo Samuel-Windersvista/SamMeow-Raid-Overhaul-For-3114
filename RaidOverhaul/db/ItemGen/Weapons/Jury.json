@@ -24,9 +24,9 @@
             "defMagType": "6628f887f6ec08df7b7dc336"
         },
         "LocalePush": {
-            "name": "The Jury",
-            "shortName": "Jury",
-            "description": "The Overseer of judgement. Or at least that's what it appears to be, considering the amount of scavs and PMC's brought down by it."
+            "name": "陪审团",
+            "shortName": "陪审团",
+            "description": "审判的监督者。至少从倒在这把枪下的 scav 和 PMC 数量来看，它确实当之无愧。"
         },
         "HandbookParent": "MarksmanRifles",
         "HandbookPrice": 60999,
@@ -65,9 +65,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Jury Magazine",
-            "shortName": "Jury Mag",
-            "description": "A 20 round extended magazine for the Jury marksman rifle. Nobody knows who produced these or where they come from."
+            "name": "陪审团弹匣",
+            "shortName": "陪审团弹匣",
+            "description": "陪审团精确射手步枪的20发加长弹匣。没人知道是谁生产了它们，也没人知道它们来自哪里。"
         },
         "HandbookParent": "Magazines",
         "HandbookPrice": 6999
@@ -93,9 +93,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Jury Extended Magazine",
-            "shortName": "Jury ExtMag",
-            "description": "A 25 round extended magazine for the Jury marksman rifle. Nobody knows who produced these or where they come from."
+            "name": "陪审团加长弹匣",
+            "shortName": "陪审团长弹匣",
+            "description": "陪审团精确射手步枪的25发加长弹匣。没人知道是谁生产了它们，也没人知道它们来自哪里。"
         },
         "HandbookParent": "Magazines",
         "HandbookPrice": 14999
@@ -121,9 +121,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Jury Drum Magazine",
-            "shortName": "Jury Drum",
-            "description": "A 50 round drum magazine for the Jury marksman rifle. Nobody knows who produced these or where they come from."
+            "name": "陪审团弹鼓",
+            "shortName": "陪审团弹鼓",
+            "description": "陪审团精确射手步枪的50发弹鼓。没人知道是谁生产了它们，也没人知道它们来自哪里。"
         },
         "HandbookParent": "Magazines",
         "HandbookPrice": 29999
@@ -134,9 +134,9 @@
             "ConflictingItems": ["6529243824cbe3c74a05e5c1", "6529302b8c26af6326029fb7"]
         },
         "LocalePush": {
-            "name": "Jury Custom upper receiver",
-            "shortName": "Jury Rec",
-            "description": "An upper receiver for the Jury marksman rifle. Although its origin is a mystery, it is very effective at what it does, killing enemies."
+            "name": "陪审团定制上机匣",
+            "shortName": "陪审团机匣",
+            "description": "陪审团精确射手步枪的上机匣。虽然其来源是个谜，但它在完成本职——击杀敌人方面非常高效。"
         },
         "HandbookParent": "ReceiversAndSlides",
         "HandbookPrice": 39999

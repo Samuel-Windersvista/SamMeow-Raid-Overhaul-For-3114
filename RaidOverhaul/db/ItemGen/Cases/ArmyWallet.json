@@ -32,9 +32,9 @@
             ]
         },
         "LocalePush": {
-            "name": "Army Wallet (Req)",
-            "shortName": "ArmyWallet (R)",
-            "description": "A military issued wallet. Able to be fitted to a modular tactical vest so you never lose your money. As long as you make it home that is"
+            "name": "军用钱包（征用）",
+            "shortName": "军钱包（征）",
+            "description": "军用制式钱包。可安装在模块化战术背心上，确保钱财永不丢失。只要你还能活着回家的话。"
         },
         "HandbookParent": "StorageContainers",
         "HandbookPrice": 139999,
