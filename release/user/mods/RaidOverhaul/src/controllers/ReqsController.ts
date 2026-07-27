@@ -379,6 +379,13 @@ export class ReqsController {
             this.utils.genRandomCount(15, 25),
             Currency.ReqSlips,
         );
+        this.assortUtils.createSingleItemOffer(
+            "67cde89a0b1c2d3e4f5a6b7c",
+            this.utils.genRandomCount(1, 3),
+            1,
+            this.utils.genRandomCount(15, 25),
+            Currency.ReqSlips,
+        );
     }
 
     //#endregion

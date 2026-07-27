@@ -166,6 +166,14 @@ export class PkController {
             Currency.ReqSlips,
             Traders.PEACEKEEPER,
         );
+        this.assortUtils.createSingleItemOffer(
+            "67cde89a0b1c2d3e4f5a6b7c",
+            this.utils.genRandomCount(1, 3),
+            1,
+            this.utils.genRandomCount(15, 25),
+            Currency.ReqSlips,
+            Traders.PEACEKEEPER,
+        );
     }
 
     //#endregion

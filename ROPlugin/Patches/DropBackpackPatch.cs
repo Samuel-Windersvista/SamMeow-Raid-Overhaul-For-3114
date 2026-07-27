@@ -3,6 +3,7 @@ using System;
 using System.Reflection;
 using SPT.Reflection.Patching;
 using RaidOverhaul.Configs;
+using RaidOverhaul.Controllers;
 
 namespace RaidOverhaul.Patches
 {
@@ -18,6 +19,9 @@ namespace RaidOverhaul.Patches
             {
                 __instance.DropBackpack();
             }
+
+            // 玩家死亡时保全撤离箱内物品
+            EventController.TrySendExfilCrateOnDeath();
         }
     }
 }

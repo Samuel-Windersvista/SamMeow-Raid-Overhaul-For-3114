@@ -177,7 +177,7 @@ namespace RaidOverhaul.FikaModule.Components
             }
             if (packet.EventToRun == Utils.GearExfilEvent)
             {
-                NotificationManagerClass.DisplayMessageNotification("Gear Exfil Event: Host has activated the gear exfil event. \nHunker down and protect them until their gear is safely locked away.", ENotificationDurationType.Long, ENotificationIconType.Quest);
+                Plugin.ECScript.DoGearExfilEvent();
             }
             if (packet.EventToRun == Utils.Train)
             {

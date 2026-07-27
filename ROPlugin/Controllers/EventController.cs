@@ -40,6 +40,12 @@ namespace RaidOverhaul.Controllers
         public static bool _eventIsRunning = false;
         public static bool _exfilLockdown;
         public static bool _gearExfil;
+        private static LootableContainer _activeExfilCrate = null;
+        private static float _lastAirspaceCheck = 0f;
+        private static bool _airspaceOccupied = false;
+        private static float _lastAirspaceWarningTime = 0f;
+        private static int _airspaceWarningCount = 0;
+        private static bool _airspaceClearShown = false;
         private bool _airdropDisabled = false;
         private bool _metabolismDisabled = false;
         private bool _jokeEventHasRun = false;
@@ -1344,18 +1350,67 @@ namespace RaidOverhaul.Controllers
 
         public void FlareLogicExfil()
         {
-            var specialFlareInHands = ROPlayer.HandsController.Item.TemplateId == Utils.SpecialExfilFlare;
+            var itemInHands = ROPlayer.HandsController.Item;
 
-            if (!specialFlareInHands) { return; }
-
-            if (specialFlareInHands && Ready())
+            // 特黄弹 → 装备撤离箱
+            if (itemInHands.TemplateId == Utils.GearExfilFlare)
             {
-                if (Input.GetKeyDown(KeyCode.Mouse0) && _mouseInputCountE < 1)
+                if (IsAirdropActive())
+                {
+                    _airspaceClearShown = false;
+                    if (Time.time - _lastAirspaceWarningTime > 5f && _airspaceWarningCount < 5)
+                    {
+                        _lastAirspaceWarningTime = Time.time;
+                        _airspaceWarningCount++;
+                        NotificationManagerClass.DisplayMessageNotification("空域已被占用，请等待当前空投完成", ENotificationDurationType.Long, ENotificationIconType.Alert);
+                    }
+                    return;
+                }
+                _airspaceWarningCount = 0;
+                // 空域已净空，提示一次
+                if (!_airspaceClearShown)
+                {
+                    _airspaceClearShown = true;
+                    NotificationManagerClass.DisplayMessageNotification("空域已净空，可以发送信号", ENotificationDurationType.Default, ENotificationIconType.Default);
+                }
+
+                if (Ready() && Input.GetKeyDown(KeyCode.Mouse0) && !_gearExfil)
+                {
+                    DoGearExfilEvent();
+                }
+                return;
+            }
+
+            // 特白弹 → PMC 紧急撤离
+            if (itemInHands.TemplateId == Utils.SpecialExfilFlare)
+            {
+                if (Ready() && Input.GetKeyDown(KeyCode.Mouse0) && _mouseInputCountE < 1)
                 {
                     _mouseInputCountE++;
                     DoPmcExfilEvent();
                 }
+                return;
             }
+        }
+
+        /// <summary>
+        /// 检查空域是否有活跃空投（每10秒缓存一次，仅扫描 LootableContainer 避免性能问题）
+        /// </summary>
+        private static bool IsAirdropActive()
+        {
+            if (Time.time - _lastAirspaceCheck < 10f) return _airspaceOccupied;
+            _lastAirspaceCheck = Time.time;
+            _airspaceOccupied = false;
+
+            foreach (var lc in UnityEngine.Object.FindObjectsOfType<LootableContainer>())
+            {
+                if (lc.name.ToLower().Contains("airdrop") && lc.transform.position.y > 10f)
+                {
+                    _airspaceOccupied = true;
+                    break;
+                }
+            }
+            return _airspaceOccupied;
         }
 
         public async void DoPmcExfilEvent()
@@ -1411,6 +1466,170 @@ namespace RaidOverhaul.Controllers
         {
             EndByExitTrigerScenario.GInterface129 exfilSession = Singleton<AbstractGame>.Instance as EndByExitTrigerScenario.GInterface129;
             exfilSession.StopSession(GamePlayerOwner.MyPlayer.ProfileId, ExitStatus.Survived, Singleton<GameWorld>.Instance.ExfiltrationController.ExfiltrationPoints.FirstOrDefault().name);
+        }
+
+        /// <summary>
+        /// 装备撤离箱：利用游戏原生空投生成空容器，玩家放入物品，150秒后锁定送达。
+        /// </summary>
+        public async void DoGearExfilEvent()
+        {
+            var token = this.destroyCancellationToken;
+            try
+            {
+                if (_gearExfil) { Plugin.Log.LogInfo("[GearExfil] Already running"); return; }
+                if (!Ready()) { Plugin.Log.LogInfo("[GearExfil] Not ready"); return; }
+
+                var loc = ROPlayer.Location;
+                if (loc == "factory4_day" || loc == "factory4_night" || loc == "laboratory" || loc == "sandbox")
+                {
+                    Plugin.Log.LogInfo($"[GearExfil] Map guard blocked: {loc}");
+                    NotificationManagerClass.DisplayMessageNotification("此地图无法呼叫撤离箱", ENotificationDurationType.Default, ENotificationIconType.Alert);
+                    return;
+                }
+
+                _gearExfil = true;
+                if (FikaBridge.IAmHost()) { FikaBridge.SendRandomEventPacket(Utils.GearExfilEvent); }
+
+                if (Utils.FindTemplates(Utils.RedFlare).FirstOrDefault() is not AmmoTemplate ammoTemplate)
+                {
+                    Plugin.Log.LogInfo("[GearExfil] RedFlare template not found");
+                    _gearExfil = false;
+                    return;
+                }
+
+                Plugin.Log.LogInfo("[GearExfil] Flare fired, waiting for airdrop...");
+                var playerPos = ROPlayer.Transform.position;
+                ROPlayer.HandleFlareSuccessEvent(playerPos, ammoTemplate);
+                NotificationManagerClass.DisplayMessageNotification("撤离箱已呼叫，等待空投抵达...", ENotificationDurationType.Default, ENotificationIconType.Default);
+
+                // 记录已存在的容器（空投会新增一个 LootableContainer）
+                var before = new HashSet<LootableContainer>(
+                    UnityEngine.Object.FindObjectsOfType<LootableContainer>());
+                LootableContainer exfilCrate = null;
+
+                await Task.Delay(5000, token); // 等飞机飞进地图
+
+                // 每10秒检查一次新增容器，总共3分钟（18次，性能无影响）
+                for (int i = 0; i < 18 && !token.IsCancellationRequested; i++)
+                {
+                    await Task.Delay(10000, token);
+                    foreach (var c in UnityEngine.Object.FindObjectsOfType<LootableContainer>())
+                    {
+                        if (!before.Contains(c) && Vector3.Distance(c.transform.position, playerPos) < 300f)
+                        {
+                            exfilCrate = c;
+                            break;
+                        }
+                    }
+                    if (exfilCrate != null) break;
+                }
+
+                if (exfilCrate == null) { Plugin.Log.LogInfo("[GearExfil] Container not found within timeout"); _gearExfil = false; return; }
+
+                Plugin.Log.LogInfo($"[GearExfil] Container found: {exfilCrate.name}, clearing...");
+                ClearContainerItems(exfilCrate);
+                Plugin.Log.LogInfo("[GearExfil] First clear done, waiting for landing...");
+
+                Vector3 lastPos = exfilCrate.transform.position;
+                int stableCount = 0;
+                for (int i = 0; i < 60 && !token.IsCancellationRequested; i++)
+                {
+                    await Task.Delay(2000, token);
+                    Vector3 curPos = exfilCrate.transform.position;
+                    if (Vector3.Distance(curPos, lastPos) < 0.5f)
+                    {
+                        stableCount++;
+                        if (stableCount >= 2) break;
+                    }
+                    else { stableCount = 0; }
+                    lastPos = curPos;
+                }
+
+                Plugin.Log.LogInfo("[GearExfil] Landed, second clear...");
+                ClearContainerItems(exfilCrate);
+
+                _activeExfilCrate = exfilCrate;
+                Plugin.Log.LogInfo("[GearExfil] Timer started: 150s");
+                NotificationManagerClass.DisplayMessageNotification("撤离箱已打开！你有 2 分 30 秒存放战利品。", ENotificationDurationType.Long, ENotificationIconType.Default);
+
+                // 150s 计时，途中提醒
+                await Task.Delay(90000, token);
+                if (!token.IsCancellationRequested)
+                    NotificationManagerClass.DisplayMessageNotification("撤离箱: 剩余1分钟", ENotificationDurationType.Default, ENotificationIconType.Default);
+                await Task.Delay(50000, token);
+                if (!token.IsCancellationRequested)
+                    NotificationManagerClass.DisplayMessageNotification("撤离箱: 剩余10秒", ENotificationDurationType.Default, ENotificationIconType.Default);
+                await Task.Delay(10000, token);
+
+                exfilCrate.Lock();
+                NotificationManagerClass.DisplayMessageNotification("撤离箱已锁定！物品将送达仓库。", ENotificationDurationType.Long, ENotificationIconType.Default);
+                Utils.SendExfilBox(exfilCrate);
+
+                _activeExfilCrate = null;
+                _gearExfil = false;
+            }
+            catch (Exception ex)
+            {
+                Plugin.Log.LogError($"[DoGearExfilEvent] failed: {ex}");
+                _activeExfilCrate = null;
+                _gearExfil = false;
+            }
+        }
+
+        private static void ClearContainerItems(LootableContainer container)
+        {
+            try
+            {
+                var owner = container.ItemOwner;
+                if (owner?.MainStorage == null) return;
+
+                foreach (var grid in owner.MainStorage)
+                {
+                    if (grid?.Items == null) continue;
+                    // Items 是视图，Remove 会修改权威数据源 ContainedItems
+                    foreach (var item in grid.Items.ToArray())
+                    {
+                        try
+                        {
+                            var result = InteractionsHandlerClass.Remove(item, owner, false);
+                            if (result.Failed)
+                                result = InteractionsHandlerClass.RemoveWithoutRestrictions(item, owner);
+                            if (result.Succeeded)
+                                result.Value.RaiseEvents(owner, CommandStatus.Succeed);
+                        }
+                        catch { }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Plugin.Log.LogInfo($"[Clear] Exception: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// 玩家死亡或断线时调用：如果存在活跃的撤离箱，自动发送箱内物品以保全战利品。
+        /// </summary>
+        public static void TrySendExfilCrateOnDeath()
+        {
+            if (_activeExfilCrate != null)
+            {
+                try
+                {
+                    _activeExfilCrate.Lock();
+                    Utils.SendExfilBox(_activeExfilCrate);
+                    _activeExfilCrate = null;
+                    _gearExfil = false;
+                    if (ConfigController.DebugConfig.DebugMode) {
+                        Utils.LogToServerConsole("[TrySendExfilCrateOnDeath] Crate items sent on death.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Plugin.Log.LogError($"[TrySendExfilCrateOnDeath] failed: {ex}");
+                    _activeExfilCrate = null;
+                }
+            }
         }
 
         public void CleanForNewEvent()

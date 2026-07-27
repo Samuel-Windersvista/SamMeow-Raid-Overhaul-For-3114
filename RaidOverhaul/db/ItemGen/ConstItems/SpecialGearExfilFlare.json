@@ -1,0 +1,16 @@
+{
+    "67cde89a0b1c2d3e4f5a6b7c": {
+        "ItemToClone": "GRENADELAUNCHER_FLARE",
+        "OverrideProperties": {},
+        "LocalePush": {
+            "name": "特殊黄色信号弹（征）",
+            "shortName": "特黄弹",
+            "description": "一种特殊的黄色信号弹，用于向征用处请求装备撤离箱。一旦发出信号，征用处将空投一个特殊储存箱供你存放战利品，撤离后送达仓库。"
+        },
+        "Handbook": {
+            "HandbookParent": "SpecialWeapons",
+            "HandbookPrice": 399999
+        },
+        "CloneToFilters": true
+    }
+}

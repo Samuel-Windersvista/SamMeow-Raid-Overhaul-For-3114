@@ -31,7 +31,7 @@ namespace RaidOverhaul.Configs
             ConsoleScreen.Processor.RegisterCommand("ExfilNow",             new Action(Plugin.ECScript.ExfilNow));
             ConsoleScreen.Processor.RegisterCommand("GetWeaponIds",         new Action(GetAllWeaponIDs));
             ConsoleScreen.Processor.RegisterCommand("GetAllIds",            new Action(GetAllItemIDs));
-            //ConsoleScreen.Processor.RegisterCommand("DoGearExfil",       new Action(Plugin.ECScript.DoGearExfilEvent));
+            ConsoleScreen.Processor.RegisterCommand("DoGearExfil",       new Action(Plugin.ECScript.DoGearExfilEvent));
         }
         
         private static void GetAllWeaponIDs()

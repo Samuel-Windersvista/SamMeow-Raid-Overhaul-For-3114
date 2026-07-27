@@ -24,6 +24,7 @@ namespace RaidOverhaul.Configs
             ShoppingSpree = 4096,
             ExfilLockdown = 8192,
             Artillery = 16384,
+            GearExfil = 32768,
 
         All = Damage | Blackout | ArmorRepair | Heal | Airdrop | Skill | Metabolism | Malfunction | Trader | Berserk | Weight | NoJokesHere | ShoppingSpree | ExfilLockdown | Artillery,
         }

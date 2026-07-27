@@ -30,6 +30,9 @@ export class TraderManager {
             baseJson,
         );
 
+        //Push dialogue locales for item delivery messages
+        this.traderUtils.addDialogueLocales();
+
         //Add custom quests
         this.utils.addQuests();
     }

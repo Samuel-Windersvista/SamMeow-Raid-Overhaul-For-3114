@@ -157,6 +157,8 @@ namespace RaidOverhaul
             if (ConfigController.DebugConfig.DebugMode) {
                 ConsoleCommands.RegisterCC();
             }
+            // DoGearExfil 总是注册（不受 DebugMode 限制），方便测试 Gear Exfil Crate 功能
+            ConsoleScreen.Processor.RegisterCommand("DoGearExfil", new Action(ECScript.DoGearExfilEvent));
 
             TryInitFikaAssembly();
         }

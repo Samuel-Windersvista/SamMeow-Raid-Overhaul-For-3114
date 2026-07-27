@@ -62,7 +62,9 @@ namespace RaidOverhaul.Helpers
         public static readonly string BtrID = "656f0f98d80a697f855d34b1";
         public static readonly string SkeletonKey = "66a2fc926af26cc365283f23";
         public static readonly string VipKeycard = "66a2fc9886fbd5d38c5ca2a6";
+        public static readonly string ExfilCrate = "67c957ce411e6263333a1c38";
         public static readonly string SpecialExfilFlare = "67cda57f8f59300db5c0ec5b";
+        public static readonly string GearExfilFlare = "67cde89a0b1c2d3e4f5a6b7c";
         public static readonly string TrainFlare = "67cde31eea2d15e888fa7dee";
         public static readonly string RedFlare = "624c09cfbc2e27219346d955";
         public static readonly string RealismKey = "RealismMod";
@@ -87,7 +89,7 @@ namespace RaidOverhaul.Helpers
         public static readonly string PmcExfil = "PmcExfil";
         public static readonly string Artillery = "Artillery";
 	    private static readonly Dictionary<string, ItemTemplate> templates = [];
-        private static readonly JsonConverter[] _defaultJsonConverters;
+        private static readonly JsonConverter[] _defaultJsonConverters = new JsonConverter[0];
 
         public static T Get<T>(string url) {
             var req = RequestHandler.GetJson(url);
@@ -181,26 +183,31 @@ namespace RaidOverhaul.Helpers
                                                 || t.NameLocalizationKey.Localized().IndexOf(templateToFind, StringComparison.OrdinalIgnoreCase) >= 0)];
         }
 
+        /// <summary>
+        /// 将 LootableContainer 中所有网格的物品通过 trader service 发送到仓库。
+        /// </summary>
         public static void SendExfilBox(LootableContainer exfilCrate)
         {
-            var exfilCrateItems = Singleton<ItemFactoryClass>.Instance.TreeToFlatItems(exfilCrate.ItemOwner.MainStorage[0].Items);
+            var owner = exfilCrate.ItemOwner;
+            if (owner?.MainStorage == null) { Plugin.Log.LogInfo("[SendExfil] No MainStorage"); return; }
 
-            if (ConfigController.ServerConfig.EnableReqShop)
+            var allItems = new List<Item>();
+            foreach (var grid in owner.MainStorage)
             {
-                RequestHandler.PutJson("/singleplayer/traderServices/itemDelivery", new
-                {
-                    items = exfilCrateItems,
-                    traderId = ReqID
-                }.ToJson(_defaultJsonConverters));
+                if (grid?.Items != null)
+                    allItems.AddRange(grid.Items);
             }
-            else
+
+            Plugin.Log.LogInfo($"[SendExfil] {allItems.Count} items in grids");
+
+            var flatItems = Singleton<ItemFactoryClass>.Instance.TreeToFlatItems(allItems);
+            Plugin.Log.LogInfo($"[SendExfil] {flatItems?.Count() ?? 0} flat items after TreeToFlatItems");
+
+            // 走自定义路由 → MailSendService → 征用处消息送达
+            RequestHandler.PutJson("/RaidOverhaul/SendExfilItems", new
             {
-                RequestHandler.PutJson("/singleplayer/traderServices/itemDelivery", new
-                {
-                    items = exfilCrateItems,
-                    traderId = BtrID
-                }.ToJson(_defaultJsonConverters));
-            }
+                items = flatItems
+            }.ToJson(_defaultJsonConverters));
         }
     }
 }

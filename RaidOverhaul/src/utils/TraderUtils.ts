@@ -83,5 +83,18 @@ export class TraderUtils {
             locale[`${baseJsonData._id} Description`] = description;
         }
     }
+
+    /// <summary>
+    /// 将 dialogue.json 中的 itemsDelivered locale 条目推入所有语言的 locale 表。
+    /// </summary>
+    public addDialogueLocales(): void {
+        const tables = this.databaseService.getTables();
+        const locales = Object.values(tables.locales.global) as Record<string, string>[];
+        for (const locale of locales) {
+            locale["67cde89a0b1c2d3e4f5a6b7d 0"] = "The Requisitions Office has secured your gear.";
+            locale["67cde89a0b1c2d3e4f5a6b7d 1"] = "Your equipment has been recovered and is ready for pickup.";
+            locale["67cde89a0b1c2d3e4f5a6b7d 2"] = "We've extracted your valuables. They await you at the office.";
+        }
+    }
     //#endregion
 }
